@@ -99,6 +99,30 @@ void	line_of_sight(t_player *player, t_win *window, float start_x, int x)
 		ray_y += sin_angle;
 	}
 }
+
+void	ft_clear_mlx(t_win *window)
+{
+	// ft_clear_img(data);
+	if (window->win)
+		mlx_destroy_window(window->mlx, window->win);
+	// window->player = NULL;
+	// data->exit = NULL;
+	if (window->mlx)
+	{
+		mlx_destroy_display(window->mlx);
+		free (window->mlx);
+	}
+}
+
+int	ft_destroy(t_win *window)
+{
+	// ft_free_map(data->map);
+	// ft_free_map(data->tmp);
+	ft_clear_mlx(window);
+	// free(data);
+	exit(0);
+}
+
 int	draw_loop(t_win *window)
 {
 	t_player	*player = &window->player;
@@ -149,6 +173,8 @@ int	main(void)
 
 	mlx_hook(window.win, 2, 1L<<0, key_press, &window.player);
 	mlx_hook(window.win, 3, 1L<<1, key_release, &window.player);
+	// mlx_hook(data->window, DestroyNotify, StructureNotifyMask,
+	// 	&ft_destroy, data);
 
 	mlx_loop_hook(window.mlx, draw_loop, &window);
 	mlx_loop(window.mlx);

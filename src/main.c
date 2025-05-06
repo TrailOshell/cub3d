@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:47:44 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:56:12 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,9 @@ int	main(int argc, char **argv)
 	if (!data->mlx)
 		return (0);
 	read_map(argv, data);
-	load_sprites(data);
 	data->win = mlx_new_window(data->mlx, data->map->n_col * SIZE, data->map->n_row * SIZE, "cub3D");
 	if (!data->win)
 		return (free(data->mlx), 1);
-	render_map(data);
-	//mlx_hook(data->win, KEYPRESS, (1L << 0), &on_keypress, data);
-	//mlx_hook(data->win, DESTROYNOTIFY, (1L << 2), &game_exit, data);
 	mlx_loop(data->mlx);
 	return (0);
 }

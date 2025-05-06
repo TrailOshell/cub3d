@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_conditions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:23:55 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:55 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:56:55 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ int	isvalidchar(char c)
 int	iswalkable(char c)
 {
 	if (c == '0' || c == 'C' || c == 'E')
-		return (1);
-	return (0);
-}
-
-int	ispatrolable(char c)
-{
-	if (c == '0' || c == 'C' || c == 'P' || c == 'T')
 		return (1);
 	return (0);
 }

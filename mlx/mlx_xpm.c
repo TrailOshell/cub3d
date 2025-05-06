@@ -67,7 +67,7 @@ char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
 	char		*str;
 
 	str = xpm_data[(*pos)++];
-	if ((len2 = sl_strlen(str))>len)
+	if ((len2 = strlen(str))>len)
 	{
 			if (copy)
 					free(copy);

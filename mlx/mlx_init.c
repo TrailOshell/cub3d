@@ -69,7 +69,7 @@ int		mlx_int_deal_shm(t_xvar *xvar)
 		xvar->pshm_format = -1;
 	gethostname(buff,32);
 	dpy = getenv(ENV_DISPLAY);
-	if (dpy && sl_strlen(dpy) && *dpy!=':' && strncmp(dpy,buff,strlen(buff)) &&
+	if (dpy && strlen(dpy) && *dpy!=':' && strncmp(dpy,buff,strlen(buff)) &&
 			strncmp(dpy,LOCALHOST,strlen(LOCALHOST)) )
 	{
 		xvar->pshm_format = -1;

@@ -19,7 +19,7 @@ int	mlx_int_str_str(char *str,char *find,int len)
   char	*s;
   char	*f;
 
-  len_f = sl_strlen(find);
+  len_f = strlen(find);
   if (len_f>len)
     return (-1);
   pos = 0;
@@ -46,7 +46,7 @@ int	mlx_int_str_str_cote(char *str,char *find,int len)
   char	*f;
   int	cote;
 
-  len_f = sl_strlen(find);
+  len_f = strlen(find);
   if (len_f>len)
     return (-1);
   cote = 0;
@@ -77,7 +77,7 @@ char	**mlx_int_str_to_wordtab(char *str)
   int	nb_word;
   int	len;
 
-  len = sl_strlen(str);
+  len = strlen(str);
   nb_word = 0;
   pos = 0;
   while (pos<len)

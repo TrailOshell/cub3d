@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:45:59 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:56:22 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ void	write_grid(char **grid)
 	set_color(RESET);
 }
 
-void	write_value(char *msg, int int_val)
-{
-	char	*str;
-
-	set_color(BLUE);
-	str = sl_strdup(msg);
-	write(1, msg, sl_strlen(str));
-	free(str);
-	write(1, ": ", 2);
-	set_color(RESET);
-	str = sl_itoa(int_val);
-	write(1, str, sl_strlen(str));
-	free(str);
-}
-
 void	write_color(char *msg, char *color)
 {
 	char	*str;
@@ -58,10 +43,4 @@ void	write_color(char *msg, char *color)
 	write(1, msg, sl_strlen(str));
 	free(str);
 	set_color(RESET);
-}
-
-void	write_color_exit(t_data *data, char *msg, char *color)
-{
-	write_color(msg, color);
-	game_exit(data);
 }

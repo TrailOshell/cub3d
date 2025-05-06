@@ -79,14 +79,13 @@ bool	touch(float px, float py, t_win *window)
 	return false;
 }
 
-int	draw_loop(t_win *window)
+float	get_distance(float x, float y)
 {
-	t_player	*player = &window->player;
-	move(player);
-	clear_image(window);
-	draw_square(player->x, player->y, 7, 0x00FF00, window);
-	draw_map(window);
+	return (sqrt(x * x + y * y));
+}
 
+void	line_of_sight(t_player *player, t_win *window, float start_x, int x)
+{
 	float ray_x = player->x;
 	float ray_y = player->y;
 	float cos_angle = cos(player->angle);
@@ -98,6 +97,45 @@ int	draw_loop(t_win *window)
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+}
+int	draw_loop(t_win *window)
+{
+	t_player	*player = &window->player;
+	move(player);
+	clear_image(window);
+	draw_square(player->x, player->y, 7, 0x00FF00, window);
+	draw_map(window);
+
+	// float ray_x = player->x;
+	// float ray_y = player->y;
+	// float cos_angle = cos(player->angle);
+	// float sin_angle = sin(player->angle);
+
+	// while(!touch(ray_x, ray_y, window))
+	// {
+	// 	put_pixel (ray_x, ray_y, 0xFF0000, window);
+	// 	ray_x += cos_angle;
+	// 	ray_y += sin_angle;
+	// }
+	float	fraction = PI / 3 / WIDTH;
+	float	start_x = player->angle - PI / 6;
+	int	i = 0;
+	while (i < WIDTH)
+	{
+		line_of_sight(player, window, start_x, i;)
+		start_x += fraction;
+		i++;
+	}
+	float dist = get_distance(ray_x - player->x, ray_y - player->y);
+	float height = (64 / dist) * (WIDTH / 2);
+	int start_y = (HEIGHT - height) / 2;
+	int	end = start_y + height;
+	while (start_y < end)
+	{
+		put_pixel(i, start_y, 255, game);
+		start_y++;
+	}
+
 	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
 }
 

@@ -40,7 +40,7 @@ typedef struct s_player
 	bool	k_left;
 	bool	k_right;
 	bool	rl;
-	bool	rr
+	bool	rr;
 } t_player;
 
 void	init_player(t_player *player);

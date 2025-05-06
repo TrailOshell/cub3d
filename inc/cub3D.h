@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:15:19 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:20:22 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ int		game_exit(t_data *data);
 int		flood_fill(t_data *data);
 // get_next_row.c
 void	get_next_row(t_data *data, int fd);
-// new_map.c
-char	**new_map(t_map *map);
-char	**dupe_map(t_map *map);
+// grid.c
+char	**new_grid(t_map *map);
+char	**dupe_grid(t_map *map);
 // line.c
 void	add_line(t_node **node, char *line);
 char	*line_dupe(char *line);

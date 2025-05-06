@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:04:59 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:19:46 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	flood_fill(t_data *data)
 		return (0);
 	flood = NULL;
 	flood = start_map(flood);
-	flood->grid = dupe_map(data->map);
+	flood->grid = dupe_grid(data->map);
 	if (!flood || !flood->grid)
 		return (0);
 	paintnear(data->player->y, data->player->x, flood);

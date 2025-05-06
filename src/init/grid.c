@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_map.c                                          :+:      :+:    :+:   */
+/*   new_grid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-char	**new_map(t_map *map)
+char	**new_grid(t_map *map)
 {
 	char	**grid;
 	int		row;
@@ -28,12 +28,12 @@ char	**new_map(t_map *map)
 	return (grid);
 }
 
-char	**dupe_map(t_map *map)
+char	**dupe_grid(t_map *map)
 {
 	char	**dupe;
 	int		y;
 
-	dupe = new_map(map);
+	dupe = new_grid(map);
 	y = 0;
 	while (map->grid[y])
 	{

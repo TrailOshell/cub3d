@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/06 20:47:19 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/06 21:20:36 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,8 @@ SRC_INIT_PTH	=	init/
 SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					flood_fill.c \
 					get_next_row.c \
+					grid.c \
 					line.c \
-					new_map.c \
 					set_map.c \
 					set_object.c \
 		)

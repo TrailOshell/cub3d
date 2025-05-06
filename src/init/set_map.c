@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:42:30 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:56:48 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:19:35 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	set_map(t_data *data, t_node *node)
 {
 	int		y;
 
-	data->map->grid = new_map(data->map);
+	data->map->grid = new_grid(data->map);
 	y = 0;
 	while (node != NULL)
 	{

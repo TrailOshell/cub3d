@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:56:12 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:04:06 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	read_map(char **argv, t_data *data)
 	get_next_row(data, fd);
 	set_map(data, data->node);
 	flood_fill(data);
-	write_color("Initial map\n", GREEN);
+	write_color("Initial map\n", GRN);
 	write_grid(data->map->grid);
 	return (1);
 }

@@ -6,11 +6,18 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:38:27 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:56:09 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:02:05 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	free_if_alloc(void *mem)
+{
+	if (mem)
+		free(mem);
+
+}
 
 void	free_map(t_map **map)
 {
@@ -44,10 +51,8 @@ void	free_stuff(t_data *data)
 {
 	if (data)
 	{
-		if (data->mlx)
-			free(data->mlx);
-		if (data->player)
-			free(data->player);
+		free_if_alloc(data->mlx);
+		free_if_alloc(data->player);
 		if (data->map)
 			free_map(&data->map);
 		if (data->node != NULL)

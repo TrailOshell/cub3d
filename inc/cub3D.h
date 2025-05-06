@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:55:02 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:15:19 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 # include "get_next_line.h"
 
 // color
-# define RESET "\033[0;39m"
-# define GRAY "\033[0;90m"
+# define NCL "\033[0;39m"
 # define RED "\033[0;91m"
-# define GREEN "\033[0;92m"
-# define YELLOW "\033[0;93m"
-# define BLUE "\033[0;94m"
-# define MAGENTA "\033[0;95m"
-# define CYAN "\033[0;96m"
+# define GRN "\033[0;92m"
+# define YLW "\033[0;93m"
+# define BLU "\033[0;94m"
+# define PUR "\033[0;95m"
+# define CYN "\033[0;96m"
 
 # ifndef SIZE
 #  define SIZE				64
@@ -74,6 +73,15 @@ typedef struct s_data
 	t_tx			tx;
 }	t_data;
 
+// color
+# define NCL "\033[0;39m"
+# define RED "\033[0;91m"
+# define GRN "\033[0;92m"
+# define YLW "\033[0;93m"
+# define BLU "\033[0;94m"
+# define PUR "\033[0;95m"
+# define CYN "\033[0;96m"
+
 /*	||  DEBUG  ||	*/
 // color.c
 void	set_color(char *color);
@@ -112,6 +120,7 @@ void	*load_a_sprite(t_data *data, char *filename);
 
 /*	||  UTIL  ||	*/
 // is_conditions.c
+int		isplayerchar(char c);
 int		isvalidchar(char c);
 int		iswalkable(char c);
 // util.c

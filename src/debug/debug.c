@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:56:22 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:03:16 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	write_grid(char **grid)
 		write(1, "\n", 1);
 		row++;
 	}
-	set_color(RESET);
+	set_color(NCL);
 }
 
 void	write_color(char *msg, char *color)
@@ -42,5 +42,5 @@ void	write_color(char *msg, char *color)
 	str = sl_strdup(msg);
 	write(1, msg, sl_strlen(str));
 	free(str);
-	set_color(RESET);
+	set_color(NCL);
 }

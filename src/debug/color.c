@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 01:05:48 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:55 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:15:06 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,10 @@ void	color_from_char(char c)
 {
 	if (c == '1')
 		set_color(RED);
-	else if (c == 'P')
-		set_color(MAGENTA);
-	else if (c == 'C')
-		set_color(YELLOW);
-	else if (c == 'E')
-		set_color(GREEN);
-	else if (c == 't')
-		set_color(BLUE);
-	else if (c == 'T')
-		set_color(CYAN);
+	else if (isplayerchar(c))
+		set_color(PUR);
 	else if (c == '0')
-		set_color(RESET);
+		set_color(NCL);
 	else
-		set_color(MAGENTA);
+		set_color(PUR);
 }

@@ -1,10 +1,11 @@
 #ifndef	CUB3D_H
 #define CUB3D_H
 
-#include <MLX42/MLX42.h>
+// #include "MLX42/MLX42.h"
+# include "../minilibx-linux/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool>
+#include <stdbool.h>
 #include <math.h>
 
 #define W 119
@@ -15,6 +16,21 @@
 #define RIGHT 65363
 
 #define PI 3.17159265359
+#define WIDTH 1280
+#define	HEIGHT 720
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	bool	k_up;
+	bool	k_down;
+	bool	k_left;
+	bool	k_right;
+	bool	rl;
+	bool	rr;
+} t_player;
 
 typedef struct  s_win
 {
@@ -30,18 +46,6 @@ typedef struct  s_win
 	char	**map;
 } t_win;
 
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float	angle
-	bool	k_up;
-	bool	k_down;
-	bool	k_left;
-	bool	k_right;
-	bool	rl;
-	bool	rr;
-} t_player;
 
 void	init_player(t_player *player);
 int		key_release(int key, t_player *player);

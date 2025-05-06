@@ -1,8 +1,5 @@
 #include "../includes/cub3d.h"
 
-#define WIDTH 1280
-#define	HEIGHT 720
-
 void	put_pixel(int x, int y, int color, t_win *window)
 {
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
@@ -10,7 +7,7 @@ void	put_pixel(int x, int y, int color, t_win *window)
 	int index = y * window->size_line + x * window->bpp / 8;
 	window->data[index] = color & 0xFF;
 	window->data[index + 1] = (color >> 8) & 0xFF;
-	window->data[indew + 2] = (color >> 16) & 0xFF;
+	window->data[index + 2] = (color >> 16) & 0xFF;
 }
 
 void	draw_square(int x, int y, int size, int color, t_win *window)
@@ -27,10 +24,12 @@ void	draw_square(int x, int y, int size, int color, t_win *window)
 
 void	draw_map(t_win *window)
 {
-	char	**map = game->map;
+	char	**map = window->map;
 	int	color = 0x0000FF;
-	for (int y = 0; map[y][x]; x++)
-		for (int x = 0; map[y][x]; x++);
+	int x = 0;
+	int y = 0;
+	for (y = 0; map[y][x]; x++)
+		for (x = 0; map[y][x]; x++);
 			if (map[y][x] == '1')
 				draw_square (x * 64, y * 64, 64, color, window);
 }
@@ -66,7 +65,7 @@ void	init_window(t_win *window)
 	window->mlx = mlx_init();
 	window->win = mlx_new_window(window->mlx, WIDTH, HEIGHT, "Start");
 	window->img = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	window->data = mlx_get_data_addr(window->img, &window->bpp, &window.endian);
+	window->data = mlx_get_data_addr(window->img, &window->bpp, &window->size_line, &window->endian);
 	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
 }
 
@@ -86,6 +85,8 @@ float	get_distance(float x, float y)
 
 void	line_of_sight(t_player *player, t_win *window, float start_x, int x)
 {
+	(void)start_x;
+	(void)x;
 	float ray_x = player->x;
 	float ray_y = player->y;
 	float cos_angle = cos(player->angle);
@@ -106,11 +107,7 @@ int	draw_loop(t_win *window)
 	draw_square(player->x, player->y, 7, 0x00FF00, window);
 	draw_map(window);
 
-	// float ray_x = player->x;
-	// float ray_y = player->y;
-	// float cos_angle = cos(player->angle);
-	// float sin_angle = sin(player->angle);
-
+	
 	// while(!touch(ray_x, ray_y, window))
 	// {
 	// 	put_pixel (ray_x, ray_y, 0xFF0000, window);
@@ -122,21 +119,26 @@ int	draw_loop(t_win *window)
 	int	i = 0;
 	while (i < WIDTH)
 	{
-		line_of_sight(player, window, start_x, i;)
+		line_of_sight(player, window, start_x, i);
 		start_x += fraction;
 		i++;
 	}
+	float ray_x = player->x;
+	float ray_y = player->y;
+	// float cos_angle = cos(player->angle);
+	// float sin_angle = sin(player->angle);
 	float dist = get_distance(ray_x - player->x, ray_y - player->y);
 	float height = (64 / dist) * (WIDTH / 2);
 	int start_y = (HEIGHT - height) / 2;
 	int	end = start_y + height;
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 255, game);
+		put_pixel(i, start_y, 255, window);
 		start_y++;
 	}
 
 	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
+	return (0);
 }
 
 int	main(void)

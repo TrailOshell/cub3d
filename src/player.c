@@ -24,9 +24,9 @@ int	key_press(int key, t_player *player)
 		player->k_down = true;
 	if (key == D)
 		player->k_right = true;
-	if (key = LEFT)
+	if (key == LEFT)
 		player->rl = true;
-	if (key = RIGHT)
+	if (key == RIGHT)
 		player->rr = true;
 	return (0);
 }
@@ -41,9 +41,9 @@ int	key_release(int key, t_player *player)
 		player->k_down = false;
 	if (key == D)
 		player->k_right = false;
-	if (key = LEFT)
+	if (key == LEFT)
 		player->rl = false;
-	if (key = RIGHT)
+	if (key == RIGHT)
 		player->rr = false;
 	return (0);
 }

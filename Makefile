@@ -1,18 +1,32 @@
-NAME = cub3d
+NAME = cub3D
+SRC = src/main.c\
+		src/player.c
+
+HEADER = includes/cub3d.h
+
 CC = cc
+CFLAGS = -Wall -Wextra -Werror -g -I $(HEADER) -O0
+MLXFLAGS = -L ./minilibx-linux/ -lmlx -Ilmlx -lXext -lX11
+
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -L ./includes/MLX42 -lmlx -lXext -lX11 -lm -lz
-INCLUDES = includes/MLX42/libmlx.a
-SRC = src/main.c
+all: $(NAME)
 
-all : $(NAME)
+$(NAME): $(OBJ) $(HEADER)
+	make -C minilibx-linux/
+	$(CC) $(CFLAGS) $(OBJ) minilibx-linux/libmlx.a -Lmlx_linux -lmlx_Linux -Lminilibx-linux/ -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(SRC) -o $(NAME) $(INCLUDES) $(LFLAGS)
+%.o:%.c $(HEADER)
+	$(CC) $(CFLAGS) -Imlx_linux -c $< -o $@
 
-fclean :
+clean:
 	rm -rf $(OBJ)
-	rm -rf $(NAME)
+	rm -rf minilibx/obj/*.o
 
-.PHONY all fclean
+fclean: clean
+	rm -rf $(NAME)
+	make clean -C minilibx-linux/
+
+re: fclean all
+
+.PHONY: all clean fclean re 

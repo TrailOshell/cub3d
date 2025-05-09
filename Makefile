@@ -5,7 +5,7 @@ SRC = src/main.c\
 HEADER = includes/cub3d.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I $(HEADER) -O0
+CFLAGS =  -g -I $(HEADER) -O0
 MLXFLAGS = -L ./minilibx-linux/ -lmlx -Ilmlx -lXext -lX11
 
 OBJ = $(SRC:.c=.o)

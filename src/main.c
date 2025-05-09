@@ -1,182 +1,139 @@
 #include "../includes/cub3d.h"
 
-void	put_pixel(int x, int y, int color, t_win *window)
+
+void	ft_init_player(t_cub *game)
 {
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-		return ;
-	int index = y * window->size_line + x * window->bpp / 8;
-	window->data[index] = color & 0xFF;
-	window->data[index + 1] = (color >> 8) & 0xFF;
-	window->data[index + 2] = (color >> 16) & 0xFF;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (game->game[y])
+	{
+		while (game->game[y][x])
+		{
+			if (game->game[y][x] == 'P')
+			{
+				game->pos_x = x;
+				game->pos_y = y;
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
 }
 
-void	draw_square(int x, int y, int size, int color, t_win *window)
+void	ft_init_mlx(t_cub *game)
 {
-	for (int i = 0; i < size; i++)
-		put_pixel(x + i, y, color, window);
-	for (int i = 0; i < size; i++)
-		put_pixel(x, y + i, color, window);
-	for (int i = 0; i < size; i++)
-		put_pixel(x + size, y, color, window);
-	for (int i = 0; i < size; i++)
-		put_pixel(x, y + size, color, window);
+	game->mlx = mlx_init();
+	game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT,
+			"Game Start\n");
+	if (!game->window)
+		free(game->window);
 }
 
-void	draw_map(t_win *window)
+void	ft_init_image(t_cub *game)
 {
-	char	**map = window->map;
-	int	color = 0x0000FF;
-	int x = 0;
-	int y = 0;
-	for (y = 0; map[y][x]; x++)
-		for (x = 0; map[y][x]; x++);
-			if (map[y][x] == '1')
-				draw_square (x * 64, y * 64, 64, color, window);
+	game->north_texture = mlx_load_png(NO);
+	game->south_texture = mlx_load_png(SO);
+	game->west_texture = mlx_load_png(WE);
+	game->east_texture = mlx_load_png(EA);
+	game->p1_texture = mlx_load_png(P1);
+	if (!game->north_texture || !game->south_texture || !game->west_texture
+		|| !game->east_texture)
+		return (-1);
+	game->north_image = mlx_texture_to_image(mlx, game->north_texture);
+	game->south_image = mlx_texture_to_image(mlx, game->south_texture);
+	game->west_image = mlx_texture_to_image(mlx, game->west_texture);
+	game->east_image = mlx_texture_to_image(mlx, game->east_texture);
+	game->p1 = mlx_texture_to_image(mlx, game->p1_texture);
+	if (!game->north_image || !game->south_image || !game->west_image
+		|| !game->east_image)
+		return (-1);
+	return (0);
 }
 
-void	clear_image(t_win *window)
+void	ft_set_status(char c, t_cub *game, int i, int j)
 {
-	for (int y = 0; y < HEIGHT; y++)
-		for (int x = 0; x < WIDTH; x++)
-			put_pixel(x, y, 0, window);
+	if (c == 'P')
+	{
+		game->pos_x = j;
+		game->pos_y = i;
+		game->p_status++;
+	}
+	if (c == 'E')
+	{
+		game->exit_x = j;
+		game->exit_y = i;
+		game->e_status++;
+	}
+}
+
+void	ft_init_game(t_cub *game)
+{
+	ft_init_player(game);
+	ft_init_mlx(game);
+	ft_init_image(game);
 }
 
 char	**get_map(void)
 {
-	char **map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100000000000001";
-	map[2] = "100000000000001";
-	map[3] = "100000000000001";
-	map[4] = "100000000000001";
-	map[5] = "100000000000001";
-	map[6] = "100000000000001";
-	map[7] = "100000000000001";
-	map[8] = "100000000000001";
-	map[9] = "100000000000001";
-	map[10] = NULL;
-	return (map);
+	char **game = malloc(sizeof(char *) * 11);
+	game[0] = "111111111111111";
+	game[1] = "100000000000001";
+	game[2] = "100000000000001";
+	game[3] = "100000000000001";
+	game[4] = "1000P0000000001";
+	game[5] = "100000000000001";
+	game[6] = "100000000000001";
+	game[7] = "100000000000001";
+	game[8] = "100000000000001";
+	game[9] = "100000000000001";
+	game[10] = NULL;
+	return (game);
 }
 
-void	init_window(t_win *window)
+void	ft_fill(t_cub *game, int i, int j)
 {
-	init_player(&window->player);
-	window->map = get_map();
-	window->mlx = mlx_init();
-	window->win = mlx_new_window(window->mlx, WIDTH, HEIGHT, "Start");
-	window->img = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	window->data = mlx_get_data_addr(window->img, &window->bpp, &window->size_line, &window->endian);
-	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
+	if (game->map[i][j] == '1')
+		mlx_put_image_to_window(game->mlx, game->window, game->north_image,
+			j * IMG, i * IMG);
+	else if (game->map[i][j] == 'P')
+		mlx_put_image_to_window(game->mlx, game->window, game->p1,
+			j * IMG, i * IMG);
 }
 
-bool	touch(float px, float py, t_win *window)
+int	ft_put_graphic(t_cub *game)
 {
-	int	x = px / 64;
-	int y = py / 64;
-	if (window->map[y][x] == '1')
-		return true;
-	return false;
-}
+	int	i;
+	int	j;
 
-float	get_distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
-}
-
-void	line_of_sight(t_player *player, t_win *window, float start_x, int x)
-{
-	(void)start_x;
-	(void)x;
-	float ray_x = player->x;
-	float ray_y = player->y;
-	float cos_angle = cos(player->angle);
-	float sin_angle = sin(player->angle);
-
-	while(!touch(ray_x, ray_y, window))
+	i = 0;
+	j = 0;
+	while (game->map[i])
 	{
-		put_pixel (ray_x, ray_y, 0xFF0000, window);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
-	}
-}
-
-void	ft_clear_mlx(t_win *window)
-{
-	// ft_clear_img(data);
-	if (window->win)
-		mlx_destroy_window(window->mlx, window->win);
-	// window->player = NULL;
-	// data->exit = NULL;
-	if (window->mlx)
-	{
-		mlx_destroy_display(window->mlx);
-		free (window->mlx);
-	}
-}
-
-int	ft_destroy(t_win *window)
-{
-	// ft_free_map(data->map);
-	// ft_free_map(data->tmp);
-	ft_clear_mlx(window);
-	// free(data);
-	exit(0);
-}
-
-int	draw_loop(t_win *window)
-{
-	t_player	*player = &window->player;
-	move(player);
-	clear_image(window);
-	draw_square(player->x, player->y, 7, 0x00FF00, window);
-	draw_map(window);
-
-	
-	// while(!touch(ray_x, ray_y, window))
-	// {
-	// 	put_pixel (ray_x, ray_y, 0xFF0000, window);
-	// 	ray_x += cos_angle;
-	// 	ray_y += sin_angle;
-	// }
-	float	fraction = PI / 3 / WIDTH;
-	float	start_x = player->angle - PI / 6;
-	int	i = 0;
-	while (i < WIDTH)
-	{
-		line_of_sight(player, window, start_x, i);
-		start_x += fraction;
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			ft_fill(game, i, j);
+			j++;
+		}
 		i++;
+		j = 0;
 	}
-	float ray_x = player->x;
-	float ray_y = player->y;
-	// float cos_angle = cos(player->angle);
-	// float sin_angle = sin(player->angle);
-	float dist = get_distance(ray_x - player->x, ray_y - player->y);
-	float height = (64 / dist) * (WIDTH / 2);
-	int start_y = (HEIGHT - height) / 2;
-	int	end = start_y + height;
-	while (start_y < end)
-	{
-		put_pixel(i, start_y, 255, window);
-		start_y++;
-	}
-
-	mlx_put_image_to_window(window->mlx, window->win, window->img, 0, 0);
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	t_win	window;
-	
-	init_window(&window);
+	t_cub	game;
 
-	mlx_hook(window.win, 2, 1L<<0, key_press, &window.player);
-	mlx_hook(window.win, 3, 1L<<1, key_release, &window.player);
-	// mlx_hook(data->window, DestroyNotify, StructureNotifyMask,
-	// 	&ft_destroy, data);
-
-	mlx_loop_hook(window.mlx, draw_loop, &window);
-	mlx_loop(window.mlx);
+	game->game = get_map();
+	ft_init_game(&game);
+	ft_put_graphic(game);
+	mlx_hook(game->window, KeyPress, KeyPressMask, &ft_keybinds, game);
+	mlx_hook(game->window, DestroyNotify, StructureNotifyMask,
+		&ft_destroy, game);
+	mlx_loop(game->mlx);
 	return (0);
 }

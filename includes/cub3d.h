@@ -1,8 +1,8 @@
 #ifndef	CUB3D_H
 #define CUB3D_H
 
-// #include "MLX42/MLX42.h"
-# include "../minilibx-linux/mlx.h"
+#include "MLX42/MLX42.h"
+// # include "../minilibx-linux/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -55,8 +55,8 @@ typedef struct  s_win
 
 typedef struct	s_cub
 {
-	void	*mlx;
-	void	*window;
+	mlx_t	*mlx;
+	mlx_image_t	*window;
 
 	char	**map;
 

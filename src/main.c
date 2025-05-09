@@ -8,11 +8,11 @@ void	ft_init_player(t_cub *game)
 
 	x = 0;
 	y = 0;
-	while (game->game[y])
+	while (game->map[y])
 	{
-		while (game->game[y][x])
+		while (game->map[y][x])
 		{
-			if (game->game[y][x] == 'P')
+			if (game->map[y][x] == 'P')
 			{
 				game->pos_x = x;
 				game->pos_y = y;
@@ -54,21 +54,21 @@ void	ft_init_image(t_cub *game)
 	return (0);
 }
 
-void	ft_set_status(char c, t_cub *game, int i, int j)
-{
-	if (c == 'P')
-	{
-		game->pos_x = j;
-		game->pos_y = i;
-		game->p_status++;
-	}
-	if (c == 'E')
-	{
-		game->exit_x = j;
-		game->exit_y = i;
-		game->e_status++;
-	}
-}
+// void	ft_set_status(char c, t_cub *game, int i, int j)
+// {
+// 	if (c == 'P')
+// 	{
+// 		game->pos_x = j;
+// 		game->pos_y = i;
+// 		game->p_status++;
+// 	}
+// 	if (c == 'E')
+// 	{
+// 		game->exit_x = j;
+// 		game->exit_y = i;
+// 		game->e_status++;
+// 	}
+// }
 
 void	ft_init_game(t_cub *game)
 {
@@ -131,9 +131,9 @@ int	main(int ac, char **av)
 	game->game = get_map();
 	ft_init_game(&game);
 	ft_put_graphic(game);
-	mlx_hook(game->window, KeyPress, KeyPressMask, &ft_keybinds, game);
-	mlx_hook(game->window, DestroyNotify, StructureNotifyMask,
-		&ft_destroy, game);
+	// mlx_hook(game->window, KeyPress, KeyPressMask, &ft_keybinds, game);
+	// mlx_hook(game->window, DestroyNotify, StructureNotifyMask,
+	// 	&ft_destroy, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

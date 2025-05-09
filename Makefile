@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/06 21:20:36 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/09 15:50:10 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					line.c \
 					set_map.c \
 					set_object.c \
+					set_texture.c \
 		)
 
 SRC_RENDER_PTH	=	render/

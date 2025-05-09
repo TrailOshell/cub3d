@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:37 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:55:50 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:57:56 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	set_rgb(t_data *data, t_rgb *rgb, char *str)
 //void	set_texture(t_data *data, t_tx *tx, char *str)
 void	set_texture(t_data *data, char *tx, char *str)
 {
-	(void)str;
-
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
 		error_and_exit(data, "ERROR! wrong texture input");

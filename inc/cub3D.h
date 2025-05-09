@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:20:22 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:14:11 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef struct s_tx
 	void	*we;
 }	t_tx;
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -71,6 +78,8 @@ typedef struct s_data
 	t_node			*node;
 	t_player		*player;
 	t_tx			tx;
+	t_rgb			f;
+	t_rgb			c;
 }	t_data;
 
 // color

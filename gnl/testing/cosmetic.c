@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:57:55 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 15:56:14 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:24:20 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	banner(char *str, char *desc)
 
 	i = -1;
 	if (*desc == 0)
-		len = sl_strlen(str);
+		len = cub_strlen(str);
 	else
-		len =sl_strlen(str) +sl_strlen(desc) + 3;
+		len =cub_strlen(str) +cub_strlen(desc) + 3;
 	banner_border(len);
 	printcolor("|", "blue");
 	ft_color("white");

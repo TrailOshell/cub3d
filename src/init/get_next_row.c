@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:55 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	get_next_row(t_data *data, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		len = sl_strlen(line);
+		len = cub_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			len--;
 		if (data->map->n_col == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:03:16 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	write_color(char *msg, char *color)
 	char	*str;
 
 	set_color(color);
-	str = sl_strdup(msg);
-	write(1, msg, sl_strlen(str));
+	str = cub_strdup(msg);
+	write(1, msg, cub_strlen(str));
 	free(str);
 	set_color(NCL);
 }

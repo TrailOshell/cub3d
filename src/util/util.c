@@ -6,13 +6,13 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:07:41 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:55 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-size_t	sl_strlen(char *s)
+size_t	cub_strlen(char *s)
 {
 	size_t	len;
 
@@ -22,12 +22,12 @@ size_t	sl_strlen(char *s)
 	return (len);
 }
 
-char	*sl_strdup(char *s)
+char	*cub_strdup(char *s)
 {
 	char	*dup;
 	int		i;
 
-	dup = malloc(sizeof(char) * sl_strlen(s) + 1);
+	dup = malloc(sizeof(char) * cub_strlen(s) + 1);
 	i = 0;
 	while (s[i])
 	{
@@ -38,7 +38,7 @@ char	*sl_strdup(char *s)
 	return (dup);
 }
 
-int	sl_strrncmp(char *s1, char *s2, size_t n)
+int	cub_strrncmp(char *s1, char *s2, size_t n)
 {
 	while (*s1)
 		s1++;
@@ -50,7 +50,7 @@ int	sl_strrncmp(char *s1, char *s2, size_t n)
 	return (0);
 }
 
-char	*sl_strjoin(char *s1, char *s2)
+char	*cub_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	size1;
@@ -59,8 +59,8 @@ char	*sl_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	size1 = sl_strlen(s1);
-	size2 = sl_strlen(s2);
+	size1 = cub_strlen(s1);
+	size2 = cub_strlen(s2);
 	ptr = malloc(sizeof(char) * (size1 + size2 + 1));
 	if (!ptr)
 		return (0);

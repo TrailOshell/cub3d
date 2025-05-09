@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:52:24 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:04:22 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	error_and_exit(t_data *data, char *msg)
 		write_grid(data->map->grid);
 	set_color(YLW);
 	if (msg && *msg)
-		write(1, msg, sl_strlen(msg));
+		write(1, msg, cub_strlen(msg));
 	else
 		write(1, "Error\n", 6);
 	set_color(NCL);

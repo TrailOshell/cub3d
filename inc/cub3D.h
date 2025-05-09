@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:14:11 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,10 @@ int		isplayerchar(char c);
 int		isvalidchar(char c);
 int		iswalkable(char c);
 // util.c
-size_t	sl_strlen(char *s);
-char	*sl_strdup(char *s);
-int		sl_strrncmp(char *s1, char *s2, size_t n);
-char	*sl_strjoin(char *s1, char *s2);
+size_t	cub_strlen(char *s);
+char	*cub_strdup(char *s);
+int		cub_strrncmp(char *s1, char *s2, size_t n);
+char	*cub_strjoin(char *s1, char *s2);
 
 /*	|| SRC ||	*/
 // error.c

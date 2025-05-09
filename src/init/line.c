@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:40:29 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:56:46 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*line_dupe(char *line)
 	int		len;
 	int		i;
 
-	len = sl_strlen(line);
+	len = cub_strlen(line);
 	new = malloc(sizeof(char) * len + 1);
 	i = 0;
 	while (len--)

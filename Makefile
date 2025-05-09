@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/09 15:50:10 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/09 17:14:18 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,10 @@ OBJ_SUB_PTHS =	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 					$(SRC_UTIL_PTH) \
 				)
 
+LIBFT_PTH	=	libft/
+LIBFT		=	$(LIBFT_PTH)libft.a
+LIBFT_INC	=	-I$(LIBFT_PTH)sources/libft.h
+
 GNL_PTH	=	gnl/
 GNL		=	$(GNL_PTH)get_next_line.a
 GNL_INC	=	-I$(GNL_PTH)
@@ -79,19 +83,23 @@ CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 CFLAGS	+=	-g
 
-all: $(MLX) $(GNL) $(NAME)
+all: $(MLX) $(LIBFT) $(GNL) $(NAME)
 
 $(OBJ_PTH)%.o: $(SRC_PTH)%.c Makefile $(INC_CUB3D) | $(OBJ_SUB_PTHS)
-	@$(CC) $(CFLAGS) $(INC) $(GNL_INC) $(MLX_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) $(LIBFT_INC) $(GNL_INC) $(MLX_INC) -c $< -o $@
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(GNL) -o $@ $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) $(GNL) $(LIBFT) -o $@ $(MLX_FLAGS)
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(OBJ_SUB_PTHS):
 	mkdir -p $(OBJ_PTH)
 	mkdir -p $(OBJ_SUB_PTHS)
+
+$(LIBFT):
+	@make -C ${LIBFT_PTH}
+	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(GNL):
 	@make -C ${GNL_PTH}

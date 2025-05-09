@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:14:43 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:49:15 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_rgb
 	int	r;
 	int	g;
 	int	b;
+	int	rgb;
 }	t_rgb;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:42:08 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ typedef struct s_data
 	t_map			*map;
 	t_node			*node;
 	t_player		*player;
-	t_tx			tx;
-	t_rgb			f;
-	t_rgb			c;
+	t_tx			*tx;
+	t_rgb			*f;
+	t_rgb			*c;
 }	t_data;
 
 // color

@@ -1,32 +1,30 @@
-NAME = cub3D
-SRC = src/main.c\
-		src/player.c
+OLOR_RESET	=	\033[0m
+GREEN		=	\033[32m
+YELLOW		=	\033[33m
+BLUE		=	\033[34m
+RED			=	\033[31m
+CYAN		= 	\033[1;36m
 
-HEADER = includes/cub3d.h
 
-CC = cc
-CFLAGS =  -g -I $(HEADER) -O0
-MLXFLAGS = -L ./minilibx-linux/ -lmlx -Ilmlx -lXext -lX11
 
-OBJ = $(SRC:.c=.o)
+NAME	= fdf
+
+SRC		=	src/main.c
+
+
+CFLAGS	= -Wextra -Wall -Werror -Ofast
+LIBMLX	= ./MLX42
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
+MLX_A	= $(LIBMLX)/build/libmlx42.a 
+
+HEADER_MLX	= -I ./include -I $(LIBMLX)/include
+HEADER_NOW = includes/cub3d.h
+
+OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
-	make -C minilibx-linux/
-	$(CC) $(CFLAGS) $(OBJ) minilibx-linux/libmlx.a -Lmlx_linux -lmlx_Linux -Lminilibx-linux/ -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJS) $(HEADER_NOW)
+	cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4\
+	$(CC) $(CFLAGS) -I $(HEADER_NOW) $(OBJS) $(MLX_A) $(MLXFLAGS) -o $(NAME)
 
-%.o:%.c $(HEADER)
-	$(CC) $(CFLAGS) -Imlx_linux -c $< -o $@
-
-clean:
-	rm -rf $(OBJ)
-	rm -rf minilibx/obj/*.o
-
-fclean: clean
-	rm -rf $(NAME)
-	make clean -C minilibx-linux/
-
-re: fclean all
-
-.PHONY: all clean fclean re 

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:37 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:49:05 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:55:50 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void	set_rgb(t_data *data, t_rgb *rgb, char *str)
 }
 
 //void	set_texture(t_data *data, t_tx *tx, char *str)
-void	set_texture(t_data *data, void *tx, char *str)
+void	set_texture(t_data *data, char *tx, char *str)
 {
-	(void)data;
-	(void)tx;
 	(void)str;
+
+	str += 3;
+	if (str[0] != '.' || str[1] != '/')
+		error_and_exit(data, "ERROR! wrong texture input");
+	tx = ft_strdup(str);
+	if (!tx)
+		error_and_exit(data, "ERROR! wrong texture input");
 }
-	//while (str[i])
-	// path
-		//tx = path;
-	//else
-	//	error_and_exit("ERROR! Wrong element input (Invalid texture input)");
 
 //	set elements which are NSEW textures and colors for celing and floor
 void	set_elements(t_data *data, int fd)

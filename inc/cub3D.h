@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:49:15 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:51:04 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ typedef struct s_map
 
 typedef struct s_tx
 {
-	void	*no;
-	void	*so;
-	void	*ea;
-	void	*we;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
 }	t_tx;
 
 typedef struct s_rgb

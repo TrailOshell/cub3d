@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cosmetic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:57:55 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:24:20 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:23:53 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	banner(char *str, char *desc)
 
 	i = -1;
 	if (*desc == 0)
-		len = cub_strlen(str);
+		len = ft_strlen(str);
 	else
-		len =cub_strlen(str) +cub_strlen(desc) + 3;
+		len =ft_strlen(str) +ft_strlen(desc) + 3;
 	banner_border(len);
 	printcolor("|", "blue");
 	ft_color("white");

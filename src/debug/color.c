@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 01:05:48 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:23:53 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_color(char *color)
 {
-	write(1, color, cub_strlen(color));
+	write(1, color, ft_strlen(color));
 }
 
 void	color_from_char(char c)

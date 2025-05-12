@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:26:22 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	read_map(char **argv, t_data *data)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		error_and_exit(data, "ERROR! fd error\n");
-	if (cub_strrncmp(argv[1], ".cub", 4))
+	if (ft_strrncmp(argv[1], ".cub", 4))
 		error_and_exit(data, "ERROR! only .cub file is allowed\n");
-	else if (cub_strrncmp(argv[1], "/.cub", 5) == 0 || argv[1][0] == '.')
+	else if (ft_strrncmp(argv[1], "/.cub", 5) == 0 || argv[1][0] == '.')
 		error_and_exit(data, "ERROR! hidden file not allowed\n");
 	get_next_row(data, fd);
 	set_map(data, data->node);

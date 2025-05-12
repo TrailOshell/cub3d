@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/12 15:46:51 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/12 17:41:59 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC				=	error.c \
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
+					color_write.c \
 					color.c \
 					debug.c \
 		)

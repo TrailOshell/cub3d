@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 15:45:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:25:46 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ t_map	*start_map(t_map *map)
 	return (map);
 }
 
+t_tx	*init_tx(t_tx *tx)
+{
+	tx = malloc(sizeof(t_tx));
+	tx->no = NULL;
+	tx->so = NULL;
+	tx->ea = NULL;
+	tx->we = NULL;
+	return (tx);
+}
+
 t_data	*start_data(t_data *data)
 {
 	if (!data)
@@ -28,6 +38,9 @@ t_data	*start_data(t_data *data)
 	data->mlx = mlx_init();
 	data->map = start_map(data->map);
 	data->node = NULL;
+	data->tx = init_tx(data->tx);
+	data->f = -1;
+	data->c = -1;
 	data->player = malloc(sizeof(t_player));
 	return (data);
 }
@@ -44,7 +57,6 @@ int	read_map(char **argv, t_data *data)
 	else if (ft_strrncmp(argv[1], "/.cub", 5) == 0 || argv[1][0] == '.')
 		error_and_exit(data, "ERROR! hidden file not allowed\n");
 	get_next_row(data, fd);
-	write_elements(data);
 	set_map(data, data->node);
 	flood_fill(data);
 	write_color("Initial map\n", GRN);

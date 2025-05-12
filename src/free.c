@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:38:27 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:02:05 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:34:18 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	free_if_alloc(void *mem)
 {
 	if (mem)
 		free(mem);
-
 }
 
 void	free_map(t_map **map)
@@ -47,6 +46,15 @@ void	free_node(t_node **node)
 	}
 }
 
+void	free_tx(t_tx *tx)
+{
+	free_if_alloc(tx->no);
+	free_if_alloc(tx->so);
+	free_if_alloc(tx->ea);
+	free_if_alloc(tx->we);
+	free(tx);
+}
+
 void	free_stuff(t_data *data)
 {
 	if (data)
@@ -57,6 +65,10 @@ void	free_stuff(t_data *data)
 			free_map(&data->map);
 		if (data->node != NULL)
 			free_node(&data->node);
+		if (data->tx)
+			free_tx(data->tx);
+		// free_if_alloc(data->f);
+		// free_if_alloc(data->c);
 		free(data);
 	}
 }

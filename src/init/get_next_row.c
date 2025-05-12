@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 14:59:15 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:25:52 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ void	get_next_row(t_data *data, int fd)
 			break ;
 		if (step == 1 && set_elements(data, line) == 0)
 		{
-			if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we
-				|| data->c->rgb == -1 || data->f->rgb == -1)
-				error_and_exit(data, "ERROR! missing elements input");
+			exit(0);
 			step = 2;
 		}
 		if (step == 2 && get_map(data, line) == 0)
-		{
-			if (data->node == NULL)
-				error_and_exit(data, "ERROR! Empty map\n");
 			step = 0;
-		}
 		free(line);
 	}
+	write_elements(data);
+	if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we
+		|| data->c == -1 || data->f == -1)
+		error_and_exit(data, "ERROR! missing elements input");
+	else if (data->node == NULL)
+		error_and_exit(data, "ERROR! Empty map\n");
 }

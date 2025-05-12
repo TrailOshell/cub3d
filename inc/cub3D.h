@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 15:44:19 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:42:27 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,6 @@ typedef struct s_tx
 	char	*we;
 }	t_tx;
 
-typedef struct s_rgb
-{
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
-}	t_rgb;
-
 typedef struct s_data
 {
 	void			*mlx;
@@ -80,8 +72,8 @@ typedef struct s_data
 	t_node			*node;
 	t_player		*player;
 	t_tx			*tx;
-	t_rgb			*f;
-	t_rgb			*c;
+	int				f;
+	int				c;
 }	t_data;
 
 // color
@@ -94,12 +86,16 @@ typedef struct s_data
 # define CYN "\033[0;96m"
 
 /*	||  DEBUG  ||	*/
+// color_write.c
+void	write_color(char *msg, char *color);
+void	write_color_nl(char *msg, char *color);
+void	write_color_nb(int nb, char *color);
+void	write_double_color(char *msg1, char *color1, char *msg2, char *color2);
 // color.c
 void	set_color(char *color);
 void	color_from_char(char c);
 // debug.c
 void	write_grid(char **grid);
-void	write_color(char *msg, char *color);
 void	write_elements(t_data *data);
 
 /*	||  EVENT  ||	*/

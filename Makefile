@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/09 17:14:18 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/12 15:03:40 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ OBJ_SUB_PTHS =	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 
 LIBFT_PTH	=	libft/
 LIBFT		=	$(LIBFT_PTH)libft.a
-LIBFT_INC	=	-I$(LIBFT_PTH)sources/libft.h
+LIBFT_INC	=	-I$(LIBFT_PTH)sources/
 
 GNL_PTH	=	gnl/
 GNL		=	$(GNL_PTH)get_next_line.a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:37 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:57:56 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:04:25 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	get_int_color(t_data *data, char *str)
 //	set the red green and blue value to t_rgb
 void	set_rgb(t_data *data, t_rgb *rgb, char *str)
 {
+	if (rgb->rgb != -1)
+		error_and_exit(data, "ERROR! duplicate color input");
 	str += 2;
 	rgb->r = get_int_color(data, str);
 	while (ft_isalpha(*str) || *str == ',')
@@ -54,6 +56,8 @@ void	set_rgb(t_data *data, t_rgb *rgb, char *str)
 //void	set_texture(t_data *data, t_tx *tx, char *str)
 void	set_texture(t_data *data, char *tx, char *str)
 {
+	if (tx != NULL)
+		error_and_exit(data, "ERROR! duplicate texture input");
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
 		error_and_exit(data, "ERROR! wrong texture input");
@@ -62,32 +66,22 @@ void	set_texture(t_data *data, char *tx, char *str)
 		error_and_exit(data, "ERROR! wrong texture input");
 }
 
-//	set elements which are NSEW textures and colors for celing and floor
-void	set_elements(t_data *data, int fd)
+//	set elements which are NSEW textures and colors for ceiling and floor
+int	set_elements(t_data *data, char	*line)
 {
-	char	*line;
-	int		isrunning;
-
-	isrunning = 1;
-	while (isrunning)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (cub_strrncmp(line, "NO ", 3) == 0)
-			set_texture(data, data->tx->no, line);
-		else if (cub_strrncmp(line, "SO ", 3) == 0)
-			set_texture(data, data->tx->so, line);
-		else if (cub_strrncmp(line, "EA ", 3) == 0)
-			set_texture(data, data->tx->ea, line);
-		else if (cub_strrncmp(line, "WE ", 3) == 0)
-			set_texture(data, data->tx->we, line);
-		else if (cub_strrncmp(line, "C ", 2))
-			set_rgb(data, data->c, line);
-		else if (cub_strrncmp(line, "F ", 2))
-			set_rgb(data, data->f, line);
-		else
-			isrunning = 0;
-		free(line);
-	}
+	if (cub_strrncmp(line, "NO ", 3) == 0)
+		set_texture(data, data->tx->no, line);
+	else if (cub_strrncmp(line, "SO ", 3) == 0)
+		set_texture(data, data->tx->so, line);
+	else if (cub_strrncmp(line, "EA ", 3) == 0)
+		set_texture(data, data->tx->ea, line);
+	else if (cub_strrncmp(line, "WE ", 3) == 0)
+		set_texture(data, data->tx->we, line);
+	else if (cub_strrncmp(line, "C ", 2))
+		set_rgb(data, data->c, line);
+	else if (cub_strrncmp(line, "F ", 2))
+		set_rgb(data, data->f, line);
+	else if (!chk_all_spaces(line))
+		return (0);
+	return (1);
 }

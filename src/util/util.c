@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:07:41 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 15:23:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:41:07 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,19 @@ char	*cub_strjoin(char *s1, char *s2)
 		ptr[i++] = *(s2++);
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+int	ft_isspace(char str)
+{
+	if (str == ' ' || str == '\t' || str == '\n' || str == '\r')
+		return (1);
+	return (0);
+}
+
+int	chk_all_spaces(char *str)
+{
+	while (*str)
+		if (ft_isspace(*(str++)) == 0)
+			return (0);
+	return (1);
 }

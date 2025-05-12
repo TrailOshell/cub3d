@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/09 17:51:04 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:45:47 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ char	*line_copy(char *copy, char *line);
 void	set_map(t_data *data, t_node *node);
 // set_object.c
 int		set_player(t_player *player, int x, int y);
+// set_texture.c
+int		set_elements(t_data *data, char	*line);
 
 /*	||  RENDER  ||	*/
 // render.c
@@ -139,6 +141,8 @@ size_t	cub_strlen(char *s);
 char	*cub_strdup(char *s);
 int		cub_strrncmp(char *s1, char *s2, size_t n);
 char	*cub_strjoin(char *s1, char *s2);
+int		ft_isspace(char str);
+int		chk_all_spaces(char *str);
 
 /*	|| SRC ||	*/
 // error.c

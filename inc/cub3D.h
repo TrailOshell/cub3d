@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 15:26:15 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:44:19 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	color_from_char(char c);
 // debug.c
 void	write_grid(char **grid);
 void	write_color(char *msg, char *color);
+void	write_elements(t_data *data);
 
 /*	||  EVENT  ||	*/
 // mlx_events.c

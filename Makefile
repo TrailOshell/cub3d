@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/12 15:03:40 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/12 15:46:51 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,3 +129,8 @@ YLW		=	\033[0;33m
 BLU		=	\033[0;34m
 PUR		=	\033[0;35m
 CYN		=	\033[0;36m
+
+t: test
+
+test: $(NAME)
+	./$(NAME) cub/test.cub

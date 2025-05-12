@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 15:26:22 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:45:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	read_map(char **argv, t_data *data)
 	else if (ft_strrncmp(argv[1], "/.cub", 5) == 0 || argv[1][0] == '.')
 		error_and_exit(data, "ERROR! hidden file not allowed\n");
 	get_next_row(data, fd);
+	write_elements(data);
 	set_map(data, data->node);
 	flood_fill(data);
 	write_color("Initial map\n", GRN);

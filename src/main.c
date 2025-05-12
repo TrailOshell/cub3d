@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 17:25:46 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:17:27 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_data	*start_data(t_data *data)
 	data->tx = init_tx(data->tx);
 	data->f = -1;
 	data->c = -1;
+	data->line = NULL;
 	data->player = malloc(sizeof(t_player));
 	return (data);
 }

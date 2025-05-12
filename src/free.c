@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:38:27 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 16:34:18 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:17:49 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +66,7 @@ void	free_stuff(t_data *data)
 			free_node(&data->node);
 		if (data->tx)
 			free_tx(data->tx);
-		// free_if_alloc(data->f);
-		// free_if_alloc(data->c);
+		free_if_alloc(data->line);
 		free(data);
 	}
 }

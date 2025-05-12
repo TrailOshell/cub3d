@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 17:25:52 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:17:01 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,20 @@ int	get_map(t_data *data, char *line)
 // this one keeps newline in the nodes
 void	get_next_row(t_data *data, int fd)
 {
-	char	*line;
 	int		step;
 
 	step = 1;
 	while (step)
 	{
-		line = get_next_line(fd);
-		if (!line)
+		data->line = get_next_line(fd);
+		if (data->line == NULL)
 			break ;
-		if (step == 1 && set_elements(data, line) == 0)
-		{
-			exit(0);
+		if (step == 1 && set_elements(data, data->line) == 0)
 			step = 2;
-		}
-		if (step == 2 && get_map(data, line) == 0)
+		if (step == 2 && get_map(data, data->line) == 0)
 			step = 0;
-		free(line);
+		free(data->line);
+		data->line = NULL;
 	}
 	write_elements(data);
 	if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we

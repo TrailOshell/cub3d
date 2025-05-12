@@ -5,12 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 15:03:37 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 16:42:59y tsomchan         ###   ########.fr       */
+/*   Created: 2025/05/13 01:07:07 by tsomchan          #+#    #+#             */
+/*   Updated: 2025/05/13 01:17:23 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	error_elements(t_data *data, char *str)
+{
+	write_elements(data);
+	error_and_exit(data, str);
+}
 
 int	get_int_color(t_data *data, char *str, int *i)
 {
@@ -25,14 +31,14 @@ int	get_int_color(t_data *data, char *str, int *i)
 			color *= 10;
 	}
 	if (color > 255)
-		error_and_exit(data, "ERROR! wrong color input (>255)\n");
+		error_elements(data, "ERROR! wrong color input (not 0-255)\n");
 	if (str[*i] == ',')
 		*i += 1;
 	return (color);
 }
 
 //	set the red green and blue value to t_rgb
-void	set_rgb(t_data *data, int *rgb, char *str)
+int	set_rgb(t_data *data, int *rgb, char *str)
 {
 	int	r;
 	int	g;
@@ -40,29 +46,32 @@ void	set_rgb(t_data *data, int *rgb, char *str)
 	int	i;
 
 	if (*rgb != -1)
-		error_and_exit(data, "ERROR! duplicate color input\n");
+		error_elements(data, "ERROR! duplicate color input\n");
 	i = 2;
 	r = get_int_color(data, str, &i);
 	g = get_int_color(data, str, &i);
 	b = get_int_color(data, str, &i);
 	if (str[i] != '\n' && str[i] != '\0')
-		error_and_exit(data, "ERROR! wrong color input\n");
+		error_elements(data, "ERROR! wrong color input\n");
 	*rgb = r;
 	*rgb = (*rgb << 8) + g;
 	*rgb = (*rgb << 8) + b;
+	return (1);
 }
+	// write_double_color("color: ", YLW, str, CYN);
 
 //void	set_texture(t_data *data, t_tx *tx, char *str)
-void	set_texture(t_data *data, char **tx, char *str)
+int	set_texture(t_data *data, char **tx, char *str)
 {
 	if (*tx != NULL)
-		error_and_exit(data, "ERROR! duplicate texture input");
+		error_elements(data, "ERROR! duplicate texture input");
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
-		error_and_exit(data, "ERROR! wrong texture input");
+		error_elements(data, "ERROR! wrong texture input");
 	*tx = ft_strdup(str);
 	if (!*tx)
-		error_and_exit(data, "ERROR! wrong texture input");
+		error_elements(data, "ERROR! wrong texture input");
+	return (1);
 }
 
 //	set elements which are NSEW textures and colors for ceiling and floor
@@ -70,19 +79,19 @@ int	set_elements(t_data *data, char	*line)
 {
 	if (chk_all_spaces(line))
 		return (1);
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		set_texture(data, &data->tx->no, line);
+	else if (ft_strncmp(line, "NO ", 3) == 0)
+		return (set_texture(data, &data->tx->no, line));
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		set_texture(data, &data->tx->so, line);
+		return (set_texture(data, &data->tx->so, line));
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		set_texture(data, &data->tx->ea, line);
+		return (set_texture(data, &data->tx->ea, line));
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		set_texture(data, &data->tx->we, line);
+		return (set_texture(data, &data->tx->we, line));
 	else if (ft_strncmp(line, "C ", 2))
-		set_rgb(data, &data->c, line);
+		return (set_rgb(data, &data->c, line));
 	else if (ft_strncmp(line, "F ", 2))
-		set_rgb(data, &data->f, line);
+		return (set_rgb(data, &data->f, line));
 	else if (!chk_all_spaces(line))
 		return (0);
-	return (1);
+	return (0);
 }

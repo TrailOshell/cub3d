@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 17:42:27 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:01:38 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_data
 	t_tx			*tx;
 	int				f;
 	int				c;
+	char			*line;
 }	t_data;
 
 // color

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:07:07 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 19:57:44 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:57:44y tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	set_rgb(t_data *data, t_rgb *rgb, char *str)
 int	set_texture(t_data *data, char **tx, char *str)
 {
 	if (*tx != NULL)
-		error_elements(data, "ERROR! duplicate texture input");
+		error_elements(data, "ERROR! duplicate texture input\n");
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
-		error_elements(data, "ERROR! wrong texture input");
+		error_elements(data, "ERROR! wrong texture input\n");
 	*tx = ft_strdup(str);
 	if (!*tx)
-		error_elements(data, "ERROR! wrong texture input");
+		error_elements(data, "ERROR! wrong texture input\n");
 	return (1);
 }
 
@@ -76,17 +76,17 @@ int	set_elements(t_data *data, char	*line)
 {
 	if (chk_all_spaces(line))
 		return (1);
-	else if (ft_strncmp(line, "NO ", 3) == 0)
+	else if (line[0] == 'N' && line[1] == 'O' && ft_isspace(line[2]))
 		return (set_texture(data, &data->tx->no, line));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
+	else if (line[0] == 'S' && line[1] == 'O' && ft_isspace(line[2]))
 		return (set_texture(data, &data->tx->so, line));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
+	else if (line[0] == 'E' && line[1] == 'A' && ft_isspace(line[2]))
 		return (set_texture(data, &data->tx->ea, line));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
+	else if (line[0] == 'W' && line[1] == 'E' && ft_isspace(line[2]))
 		return (set_texture(data, &data->tx->we, line));
-	else if (ft_strncmp(line, "C ", 2))
+	else if (line[0] == 'C' && ft_isspace(line[1]))
 		return (set_rgb(data, data->c, line));
-	else if (ft_strncmp(line, "F ", 2))
+	else if (line[0] == 'F' && ft_isspace(line[1]))
 		return (set_rgb(data, data->f, line));
 	else if (!chk_all_spaces(line))
 		return (0);

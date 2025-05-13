@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 20:46:32 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:08:50y tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	write_itoa(int nb)
 //	write info about the color inputed from .cub
 void	write_color_input(t_rgb *rgb)
 {
-	write_color_nb(rgb->rgb, YLW);
+	write_color_nb(rgb->rgb, CYN);
+	if (rgb->rgb == -1)
+		write(1, "\t", 1);
+	write(1, "  ", 2);
 	write(1, "\033[48;2;", 8);
 	write_itoa(rgb->r);
 	write(1, ";", 1);
@@ -54,8 +57,9 @@ void	write_color_input(t_rgb *rgb)
 	write(1, ";", 1);
 	write_itoa(rgb->b);
 	write(1, "m", 1);
-	write(1, "\t     \t", 7);
+	write(1, "     ", 5);
 	write(1, "\033[0;49m", 8);
+	write(1, "  ", 2);
 	write_color_nb(rgb->r, RED);
 	write_color(",", NULL);
 	write_color_nb(rgb->g, GRN);
@@ -67,20 +71,20 @@ void	write_color_input(t_rgb *rgb)
 //	write textures and color that has been set
 void	write_elements(t_data *data)
 {
-	if (data->tx->no)
-		write_double_color("NO\t", BLU, data->tx->no, CYN);
-	if (data->tx->so)
-		write_double_color("SO\t", BLU, data->tx->so, CYN);
-	if (data->tx->ea)
-		write_double_color("EA\t", BLU, data->tx->ea, CYN);
-	if (data->tx->we)
-		write_double_color("WE\t", BLU, data->tx->we, CYN);
+	write_double_color("NO\t", BLU, data->tx->no, CYN);
+	if (!data->tx->no)
+		write_color("No input\n", YLW);
+	write_double_color("SO\t", BLU, data->tx->so, CYN);
+	if (!data->tx->so)
+		write_color("No input\n", YLW);
+	write_double_color("EA\t", BLU, data->tx->ea, CYN);
+	if (!data->tx->ea)
+		write_color("No input\n", YLW);
+	write_double_color("WE\t", BLU, data->tx->we, CYN);
+	if (!data->tx->we)
+		write_color("No input\n", YLW);
 	write_color("Floor\t", BLU);
 	write_color_input(data->f);
 	write_color("Ceiling\t", BLU);
 	write_color_input(data->c);
 }
-/*
-	write_color("Textures (NSEW)\n", YLW);
-	write_color("Color (Floor and Ceiling)\n", YLW);
-*/

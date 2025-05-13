@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 20:44:15 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:46:32 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	write_itoa(int nb)
 	free(tmp);
 }
 
+//	write info about the color inputed from .cub
 void	write_color_input(t_rgb *rgb)
 {
 	write_color_nb(rgb->rgb, YLW);
@@ -61,8 +62,6 @@ void	write_color_input(t_rgb *rgb)
 	write_color(",", NULL);
 	write_color_nb(rgb->b, CYN);
 	write_color("\n", NULL);
-
-
 }
 
 //	write textures and color that has been set

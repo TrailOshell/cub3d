@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:07:07 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 01:17:23 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:57:44 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,21 @@ int	get_int_color(t_data *data, char *str, int *i)
 }
 
 //	set the red green and blue value to t_rgb
-int	set_rgb(t_data *data, int *rgb, char *str)
+int	set_rgb(t_data *data, t_rgb *rgb, char *str)
 {
-	int	r;
-	int	g;
-	int	b;
 	int	i;
 
-	if (*rgb != -1)
+	if (rgb->rgb != -1)
 		error_elements(data, "ERROR! duplicate color input\n");
 	i = 2;
-	r = get_int_color(data, str, &i);
-	g = get_int_color(data, str, &i);
-	b = get_int_color(data, str, &i);
+	rgb->r = get_int_color(data, str, &i);
+	rgb->g = get_int_color(data, str, &i);
+	rgb->b = get_int_color(data, str, &i);
 	if (str[i] != '\n' && str[i] != '\0')
 		error_elements(data, "ERROR! wrong color input\n");
-	*rgb = r;
-	*rgb = (*rgb << 8) + g;
-	*rgb = (*rgb << 8) + b;
+	rgb->rgb = rgb->r;
+	rgb->rgb = (rgb->rgb << 8) + rgb->g;
+	rgb->rgb = (rgb->rgb << 8) + rgb->b;
 	return (1);
 }
 	// write_double_color("color: ", YLW, str, CYN);
@@ -88,9 +85,9 @@ int	set_elements(t_data *data, char	*line)
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 		return (set_texture(data, &data->tx->we, line));
 	else if (ft_strncmp(line, "C ", 2))
-		return (set_rgb(data, &data->c, line));
+		return (set_rgb(data, data->c, line));
 	else if (ft_strncmp(line, "F ", 2))
-		return (set_rgb(data, &data->f, line));
+		return (set_rgb(data, data->f, line));
 	else if (!chk_all_spaces(line))
 		return (0);
 	return (0);

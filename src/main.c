@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 00:17:27 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:55:37 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ t_tx	*init_tx(t_tx *tx)
 	return (tx);
 }
 
+t_rgb	*init_rgb(t_rgb *rgb)
+{
+	rgb = malloc(sizeof(t_rgb));
+	rgb->r = -1;
+	rgb->g = -1;
+	rgb->b = -1;
+	rgb->rgb = -1;
+	return (rgb);
+}
+
 t_data	*start_data(t_data *data)
 {
 	if (!data)
@@ -39,8 +49,8 @@ t_data	*start_data(t_data *data)
 	data->map = start_map(data->map);
 	data->node = NULL;
 	data->tx = init_tx(data->tx);
-	data->f = -1;
-	data->c = -1;
+	data->f = init_rgb(data->f);
+	data->c = init_rgb(data->c);
 	data->line = NULL;
 	data->player = malloc(sizeof(t_player));
 	return (data);

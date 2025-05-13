@@ -67,6 +67,8 @@ void	free_stuff(t_data *data)
 		if (data->tx)
 			free_tx(data->tx);
 		free_if_alloc(data->line);
+		free_if_alloc(data->f);
+		free_if_alloc(data->c);
 		free(data);
 	}
 }

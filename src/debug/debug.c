@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 17:39:57 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:44:15 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,37 @@ void	write_grid(char **grid)
 	set_color(NCL);
 }
 
+void	write_itoa(int nb)
+{
+	char	*tmp;
+
+	tmp = ft_itoa(nb);
+	write(1, tmp, ft_strlen(tmp));
+	free(tmp);
+}
+
+void	write_color_input(t_rgb *rgb)
+{
+	write_color_nb(rgb->rgb, YLW);
+	write(1, "\033[48;2;", 8);
+	write_itoa(rgb->r);
+	write(1, ";", 1);
+	write_itoa(rgb->g);
+	write(1, ";", 1);
+	write_itoa(rgb->b);
+	write(1, "m", 1);
+	write(1, "\t     \t", 7);
+	write(1, "\033[0;49m", 8);
+	write_color_nb(rgb->r, RED);
+	write_color(",", NULL);
+	write_color_nb(rgb->g, GRN);
+	write_color(",", NULL);
+	write_color_nb(rgb->b, CYN);
+	write_color("\n", NULL);
+
+
+}
+
 //	write textures and color that has been set
 void	write_elements(t_data *data)
 {
@@ -46,11 +77,9 @@ void	write_elements(t_data *data)
 	if (data->tx->we)
 		write_double_color("WE\t", BLU, data->tx->we, CYN);
 	write_color("Floor\t", BLU);
-	write_color_nb(data->f, CYN);
-	write_color("\n", NULL);
+	write_color_input(data->f);
 	write_color("Ceiling\t", BLU);
-	write_color_nb(data->c, CYN);
-	write_color("\n", NULL);
+	write_color_input(data->c);
 }
 /*
 	write_color("Textures (NSEW)\n", YLW);

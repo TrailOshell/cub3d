@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 16:51:13 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 16:59:00 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					flood_fill.c \
 					get_next_row.c \
 					grid.c \
+					init.c \
 					line.c \
 					set_map.c \
 					set_object.c \

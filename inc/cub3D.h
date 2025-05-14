@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:49:04 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:58:44 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void	get_next_row(t_data *data, int fd);
 // grid.c
 char	**new_grid(t_map *map);
 char	**dupe_grid(t_map *map);
+// init.c
+t_data	*init_data(t_data *data);
 // line.c
 void	add_line(t_node **node, char *line);
 char	*line_dupe(char *line);
@@ -167,6 +169,6 @@ void	free_map(t_map **map);
 void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c
-t_map	*start_map(t_map *map);
+t_map	*init_map(t_map *map);
 
 #endif

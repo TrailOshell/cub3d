@@ -6,55 +6,11 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:49:54 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:57:58 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-t_map	*start_map(t_map *map)
-{
-	map = malloc(sizeof(t_map));
-	map->n_col = 0;
-	map->n_row = 0;
-	map->grid = NULL;
-	return (map);
-}
-
-t_tx	*init_tx(t_tx *tx)
-{
-	tx = malloc(sizeof(t_tx));
-	tx->no = NULL;
-	tx->so = NULL;
-	tx->ea = NULL;
-	tx->we = NULL;
-	return (tx);
-}
-
-t_rgb	*init_rgb(t_rgb *rgb)
-{
-	rgb = malloc(sizeof(t_rgb));
-	rgb->r = -1;
-	rgb->g = -1;
-	rgb->b = -1;
-	rgb->rgb = -1;
-	return (rgb);
-}
-
-t_data	*start_data(t_data *data)
-{
-	if (!data)
-		data = malloc(sizeof(t_data));
-	data->mlx = mlx_init();
-	data->map = start_map(data->map);
-	data->node = NULL;
-	data->tx = init_tx(data->tx);
-	data->f = init_rgb(data->f);
-	data->c = init_rgb(data->c);
-	data->line = NULL;
-	data->player = malloc(sizeof(t_player));
-	return (data);
-}
 
 int	read_map(char **argv, t_data *data)
 {
@@ -80,13 +36,14 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
-	data = start_data(data);
+	data = init_data(data);
 	if (argc != 2)
 		error_and_exit(data, "ERROR! Input arguments not equal 2\n");
 	if (!data->mlx)
 		return (0);
 	read_map(argv, data);
-	data->win = mlx_new_window(data->mlx, data->map->n_col * SIZE, data->map->n_row * SIZE, "cub3D");
+	data->win = mlx_new_window(data->mlx,
+			data->map->n_col * SIZE, data->map->n_row * SIZE, "cub3D");
 	if (!data->win)
 		return (free(data->mlx), 1);
 	mlx_hook(data->win, KEYPRESS, (1L << 0), &on_keypress, data);

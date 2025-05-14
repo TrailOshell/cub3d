@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:27:13 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:57:13 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	flood_fill(t_data *data)
 	if (!data || !data->map)
 		return (0);
 	flood = NULL;
-	flood = start_map(flood);
+	flood = init_map(flood);
 	flood->grid = dupe_grid(data->map);
 	if (!flood || !flood->grid)
 		return (0);

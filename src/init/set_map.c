@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:42:30 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:27:32 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:08:47 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	check_player_pos(t_data *data, char *line, int y)
 	{
 		if (isplayerchar(line[x]))
 		{
+			if (data->player->x != -1 || data->player->y != -1)
+				error_and_exit(data, "ERROR! duplicated player\n");
 			data->player->x = x;
 			data->player->y = y;
 			return (1);
@@ -57,5 +59,7 @@ void	set_map(t_data *data, t_node *node)
 		y++;
 	}
 	check_map_size(data);
+	if (data->player->x == -1 || data->player->y == -1)
+		error_and_exit(data, "ERROR! player not found\n");
 	free_node(&data->node);
 }

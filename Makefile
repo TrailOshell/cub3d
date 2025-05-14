@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 18:12:44 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 18:29:48 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,6 +160,22 @@ valid : $(NAME)
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_2.cub
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_dimond.cub
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_subject.cub
+
+i : invalid
+invalid : $(NAME) $(TEXTURES) if
+
+im : invalid_map
+invalid_map : $(NAME) $(TEXTURES)
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_no_news_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_no_news_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_0_path_textures.cub          
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_2_path_textures.cub          
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_0_floor.cub                 
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_2_floor.cub                  
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_player0.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_player2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_wall_no_close_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_wall_no_close_2.cub
 
 if : invalid_file
 invalid_file : $(NAME) $(TEXTURES)

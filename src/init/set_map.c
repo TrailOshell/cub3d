@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:42:30 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/12 14:55:13 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:27:32 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ int	check_map_size(t_data *data)
 	return (1);
 }
 
+int	check_player_pos(t_data *data, char *line, int y)
+{
+	int	x;
+
+	x = 0;
+	while (line[x])
+	{
+		if (isplayerchar(line[x]))
+		{
+			data->player->x = x;
+			data->player->y = y;
+			return (1);
+		}
+		x++;
+	}
+	return (0);
+}
+
 void	set_map(t_data *data, t_node *node)
 {
 	int		y;
@@ -33,6 +51,7 @@ void	set_map(t_data *data, t_node *node)
 	y = 0;
 	while (node != NULL)
 	{
+		check_player_pos(data, node->line, y);
 		line_copy(data->map->grid[y], node->line);
 		node = node->next;
 		y++;

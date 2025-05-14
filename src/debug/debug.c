@@ -46,9 +46,6 @@ void	write_itoa(int nb)
 //	write info about the color inputed from .cub
 void	write_color_input(t_rgb *rgb)
 {
-	write_color_nb(rgb->rgb, CYN);
-	if (rgb->rgb == -1)
-		write(1, "\t", 1);
 	write(1, "  ", 2);
 	write(1, "\033[48;2;", 8);
 	write_itoa(rgb->r);
@@ -65,6 +62,10 @@ void	write_color_input(t_rgb *rgb)
 	write_color_nb(rgb->g, GRN);
 	write_color(",", NULL);
 	write_color_nb(rgb->b, CYN);
+	write(1, "\t", 1);
+	//if (rgb->rgb == -1 || rgb->rgb == 0)
+	//	write(1, "\t", 1);
+	write_color_nb(rgb->rgb, CYN);
 	write_color("\n", NULL);
 }
 

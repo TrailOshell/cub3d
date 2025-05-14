@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_row.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 21:00:52 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:26:17 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ int	get_map(t_data *data, char *line)
 	int		row_len;
 
 	i = 0;
+	row_len = 0;
 	while (line[i])
 	{
 		if (isvalidchar(line[i]) == 0)
 			error_and_exit(data, "ERROR! Invalid char\n");
-		else if (ft_isspace(line[i]) == 0)
+		else if (line[i] != '\n' && ft_isspace(line[i]) == 0)
 			row_len = i + 1;
 		i++;
 	}
 	line[row_len] = '\0';
 	add_line(&data->node, line);
 	data->map->n_row++;
+	if (row_len > data->map->n_col)
+		data->map->n_col = row_len;
 	return (1);
 }
 
@@ -57,3 +60,10 @@ void	get_next_row(t_data *data, int fd)
 	else if (data->node == NULL)
 		error_and_exit(data, "ERROR! Empty map\n");
 }
+/*
+	write_color("Max rows is :", BLU);
+	write_color_nb(data->map->n_row, CYN);
+	write_color("\nMax cols is :", BLU);
+	write_color_nb(data->map->n_col, CYN);
+	write_color("\n", NULL);
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 19:53:49 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:49:04 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,26 @@
 # ifndef SIZE
 #  define SIZE				64
 # endif
+
+//	X11 events 
+# define KEYPRESS			2
+# define DESTROYNOTIFY		17
+# define EXPOSE				12
+
+//# define KEYPRESSMASK	(1L<<0)
+
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100 
+# define KEY_UP  			65362
+# define KEY_LEFT  			65361
+# define KEY_RIGHT 			65363
+# define KEY_DOWN  			65364 
+# define KEY_SPACE 			32
+# define KEY_H				104
+# define KEY_Q				113
+# define KEY_ESC			65307
 
 typedef struct s_node
 {
@@ -85,15 +105,6 @@ typedef struct s_data
 	char			*line;
 }	t_data;
 
-// color
-# define NCL "\033[0;39m"
-# define RED "\033[0;91m"
-# define GRN "\033[0;92m"
-# define YLW "\033[0;93m"
-# define BLU "\033[0;94m"
-# define PUR "\033[0;95m"
-# define CYN "\033[0;96m"
-
 /*	||  DEBUG  ||	*/
 // color_write.c
 void	write_color(char *msg, char *color);
@@ -110,6 +121,7 @@ void	write_elements(t_data *data);
 /*	||  EVENT  ||	*/
 // mlx_events.c
 int		game_exit(t_data *data);
+int		on_keypress(int keysym, t_data *data);
 
 /*	||  INIT  ||	*/
 // flood_fill.c

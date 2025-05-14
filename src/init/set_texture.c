@@ -23,6 +23,8 @@ int	get_int_color(t_data *data, char *str, int *i)
 	int	color;
 
 	color = 0;
+	while (ft_isspace(str[*i]))
+		*i += 1;
 	while (str[*i] && ft_isdigit(str[*i]))
 	{
 		color += (str[*i] - '0');
@@ -30,6 +32,8 @@ int	get_int_color(t_data *data, char *str, int *i)
 		if (str[*i] && ft_isdigit(str[*i]))
 			color *= 10;
 	}
+	while (ft_isspace(str[*i]))
+		*i += 1;
 	if (color > 255)
 		error_elements(data, "ERROR! wrong color input (not 0-255)\n");
 	if (str[*i] == ',')
@@ -48,7 +52,7 @@ int	set_rgb(t_data *data, t_rgb *rgb, char *str)
 	rgb->r = get_int_color(data, str, &i);
 	rgb->g = get_int_color(data, str, &i);
 	rgb->b = get_int_color(data, str, &i);
-	if (str[i] != '\n' && str[i] != '\0')
+	if (!ft_isspace(str[i]) && str[i] != '\0')
 		error_elements(data, "ERROR! wrong color input\n");
 	rgb->rgb = rgb->r;
 	rgb->rgb = (rgb->rgb << 8) + rgb->g;

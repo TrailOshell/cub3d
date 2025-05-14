@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/12 17:41:59 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 16:51:13 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,13 @@ BLU		=	\033[0;34m
 PUR		=	\033[0;35m
 CYN		=	\033[0;36m
 
-t: test
+t : test
+test : $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/test.cub
 
-test: $(NAME)
-	./$(NAME) cub/test.cub
+v : valid
+valid : $(NAME)
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_dimond.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_subject.cub

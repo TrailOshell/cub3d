@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_conditions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:23:55 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:14:34 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:05:37 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	isplayerchar(char c)
 
 int	isvalidchar(char c)
 {
-	if (c == '0' || c == '1' || isplayerchar(c))
-		return (1);
-	else if (c == '\n')
+	if (c == '0' || c == '1' || isplayerchar(c) || ft_isspace(c))
 		return (1);
 	return (0);
 }

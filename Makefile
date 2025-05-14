@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 16:59:00 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 17:32:45 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,6 +135,10 @@ CYN		=	\033[0;36m
 t : test
 test : $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/test.cub
+
+s : subject
+subject : $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/subject.cub
 
 v : valid
 valid : $(NAME)

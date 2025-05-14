@@ -6,31 +6,42 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:57:13 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:28:05 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	painting(char *c, t_map *map)
+int	check_unenclosed_wall(t_data *data, int x, int y, t_map *flood)
 {
-	(void)map;
+	if (y == 0 && flood->grid[y][x] != '1')
+		error_and_exit(data, "ERROR! Unenclosed wall (top must be wall)\n");
+	else if (y == data->map->n_row - 1 && flood->grid[y][x] != '1')
+		error_and_exit(data, "ERROR! Unenclosed wall (bottom must be wall)\n");
+	return (0);
+}
+
+int	painting(char *c, t_data *data)
+{
+	if (!*c)
+		error_and_exit(data, "ERROR! Unenclosed wall\n");
 	if (iswalkable(*c) == 0)
 		return (0);
 	*c = 'P';
 	return (1);
 }
 
-void	paintnear(int y, int x, t_map *map)
+void	paintnear(int y, int x, t_data *data, t_map *flood)
 {
-	if (painting(&map->grid[y + 1][x], map) == 1)
-		paintnear(y + 1, x, map);
-	if (painting(&map->grid[y - 1][x], map) == 1)
-		paintnear(y - 1, x, map);
-	if (painting(&map->grid[y][x + 1], map) == 1)
-		paintnear(y, x + 1, map);
-	if (painting(&map->grid[y][x - 1], map) == 1)
-		paintnear(y, x - 1, map);
+	check_unenclosed_wall(data, x, y, flood);
+	if (painting(&flood->grid[y + 1][x], data) == 1)
+		paintnear(y + 1, x, data, flood);
+	if (painting(&flood->grid[y - 1][x], data) == 1)
+		paintnear(y - 1, x, data, flood);
+	if (painting(&flood->grid[y][x + 1], data) == 1)
+		paintnear(y, x + 1, data, flood);
+	if (painting(&flood->grid[y][x - 1], data) == 1)
+		paintnear(y, x - 1, data, flood);
 }
 
 int	flood_fill(t_data *data)
@@ -44,7 +55,7 @@ int	flood_fill(t_data *data)
 	flood->grid = dupe_grid(data->map);
 	if (!flood || !flood->grid)
 		return (0);
-	paintnear(data->player->y, data->player->x, flood);
+	paintnear(data->player->y, data->player->x, data, flood);
 	write_color("Map is valid (flood_filled)\n", PUR);
 	write_grid(flood->grid);
 	free_map(&flood);

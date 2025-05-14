@@ -64,16 +64,25 @@ int	set_rgb(t_data *data, t_rgb *rgb, char *str)
 //void	set_texture(t_data *data, t_tx *tx, char *str)
 int	set_texture(t_data *data, char **tx, char *str)
 {
+	int	fd;
+
 	if (*tx != NULL)
 		error_elements(data, "ERROR! duplicate texture input\n");
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
-		error_elements(data, "ERROR! wrong texture input\n");
+		error_elements(data, "ERROR! texture input \"./\" not found)\n");
+	if (ft_strrncmp(str, ".png", 3))
+		error_elements(data, "ERROR! only .png texture file is allowed\n");
+	fd = open(&str[2], O_RDONLY);
+	if (fd < 0)
+		error_and_exit(data, "ERROR! fd error on texture file\n");
+	close(fd);
 	*tx = ft_strdup(str);
 	if (!*tx)
-		error_elements(data, "ERROR! wrong texture input\n");
+		error_elements(data, "ERROR! texture input failed\n");
 	return (1);
 }
+	//write_color_nl(&str[2], GRN);
 
 //	set elements which are NSEW textures and colors for ceiling and floor
 int	set_elements(t_data *data, char	*line)

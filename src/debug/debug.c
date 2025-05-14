@@ -74,16 +74,20 @@ void	write_elements(t_data *data)
 {
 	write_double_color("NO\t", BLU, data->tx->no, CYN);
 	if (!data->tx->no)
-		write_color("No input\n", YLW);
+		write_color("No input", YLW);
+	write_color("\n", NULL);
 	write_double_color("SO\t", BLU, data->tx->so, CYN);
 	if (!data->tx->so)
-		write_color("No input\n", YLW);
+		write_color("No input", YLW);
+	write_color("\n", NULL);
 	write_double_color("EA\t", BLU, data->tx->ea, CYN);
 	if (!data->tx->ea)
-		write_color("No input\n", YLW);
+		write_color("No input", YLW);
+	write_color("\n", NULL);
 	write_double_color("WE\t", BLU, data->tx->we, CYN);
 	if (!data->tx->we)
-		write_color("No input\n", YLW);
+		write_color("No input", YLW);
+	write_color("\n", NULL);
 	write_color("Floor\t", BLU);
 	write_color_input(data->f);
 	write_color("Ceiling\t", BLU);

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:26:17 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:08:16 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	get_map(t_data *data, char *line)
 void	get_next_row(t_data *data, int fd)
 {
 	int		step;
+	int		i;
 
 	step = 1;
 	while (step)
@@ -46,6 +47,13 @@ void	get_next_row(t_data *data, int fd)
 		data->line = get_next_line(fd);
 		if (data->line == NULL)
 			break ;
+		i = 0;
+		while (data->line[i])
+		{
+			if (data->line[i] == '\n')
+				data->line[i] = '\0';
+			i++;
+		}
 		if (step == 1 && set_elements(data, data->line) == 0)
 			step = 2;
 		if (step == 2 && get_map(data, data->line) == 0)

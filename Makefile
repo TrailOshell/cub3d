@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 17:49:28 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 18:12:44 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,3 +160,10 @@ valid : $(NAME)
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_2.cub
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_dimond.cub
 	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_subject.cub
+
+if : invalid_file
+invalid_file : $(NAME) $(TEXTURES)
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_cu
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_no_path.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_pn.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_text.cub

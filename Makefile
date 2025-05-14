@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 18:29:48 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 18:38:38 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,30 +156,30 @@ subject : $(NAME) $(TEXTURES)
 
 v : valid
 valid : $(NAME)
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_1.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_2.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_dimond.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/map_ok_subject.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/ok_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/ok_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/ok_dimond.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/valid/ok_subject.cub
 
 i : invalid
-invalid : $(NAME) $(TEXTURES) if
+invalid : $(NAME) $(TEXTURES) im if
 
 im : invalid_map
 invalid_map : $(NAME) $(TEXTURES)
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_no_news_1.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_no_news_2.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_0_path_textures.cub          
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_2_path_textures.cub          
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_0_floor.cub                 
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_2_floor.cub                  
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_player0.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_player2.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_wall_no_close_1.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_wall_no_close_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_color_floor_0.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_color_floor_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_no_news_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_no_news_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_player_0.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_player_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_textures_0.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_textures_2.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_wall_no_close_1.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_wall_no_close_2.cub
 
 if : invalid_file
 invalid_file : $(NAME) $(TEXTURES)
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_cu
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_no_path.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_pn.cub
-	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/map_error_file_name_error_text.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_file_name_error_no_path.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_file_name_error_pn.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_file_name_error_text.cub
+	@- valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/invalid/error_file_name.cu

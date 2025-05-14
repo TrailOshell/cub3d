@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 17:32:45 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 17:47:34 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,12 +132,26 @@ BLU		=	\033[0;34m
 PUR		=	\033[0;35m
 CYN		=	\033[0;36m
 
+#	Tests
+
+TEXTURES_PTH	=	textures/
+TEXTURES		=	path_to_the_east_texture.png \
+					path_to_the_north_texture.png \
+					path_to_the_south_texture.png \
+					path_to_the_west_texture.png
+
+$(TEXTURES):
+	cp $(TEXTURES_PTH)path_to_the_east_texture.png .
+	cp $(TEXTURES_PTH)path_to_the_north_texture.png .
+	cp $(TEXTURES_PTH)path_to_the_south_texture.png .
+	cp $(TEXTURES_PTH)path_to_the_west_texture.png .
+
 t : test
-test : $(NAME)
+test : $(NAME) $(TEXTURES)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/test.cub
 
 s : subject
-subject : $(NAME)
+subject : $(NAME) $(TEXTURES)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) cub/subject.cub
 
 v : valid

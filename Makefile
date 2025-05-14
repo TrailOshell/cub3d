@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/14 17:47:34 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/14 17:49:28 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,7 @@ $(MLX):
 clean:
 	rm -f $(OBJ)
 	rm -rf $(OBJ_PTH)
+	rm -rf $(TEXTURES)
 	@echo "$(YLW)removed object files$(NCL)"
 
 fclean: clean
@@ -139,7 +140,6 @@ TEXTURES		=	path_to_the_east_texture.png \
 					path_to_the_north_texture.png \
 					path_to_the_south_texture.png \
 					path_to_the_west_texture.png
-
 $(TEXTURES):
 	cp $(TEXTURES_PTH)path_to_the_east_texture.png .
 	cp $(TEXTURES_PTH)path_to_the_north_texture.png .

@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/15 17:40:53 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/15 18:16:18 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					init.c \
 					line.c \
 					set_map.c \
-					set_object.c \
 					set_texture.c \
 		)
 
@@ -150,11 +149,11 @@ VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp
 
 t : test
 test : $(NAME) $(TEXTURES)
-	valgrind $(VAL_FLAGS) ./$(NAME) cub/test.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/test.cub
 
 s : subject
 subject : $(NAME) $(TEXTURES)
-	valgrind $(VAL_FLAGS) ./$(NAME) cub/subject.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/subject.cub
 
 v : valid
 valid : $(NAME)
@@ -168,20 +167,20 @@ invalid : $(NAME) $(TEXTURES) im if
 
 im : invalid_map
 invalid_map : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_color_floor_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_color_floor_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_no_news_1.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_no_news_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_player_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_player_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_textures_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_textures_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_wall_no_close_1.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_wall_no_close_2.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/color_floor_0.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/color_floor_2.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/no_news_1.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/no_news_2.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/player_0.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/player_2.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/textures_0.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/textures_2.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/wall_no_close_1.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/wall_no_close_2.cub
 
 if : invalid_file
 invalid_file : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_file_name_error_no_path.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_file_name_error_pn.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_file_name_error_text.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/error_file_name.cu
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_no_path.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_pn.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_text.cub
+	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name.cu

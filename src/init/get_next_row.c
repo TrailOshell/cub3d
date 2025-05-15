@@ -6,17 +6,19 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 18:08:16 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:58:26 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	get_map(t_data *data, char *line)
+int	get_map(t_data *data)
 {
 	int		i;
 	int		row_len;
+	char	*line;
 
+	line = data->line;
 	i = 0;
 	row_len = 0;
 	while (line[i])
@@ -54,9 +56,9 @@ void	get_next_row(t_data *data, int fd)
 				data->line[i] = '\0';
 			i++;
 		}
-		if (step == 1 && set_elements(data, data->line) == 0)
+		if (step == 1 && set_elements(data) == 0)
 			step = 2;
-		if (step == 2 && get_map(data, data->line) == 0)
+		if (step == 2 && get_map(data) == 0)
 			step = 0;
 		free(data->line);
 		data->line = NULL;

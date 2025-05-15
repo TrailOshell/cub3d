@@ -42,10 +42,12 @@ int	get_int_color(t_data *data, char *str, int *i)
 }
 
 //	set the red green and blue value to t_rgb
-int	set_rgb(t_data *data, t_rgb *rgb, char *str)
+int	set_rgb(t_data *data, t_rgb *rgb)
 {
-	int	i;
+	int		i;
+	char	*str;
 
+	str = data->line;
 	if (rgb->rgb != -1)
 		error_elements(data, "ERROR! duplicate color input\n");
 	i = 2;
@@ -62,10 +64,12 @@ int	set_rgb(t_data *data, t_rgb *rgb, char *str)
 	// write_double_color("color: ", YLW, str, CYN);
 
 //void	set_texture(t_data *data, t_tx *tx, char *str)
-int	set_texture(t_data *data, char **tx, char *str)
+int	set_texture(t_data *data, char **tx)
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
+	str = data->line;
 	if (*tx != NULL)
 		error_elements(data, "ERROR! duplicate texture input\n");
 	str += 3;
@@ -85,22 +89,25 @@ int	set_texture(t_data *data, char **tx, char *str)
 	//write_color_nl(&str[2], GRN);
 
 //	set elements which are NSEW textures and colors for ceiling and floor
-int	set_elements(t_data *data, char	*line)
+int	set_elements(t_data *data)
 {
+	char	*line;
+
+	line = data->line;
 	if (chk_all_spaces(line))
 		return (1);
 	else if (line[0] == 'N' && line[1] == 'O' && ft_isspace(line[2]))
-		return (set_texture(data, &data->tx->no, line));
+		return (set_texture(data, &data->tx->no));
 	else if (line[0] == 'S' && line[1] == 'O' && ft_isspace(line[2]))
-		return (set_texture(data, &data->tx->so, line));
+		return (set_texture(data, &data->tx->so));
 	else if (line[0] == 'E' && line[1] == 'A' && ft_isspace(line[2]))
-		return (set_texture(data, &data->tx->ea, line));
+		return (set_texture(data, &data->tx->ea));
 	else if (line[0] == 'W' && line[1] == 'E' && ft_isspace(line[2]))
-		return (set_texture(data, &data->tx->we, line));
+		return (set_texture(data, &data->tx->we));
 	else if (line[0] == 'C' && ft_isspace(line[1]))
-		return (set_rgb(data, data->c, line));
+		return (set_rgb(data, data->c));
 	else if (line[0] == 'F' && ft_isspace(line[1]))
-		return (set_rgb(data, data->f, line));
+		return (set_rgb(data, data->f));
 	else if (!chk_all_spaces(line))
 		return (0);
 	return (0);

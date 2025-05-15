@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:58:44 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:16:07 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,8 @@ char	*line_dupe(char *line);
 char	*line_copy(char *copy, char *line);
 // set_map.c
 void	set_map(t_data *data, t_node *node);
-// set_object.c
-int		set_player(t_player *player, int x, int y);
 // set_texture.c
-int		set_elements(t_data *data, char	*line);
+int		set_elements(t_data *data);
 
 /*	||  RENDER  ||	*/
 // render.c

@@ -123,6 +123,8 @@ fclean: clean
 
 re: fclean all
 
+.PHONY	=	all clean fclean re
+
 #	Colors
 NCL		=	\033[0;0m
 RED		=	\033[0;31m
@@ -192,3 +194,5 @@ invalid_file : $(NAME) $(TEXTURES)
 	-$(call test_cub, cub/invalid/file_name_error_pn.cub)
 	-$(call test_cub, cub/invalid/file_name_error_text.cub)
 	-$(call test_cub, cub/invalid/file_name.cu)
+
+.PHONY	+=	t test s subject v valid i invalid im invalid_map if invalid_file

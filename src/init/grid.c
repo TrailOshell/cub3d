@@ -22,6 +22,7 @@ char	**new_grid(t_map *map)
 	while (row < map->n_row)
 	{
 		grid[row] = malloc(sizeof(char *) * (map->n_col + 1));
+		grid[row][0] = '\0';
 		row++;
 	}
 	grid[row] = NULL;

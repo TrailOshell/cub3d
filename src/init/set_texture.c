@@ -12,11 +12,14 @@
 
 #include "cub3D.h"
 
-void	error_elements(t_data *data, char *str)
+//	write error and return -1
+int	err_elem(t_data *data, char *str)
 {
 	write_elements(data);
-	error_and_exit(data, str);
+	write_color(str, YLW);
+	return (-1);
 }
+	// error_and_exit(data, str);
 
 int	get_int_color(t_data *data, char *str, int *i)
 {
@@ -35,7 +38,7 @@ int	get_int_color(t_data *data, char *str, int *i)
 	while (ft_isspace(str[*i]))
 		*i += 1;
 	if (color > 255)
-		error_elements(data, "ERROR! wrong color input (not 0-255)\n");
+		return (err_elem(data, "ERROR! wrong color input (not 0-255)\n"));
 	if (str[*i] == ',')
 		*i += 1;
 	return (color);
@@ -49,13 +52,13 @@ int	set_rgb(t_data *data, t_rgb *rgb)
 
 	str = data->line;
 	if (rgb->rgb != -1)
-		error_elements(data, "ERROR! duplicate color input\n");
+		return (err_elem(data, "ERROR! duplicate color input\n"));
 	i = 2;
 	rgb->r = get_int_color(data, str, &i);
 	rgb->g = get_int_color(data, str, &i);
 	rgb->b = get_int_color(data, str, &i);
 	if (!ft_isspace(str[i]) && str[i] != '\0')
-		error_elements(data, "ERROR! wrong color input\n");
+		return (err_elem(data, "ERROR! wrong color input\n"));
 	rgb->rgb = rgb->r;
 	rgb->rgb = (rgb->rgb << 8) + rgb->g;
 	rgb->rgb = (rgb->rgb << 8) + rgb->b;
@@ -71,19 +74,22 @@ int	set_texture(t_data *data, char **tx)
 
 	str = data->line;
 	if (*tx != NULL)
-		error_elements(data, "ERROR! duplicate texture input\n");
+		return (err_elem(data, "ERROR! duplicate texture input\n"));
 	str += 3;
 	if (str[0] != '.' || str[1] != '/')
-		error_elements(data, "ERROR! texture input \"./\" not found)\n");
+		return (err_elem(data, "ERROR! texture input \"./\" not found)\n"));
 	if (ft_strrncmp(str, ".png", 3))
-		error_elements(data, "ERROR! only .png texture file is allowed\n");
+		return (err_elem(data, "ERROR! only .png texture file is allowed\n"));
 	fd = open(&str[2], O_RDONLY);
 	if (fd < 0)
-		error_and_exit(data, "ERROR! fd error on texture file\n");
+	{
+		write_color("ERROR! fd error on texture file\n", YLW);
+		return (-1);
+	}
 	close(fd);
 	*tx = ft_strdup(str);
 	if (!*tx)
-		error_elements(data, "ERROR! texture input failed\n");
+		return (err_elem(data, "ERROR! texture input failed\n"));
 	return (1);
 }
 	//write_color_nl(&str[2], GRN);

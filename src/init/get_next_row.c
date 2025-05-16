@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_row.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/15 17:58:26 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/16 18:42:16 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	get_map(t_data *data)
 	while (line[i])
 	{
 		if (isvalidchar(line[i]) == 0)
-			error_and_exit(data, "ERROR! Invalid char\n");
+		{
+			write_color("ERROR! Invalid char\n", YLW);
+			return (-1);
+		}
 		else if (line[i] != '\n' && ft_isspace(line[i]) == 0)
 			row_len = i + 1;
 		i++;
@@ -37,38 +40,51 @@ int	get_map(t_data *data)
 	return (1);
 }
 
+void	remove_newline(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->line[i])
+	{
+		if (data->line[i] == '\n')
+			data->line[i] = '\0';
+		i++;
+	}
+}
+
+int	get_result(int	*result, int func)
+{
+	*result = func;
+	return (*result);
+}
+
 // this one keeps newline in the nodes
 void	get_next_row(t_data *data, int fd)
 {
-	int		step;
-	int		i;
+	int	step;
+	int	result;
 
+	result = 0;
 	step = 1;
 	while (step)
 	{
 		data->line = get_next_line(fd);
 		if (data->line == NULL)
 			break ;
-		i = 0;
-		while (data->line[i])
+		remove_newline(data);
+		if (result != -1)
 		{
-			if (data->line[i] == '\n')
-				data->line[i] = '\0';
-			i++;
+			if (step == 1 && get_result(&result, set_elements(data)) == 0)
+				step = 2;
+			if (step == 2 && get_result(&result, get_map(data) == 0))
+				step = 0;
 		}
-		if (step == 1 && set_elements(data) == 0)
-			step = 2;
-		if (step == 2 && get_map(data) == 0)
-			step = 0;
 		free(data->line);
 		data->line = NULL;
 	}
-	write_elements(data);
-	if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we
-		|| data->c->rgb == -1 || data->f->rgb == -1)
-		error_and_exit(data, "ERROR! missing elements input\n");
-	else if (data->node == NULL)
-		error_and_exit(data, "ERROR! Empty map\n");
+	if (result == -1)
+		error_and_exit(data, NULL);
 }
 /*
 	write_color("Max rows is :", BLU);

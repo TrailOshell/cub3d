@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 18:14:02 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/16 18:12:29 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int	read_map(char **argv, t_data *data)
 	if (fd < 0)
 		error_and_exit(data, "ERROR! fd error\n");
 	get_next_row(data, fd);
+	write_elements(data);
+	if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we
+		|| data->c->rgb == -1 || data->f->rgb == -1)
+		error_and_exit(data, "ERROR! missing elements input\n");
+	else if (data->node == NULL)
+		error_and_exit(data, "ERROR! Empty map\n");
 	set_map(data, data->node);
 	flood_fill(data);
 	write_color("Initial map\n", GRN);

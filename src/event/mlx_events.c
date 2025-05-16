@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 19:50:58 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 16:47:45 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:48:16 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	game_exit(t_data *data)
 	mlx_destroy_display(data->mlx);
 	free_stuff(data);
 	write_color("Game now exit\n", YLW);
-	exit(1);
+	exit(0);
 	return (0);
 }
 

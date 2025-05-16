@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/15 18:16:18 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/05/16 19:53:44by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,40 +147,48 @@ $(TEXTURES):
 
 VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp
 
+define	test_cub
+	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"
+	@-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
+	@- GREP_COLOR='01;32' grep --color=auto -E "no leaks" valgrind.out || @- GREP_COLOR='01;31' grep echo "leaks found"
+	@-grep --color=auto -E "definitely lost:|indirectly lost:|possibly lost:|still reachable:| suppressed:" valgrind.out || true
+	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true
+endef
+
 t : test
 test : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/test.cub
+	-$(call test_cub, cub/test.cub)
 
 s : subject
 subject : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/subject.cub
+	-$(call test_cub, cub/subject.cub)
 
 v : valid
 valid : $(NAME)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/valid/ok_1.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/valid/ok_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/valid/ok_dimond.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/valid/ok_subject.cub
+	-$(call test_cub, cub/valid/ok_1.cub)
+	-$(call test_cub, cub/valid/ok_2.cub)
+	-$(call test_cub, cub/valid/ok_dimond.cub)
+	-$(call test_cub, cub/valid/ok_subject.cub)
 
 i : invalid
 invalid : $(NAME) $(TEXTURES) im if
 
 im : invalid_map
 invalid_map : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/color_floor_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/color_floor_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/no_news_1.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/no_news_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/player_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/player_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/textures_0.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/textures_2.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/wall_no_close_1.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/wall_no_close_2.cub
+	-$(call test_cub, cub/invalid/color_floor_0.cub)
+	-$(call test_cub, cub/invalid/color_floor_2.cub)
+	-$(call test_cub, cub/invalid/no_news_1.cub)
+	-$(call test_cub, cub/invalid/no_news_2.cub)
+	-$(call test_cub, cub/invalid/player_0.cub)
+	-$(call test_cub, cub/invalid/player_2.cub)
+	-$(call test_cub, cub/invalid/textures_0.cub)
+	-$(call test_cub, cub/invalid/textures_2.cub)
+	-$(call test_cub, cub/invalid/wall_no_close_1.cub)
+	-$(call test_cub, cub/invalid/wall_no_close_2.cub)
 
 if : invalid_file
 invalid_file : $(NAME) $(TEXTURES)
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_no_path.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_pn.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name_error_text.cub
-	@- valgrind $(VAL_FLAGS) ./$(NAME) cub/invalid/file_name.cu
+	-$(call test_cub, cub/invalid/file_name_error_no_path.cub)
+	-$(call test_cub, cub/invalid/file_name_error_pn.cub)
+	-$(call test_cub, cub/invalid/file_name_error_text.cub)
+	-$(call test_cub, cub/invalid/file_name.cu)

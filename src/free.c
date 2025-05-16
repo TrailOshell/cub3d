@@ -17,19 +17,19 @@ void	free_if_alloc(void *mem)
 		free(mem);
 }
 
-void	free_map(t_map **map)
+void	free_map(t_map *map)
 {
 	int	i;
 
-	if ((*map)->grid)
+	if (map->grid)
 	{
 		i = 0;
-		while ((*map)->grid[i])
-			free((*map)->grid[i++]);
-		free((*map)->grid);
+		while (map->grid[i])
+			free(map->grid[i++]);
+		free(map->grid);
 	}
-	free(*map);
-	*map = NULL;
+	free(map);
+	map = NULL;
 }
 
 void	free_node(t_node **node)
@@ -61,7 +61,7 @@ void	free_stuff(t_data *data)
 		free_if_alloc(data->mlx);
 		free_if_alloc(data->player);
 		if (data->map)
-			free_map(&data->map);
+			free_map(data->map);
 		if (data->node != NULL)
 			free_node(&data->node);
 		if (data->tx)

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/16 17:10:52 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:09:03 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int		chk_all_spaces(char *str);
 // error.c
 void	error_and_exit(t_data *data, char *msg);
 // free.c
-void	free_map(t_map **map);
+void	free_map(t_map *map);
 void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c

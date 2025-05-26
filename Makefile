@@ -20,7 +20,8 @@ INC_CUB3D		=	$(INC_PTH)cub3D.h
 SRC_PTH			=	src/
 SRC				=	error.c \
 					free.c \
-					main.c
+					main.c \
+					ray.c
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -77,7 +78,7 @@ GNL_INC	=	-I$(GNL_PTH)
 
 MLX            =    $(MLX_PTH)/build/libmlx42.a
 MLX_PTH        =    MLX42/
-MLX_FLAGS		=    -L$(MLX_PTH) -l$(MLX_PTH) -L/usr/lib -I$(MLX_PTH) -lXext -lX11 -lm -lz
+MLX_FLAGS		=    -Iinclude -ldl -lglfw -pthread -lm
 MLX_INC        =    -I$(MLX_PTH)include/MLX42
 
 CC		=	cc

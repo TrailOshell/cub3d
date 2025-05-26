@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 17:40:11 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:53:29 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main(int argc, char **argv)
 		return 1;//malloc error
 	ft_bzero(data->ray, sizeof(t_ray));
 	ft_ray(data);
-	mlx_loop(data->mlx);
 	return (0);
 }
 

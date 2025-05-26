@@ -49,13 +49,13 @@ void	ft_dda(t_map *map, t_ray *ray)
 		}
 		else
 		{
-			ray->side_dy += ray->delta_distance_y;
+			ray->side_dy += ray->dy;
 			ray->y += ray->step_y;
 			ray->side = 1;
 		}
 		if (ray->y <= 0 || ray->y >= map->n_col || ray->x <= 0 || ray->x >= map->n_row)
 			return ;
-		if (map->map[ray->y][ray->x] == '1')
+		if (map->grid[ray->y][ray->x] == '1')
 			ray->hit = 1;
 	}
 }
@@ -69,7 +69,7 @@ void	ft_ray(t_data *data)
 	{
 		init_ray(data->player, data->ray, i);
 		ft_dda(data->map, data->ray);
-		calculate_wall(data);
+		//calculate_wall(data);
 		//draw 
 		i++;
 	}

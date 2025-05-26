@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 17:42:37 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:52:59 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <string.h>
+# include <math.h>
 
 # include "MLX42.h"
 # include "get_next_line.h"
@@ -72,6 +73,8 @@ typedef struct s_player
 	int			y;
 	char		direction;
 
+	int			dir_x;
+	int			dir_y;
 	double		plane_x;
 	double		plane_y;
 }	t_player;
@@ -85,11 +88,6 @@ typedef struct s_map
 
 typedef struct s_tx
 {
-	char			*no_path;
-	char			*so_path;
-	char			*we_path;
-	char			*ea_path;// uninitfunc.
-
 	char			*no;
 	char			*so;
 	char			*ea;
@@ -136,8 +134,8 @@ typedef struct s_ray
 	int				step_x;
 	int				step_y;
 
-	double			side_distance_x;
-	double			side_distance_y;
+	double			side_dx;
+	double			side_dy;
 	int				side;
 
 }	t_ray;

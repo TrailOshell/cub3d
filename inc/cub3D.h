@@ -58,6 +58,7 @@
 
 # define WIDTH	1920
 # define HEIGHT 1080
+# define PI 3.14159265
 
 typedef struct s_node
 {
@@ -73,10 +74,11 @@ typedef struct s_player
 	int			y;
 	char		direction;
 
-	int			dir_x;
-	int			dir_y;
-	double		plane_x;
-	double		plane_y;
+	double	radian;
+	int		dir_x;
+	int		dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_map

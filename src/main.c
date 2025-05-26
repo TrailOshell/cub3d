@@ -48,10 +48,11 @@ int	main(int argc, char **argv)
 	if (!data->mlx)
 		return (0);
 	read_map(argv, data);
-	//init_player;
+	init_mlx(data);
+	init_player(data, data->player);
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
-		return 1;//malloc error
+		return 1;
 	ft_bzero(data->ray, sizeof(t_ray));
 	ft_ray(data);
 	return (0);

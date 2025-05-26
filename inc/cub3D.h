@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 17:23:23 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:42:37 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ typedef struct s_player
 	int			y;
 	char		direction;
 
-	double	plane_x;
-	double	plane_y;
+	double		plane_x;
+	double		plane_y;
 }	t_player;
 
 typedef struct s_map
@@ -85,11 +85,16 @@ typedef struct s_map
 
 typedef struct s_tx
 {
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;// uninitfunc.
-	
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;// uninitfunc.
+
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
+
 	mlx_image_t		*no_img;
 	mlx_image_t		*so_img;
 	mlx_image_t		*ea_img;
@@ -178,6 +183,7 @@ void	get_next_row(t_data *data, int fd);
 char	**new_grid(t_map *map);
 char	**dupe_grid(t_map *map);
 // init.c
+t_map	*init_map(t_map *map);
 t_data	*init_data(t_data *data);
 // line.c
 void	add_line(t_node **node, char *line);
@@ -213,6 +219,8 @@ void	free_map(t_map *map);
 void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c
-t_map	*init_map(t_map *map);
+
+// ray.c
+void	ft_ray(t_data *data);
 
 #endif

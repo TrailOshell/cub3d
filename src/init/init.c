@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:57:43 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/14 17:02:59 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:42:57 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_data	*init_data(t_data *data)
 {
 	if (!data)
 		data = malloc(sizeof(t_data));
-	data->mlx = mlx_init();
+	//data->mlx = mlx_init();
 	data->map = init_map(data->map);
 	data->node = NULL;
 	data->tx = init_tx(data->tx);

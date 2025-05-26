@@ -75,10 +75,10 @@ GNL_PTH	=	gnl/
 GNL		=	$(GNL_PTH)get_next_line.a
 GNL_INC	=	-I$(GNL_PTH)
 
-MLX			=	$(MLX_PTH)/libmlx.a
-MLX_PTH		=	mlx
-MLX_FLAGS	=	-L$(MLX_PTH) -l$(MLX_PTH) -L/usr/lib -I$(MLX_PTH) -lXext -lX11 -lm -lz
-MLX_INC		=	-I$(MLX_PTH)
+MLX            =    $(MLX_PTH)/build/libmlx42.a
+MLX_PTH        =    MLX42/
+MLX_FLAGS		=    -L$(MLX_PTH) -l$(MLX_PTH) -L/usr/lib -I$(MLX_PTH) -lXext -lX11 -lm -lz
+MLX_INC        =    -I$(MLX_PTH)include/MLX42
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
@@ -107,7 +107,9 @@ $(GNL):
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(MLX):
-	@make -C ${MLX_PTH}
+	@echo "$(YLW)===================> start make MLX42$(NCL)"
+	cmake $(MLX_PTH) -B $(MLX_PTH)/build && make -C $(MLX_PTH)/build -j4
+	@echo "$(YLW)===================> Finish mlx\n$(NCL)"
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 16:47:22 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:23:23 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <string.h>
 
-# include "mlx.h"
+# include "MLX42.h"
 # include "get_next_line.h"
 # include "../libft/sources/libft.h"
 

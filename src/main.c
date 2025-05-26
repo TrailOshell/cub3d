@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 17:53:29 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:55:49 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ int	main(int argc, char **argv)
 	if (!data->mlx)
 		return (0);
 	read_map(argv, data);
-	init_mlx(data);
 	init_player(data, data->player);
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
 		return 1;
 	ft_bzero(data->ray, sizeof(t_ray));
 	ft_ray(data);
+	// mlx_loop_hook();
+	// mlx_close_hook();
+	mlx_loop(data->mlx);
 	return (0);
 }
 

@@ -19,7 +19,10 @@
 # include <string.h>
 # include <math.h>
 
+# include <stdio.h>
+
 # include "MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"
 # include "../libft/sources/libft.h"
 
@@ -222,5 +225,8 @@ void	free_stuff(t_data *data);
 
 // ray.c
 void	ft_ray(t_data *data);
+
+void	init_mlx(t_data *data);
+void	init_player(t_data *data, t_player *player);
 
 #endif

@@ -45,7 +45,7 @@ t_data	*init_data(t_data *data)
 {
 	if (!data)
 		data = malloc(sizeof(t_data));
-	//data->mlx = mlx_init();
+	init_mlx(data);
 	data->map = init_map(data->map);
 	data->node = NULL;
 	data->tx = init_tx(data->tx);

@@ -21,7 +21,9 @@ SRC_PTH			=	src/
 SRC				=	error.c \
 					free.c \
 					main.c \
-					ray.c
+					ray.c \
+					init_mlx.c\
+					init_player.c\
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -92,7 +94,7 @@ $(OBJ_PTH)%.o: $(SRC_PTH)%.c Makefile $(INC_CUB3D) | $(OBJ_SUB_PTHS)
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(GNL) $(LIBFT) -o $@ $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) $(GNL) $(LIBFT) $(MLX) -o $@ $(MLX_FLAGS)
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(OBJ_SUB_PTHS):
@@ -116,12 +118,13 @@ $(MLX):
 clean:
 	rm -f $(OBJ)
 	rm -rf $(OBJ_PTH)
+	rm -rf $(MLX_PTH)/build
 	rm -rf $(TEXTURES)
 	@echo "$(YLW)removed object files$(NCL)"
 
 fclean: clean
-	make clean -C $(MLX_PTH)
 	rm -f $(NAME)
+	rm -f $(MLX)
 	@echo "$(YLW)removed $(NAME) and object files$(NCL)"
 
 re: fclean all

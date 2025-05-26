@@ -1,0 +1,13 @@
+NO ./no_folder/north.png
+SO ./textures/south.png
+WE ./textures/west.png
+EA ./textures/east.png
+
+C 225,30,0
+F 220,100,99
+
+11111111
+10000001
+10000N01
+10000001
+11111111

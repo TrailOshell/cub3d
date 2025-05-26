@@ -1,139 +1,66 @@
-#include "../includes/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
+/*   Updated: 2025/05/26 10:56:32 by paradari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3D.h"
 
-void	ft_init_player(t_cub *game)
+int	read_map(char **argv, t_data *data)
 {
-	int	x;
-	int	y;
+	int		fd;
 
-	x = 0;
-	y = 0;
-	while (game->map[y])
-	{
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'P')
-			{
-				game->pos_x = x;
-				game->pos_y = y;
-			}
-			x++;
-		}
-		x = 0;
-		y++;
-	}
+	if (ft_strrncmp(argv[1], ".cub", 4))
+		error_and_exit(data, "ERROR! only .cub file is allowed\n");
+	else if (ft_strrncmp(argv[1], "/.cub", 5) == 0 || argv[1][0] == '.')
+		error_and_exit(data, "ERROR! hidden file not allowed\n");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		error_and_exit(data, "ERROR! fd error\n");
+	get_next_row(data, fd);
+	write_elements(data);
+	if (!data->tx->no || !data->tx->so || !data->tx->ea || !data->tx->we
+		|| data->c->rgb == -1 || data->f->rgb == -1)
+		error_and_exit(data, "ERROR! missing elements input\n");
+	else if (data->node == NULL)
+		error_and_exit(data, "ERROR! Empty map\n");
+	set_map(data, data->node);
+	flood_fill(data);
+	write_color("Initial map\n", GRN);
+	write_grid(data->map->grid);
+	return (1);
 }
 
-void	ft_init_mlx(t_cub *game)
+int	main(int argc, char **argv)
 {
-	game->mlx = mlx_init();
-	game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT,
-			"Game Start\n");
-	if (!game->window)
-		free(game->window);
-}
+	t_data	*data;
 
-void	ft_init_image(t_cub *game)
-{
-	game->north_texture = mlx_load_png(NO);
-	game->south_texture = mlx_load_png(SO);
-	game->west_texture = mlx_load_png(WE);
-	game->east_texture = mlx_load_png(EA);
-	game->p1_texture = mlx_load_png(P1);
-	if (!game->north_texture || !game->south_texture || !game->west_texture
-		|| !game->east_texture)
-		return (-1);
-	game->north_image = mlx_texture_to_image(mlx, game->north_texture);
-	game->south_image = mlx_texture_to_image(mlx, game->south_texture);
-	game->west_image = mlx_texture_to_image(mlx, game->west_texture);
-	game->east_image = mlx_texture_to_image(mlx, game->east_texture);
-	game->p1 = mlx_texture_to_image(mlx, game->p1_texture);
-	if (!game->north_image || !game->south_image || !game->west_image
-		|| !game->east_image)
-		return (-1);
+	data = NULL;
+	data = init_data(data);
+	if (argc != 2)
+		error_and_exit(data, "ERROR! Input arguments not equal 2\n");
+	if (!data->mlx)
+		return (0);
+	read_map(argv, data);
+	init_mlx(data);
+	//init_player;
+	data->ray = malloc(sizeof(t_ray));
+	if (!data->ray)
+		return 1;//malloc error
+	ft_bzero(data->ray, sizeof(t_ray));
+	ft_ray(data);
+	mlx_loop_hook(data->mlx, on_keypress, data);//
+	mlx_close_hook(data->mlx, game_exit, data);
+	mlx_loop(data->mlx);
 	return (0);
 }
 
-// void	ft_set_status(char c, t_cub *game, int i, int j)
-// {
-// 	if (c == 'P')
-// 	{
-// 		game->pos_x = j;
-// 		game->pos_y = i;
-// 		game->p_status++;
-// 	}
-// 	if (c == 'E')
-// 	{
-// 		game->exit_x = j;
-// 		game->exit_y = i;
-// 		game->e_status++;
-// 	}
-// }
-
-void	ft_init_game(t_cub *game)
-{
-	ft_init_player(game);
-	ft_init_mlx(game);
-	ft_init_image(game);
-}
-
-char	**get_map(void)
-{
-	char **game = malloc(sizeof(char *) * 11);
-	game[0] = "111111111111111";
-	game[1] = "100000000000001";
-	game[2] = "100000000000001";
-	game[3] = "100000000000001";
-	game[4] = "1000P0000000001";
-	game[5] = "100000000000001";
-	game[6] = "100000000000001";
-	game[7] = "100000000000001";
-	game[8] = "100000000000001";
-	game[9] = "100000000000001";
-	game[10] = NULL;
-	return (game);
-}
-
-void	ft_fill(t_cub *game, int i, int j)
-{
-	if (game->map[i][j] == '1')
-		mlx_put_image_to_window(game->mlx, game->window, game->north_image,
-			j * IMG, i * IMG);
-	else if (game->map[i][j] == 'P')
-		mlx_put_image_to_window(game->mlx, game->window, game->p1,
-			j * IMG, i * IMG);
-}
-
-int	ft_put_graphic(t_cub *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (game->map[i])
-	{
-		while (game->map[i][j] && game->map[i][j] != '\n')
-		{
-			ft_fill(game, i, j);
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	return (0);
-}
-
-int	main(int ac, char **av)
-{
-	t_cub	game;
-
-	game->game = get_map();
-	ft_init_game(&game);
-	ft_put_graphic(game);
-	// mlx_hook(game->window, KeyPress, KeyPressMask, &ft_keybinds, game);
-	// mlx_hook(game->window, DestroyNotify, StructureNotifyMask,
-	// 	&ft_destroy, game);
-	mlx_loop(game->mlx);
-	return (0);
-}
+	//mlx_destroy_display(data->mlx);
+	//free_stuff(data);
+	//write_color("End of test\n", YLW);

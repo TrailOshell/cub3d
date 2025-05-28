@@ -1,0 +1,118 @@
+#include "cub3D.h"
+
+void	key_ws(t_data *data, const char key)
+{
+	double	new_x;
+	double	new_y;
+
+	if (key == 'W')
+	{
+		new_x = data->player->x + data->player->dir_x * STEP;
+		new_y = data->player->y + data->player->dir_y * STEP;
+		if (wall_check(data->map, new_x, new_y) == '1')
+		{
+			data->player->x -= data->player->dir_x * STEP;
+			data->player->y -= data->player->dir_y * STEP;
+			return ;
+		}
+	}
+	else if (key == 'S')
+	{
+		new_x = data->player->x - data->player->dir_x * STEP;
+		new_y = data->player->y - data->player->dir_y * STEP;
+		if (wall_check(data->map, new_x, new_y) == '1')
+		{
+			data->player->x += data->player->dir_x * STEP;
+			data->player->y += data->player->dir_y * STEP;
+			return ;
+		}
+	}
+	data->player->x = new_x;
+	data->player->y = new_y;
+}
+
+void	key_ad(t_data *data, const char key)
+{
+	double	new_x;
+	double	new_y;
+
+	if (key == 'A')
+	{
+		new_x = data->player->x + data->player->dir_x * STEP;
+		new_y = data->player->y - data->player->dir_y * STEP;
+		if (wall_check(data->map, new_x, new_y) == '1')
+		{
+			data->player->x -= data->player->dir_x * STEP;
+			data->player->y += data->player->dir_y * STEP;
+			return ;
+		}
+	}
+	else if (key == 'D')
+	{
+		new_x = data->player->x - data->player->dir_x * STEP;
+		new_y = data->player->y + data->player->dir_y * STEP;
+		if (wall_check(data->map, new_x, new_y) == '1')
+		{
+			data->player->x += data->player->dir_x * STEP;
+			data->player->y -= data->player->dir_y * STEP;
+			return ;
+		}
+	}
+	data->player->x = new_x;
+	data->player->y = new_y;
+}
+
+void	rotateleft(t_data *data)
+{
+	double	tmp_x;
+	double	tmp_y;
+
+	tmp_x = data->player->dir_x;
+	tmp_y = data->player->dir_y;
+	data->player->dir_x = tmp_x * cos(-RSPEED) - tmp_y * sin(-RSPEED);
+	data->player->dir_y = tmp_x * sin(-RSPEED) + tmp_y * cos(-RSPEED);
+	tmp_x = data->player->plane_x;
+	tmp_y = data->player->plane_y;
+	data->player->plane_x = tmp_x * cos(-RSPEED) - tmp_y * sin(-RSPEED);
+	data->player->plane_y = tmp_x * sin(-RSPEED) + tmp_y * cos(-RSPEED);
+	ft_ray(data);
+}
+
+void	rotateright(t_data *data)
+{
+	double	tmp_x;
+	double	tmp_y;
+
+	(void)map;
+	tmp_x = data->player->dir_x;
+	tmp_y = data->player->dir_y;
+	data->player->dir_x = tmp_x * cos(RSPEED) - tmp_y * sin(RSPEED);
+	data->player->dir_y = tmp_x * sin(RSPEED) + tmp_y * cos(RSPEED);
+	tmp_x = data->player->plane_x;
+	tmp_y = data->player->plane_y;
+	data->player->plane_x = tmp_x * cos(RSPEED) - tmp_y * sin(RSPEED);
+	data->player->plane_y = tmp_x * sin(RSPEED) + tmp_y * cos(RSPEED);
+	ft_ray(data);
+}
+
+void	keybinds(void *tmp)
+{
+	t_data	*data;
+
+	data = (t_data *)tmp;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+		key_w(data, 'W');
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+		key_w(data, 'A');
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		key_w(data, 'S');
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		key_w(data, 'D');
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		rotateleft(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+		rotateright(data);
+	ft_ray(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		free_and_exit(data);
+}

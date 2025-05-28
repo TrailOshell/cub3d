@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 18:55:49 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:09:24 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int	read_map(char **argv, t_data *data)
 	return (1);
 }
 
+void free_and_exit(t_data *data)
+{
+	free_stuff(data);
+	exit (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -54,8 +60,8 @@ int	main(int argc, char **argv)
 		return 1;
 	ft_bzero(data->ray, sizeof(t_ray));
 	ft_ray(data);
-	// mlx_loop_hook();
-	// mlx_close_hook();
+	mlx_loop_hook(data->mlx, keybinds, data);
+	mlx_close_hook(data->mlx, free_and_exit, data);
 	mlx_loop(data->mlx);
 	return (0);
 }

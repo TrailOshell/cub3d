@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/26 18:47:04 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:35:16 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ void	ft_set_texture(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			ray->tx = W;
+			ray->tx = 'W';
 		else
-			ray->tx = E;
+			ray->tx = 'E';
 	}
 	else
 	{
 		if (ray->dir_y > 0)
-			ray->tx = N;
+			ray->tx = 'N';
 		else
-			ray->tx = S;
+			ray->tx = 'S';
 	}
 }
 

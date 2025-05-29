@@ -2,30 +2,30 @@
 
 void	key_ws(t_data *data, const char key)
 {
-	double	new_x;
-	double	new_y;
+	double	new_x = 0;
+	double	new_y = 0;
 
 	if (key == 'W')
 	{
 		new_x = data->player->x + data->player->dir_x * STEP;
 		new_y = data->player->y + data->player->dir_y * STEP;
-		if (wall_check(data->map, new_x, new_y) == '1')
-		{
-			data->player->x -= data->player->dir_x * STEP;
-			data->player->y -= data->player->dir_y * STEP;
-			return ;
-		}
+		// if (wall_check(data->map, new_x, new_y) == '1')
+		// {
+		// 	data->player->x -= data->player->dir_x * STEP;
+		// 	data->player->y -= data->player->dir_y * STEP;
+		// 	return ;
+		// }
 	}
 	else if (key == 'S')
 	{
 		new_x = data->player->x - data->player->dir_x * STEP;
 		new_y = data->player->y - data->player->dir_y * STEP;
-		if (wall_check(data->map, new_x, new_y) == '1')
-		{
-			data->player->x += data->player->dir_x * STEP;
-			data->player->y += data->player->dir_y * STEP;
-			return ;
-		}
+		// if (wall_check(data->map, new_x, new_y) == '1')
+		// {
+		// 	data->player->x += data->player->dir_x * STEP;
+		// 	data->player->y += data->player->dir_y * STEP;
+		// 	return ;
+		// }
 	}
 	data->player->x = new_x;
 	data->player->y = new_y;
@@ -33,30 +33,30 @@ void	key_ws(t_data *data, const char key)
 
 void	key_ad(t_data *data, const char key)
 {
-	double	new_x;
-	double	new_y;
+	double	new_x = 0;
+	double	new_y = 0;
 
 	if (key == 'A')
 	{
 		new_x = data->player->x + data->player->dir_x * STEP;
 		new_y = data->player->y - data->player->dir_y * STEP;
-		if (wall_check(data->map, new_x, new_y) == '1')
-		{
-			data->player->x -= data->player->dir_x * STEP;
-			data->player->y += data->player->dir_y * STEP;
-			return ;
-		}
+		// if (wall_check(data->map, new_x, new_y) == '1')
+		// {
+		// 	data->player->x -= data->player->dir_x * STEP;
+		// 	data->player->y += data->player->dir_y * STEP;
+		// 	return ;
+		// }
 	}
 	else if (key == 'D')
 	{
 		new_x = data->player->x - data->player->dir_x * STEP;
 		new_y = data->player->y + data->player->dir_y * STEP;
-		if (wall_check(data->map, new_x, new_y) == '1')
-		{
-			data->player->x += data->player->dir_x * STEP;
-			data->player->y -= data->player->dir_y * STEP;
-			return ;
-		}
+		// if (wall_check(data->map, new_x, new_y) == '1')
+		// {
+		// 	data->player->x += data->player->dir_x * STEP;
+		// 	data->player->y -= data->player->dir_y * STEP;
+		// 	return ;
+		// }
 	}
 	data->player->x = new_x;
 	data->player->y = new_y;
@@ -83,7 +83,6 @@ void	rotateright(t_data *data)
 	double	tmp_x;
 	double	tmp_y;
 
-	(void)map;
 	tmp_x = data->player->dir_x;
 	tmp_y = data->player->dir_y;
 	data->player->dir_x = tmp_x * cos(RSPEED) - tmp_y * sin(RSPEED);
@@ -101,13 +100,13 @@ void	keybinds(void *tmp)
 
 	data = (t_data *)tmp;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		key_w(data, 'W');
+		key_ws(data, 'W');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		key_w(data, 'A');
+		key_ad(data, 'A');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		key_w(data, 'S');
+		key_ws(data, 'S');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		key_w(data, 'D');
+		key_ad(data, 'D');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		rotateleft(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))

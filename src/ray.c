@@ -69,7 +69,7 @@ void	ft_ray(t_data *data)
 	{
 		init_ray(data->player, data->ray, i);
 		ft_dda(data->map, data->ray);
-		//calculate_wall(data);
+		// calculate_wall(data);
 		//draw 
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/28 11:56:34 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:16:55 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,11 +224,16 @@ void	free_map(t_map *map);
 void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c
+void	free_and_exit(void	*data);
 
 // ray.c
 void	ft_ray(t_data *data);
 
 void	init_mlx(t_data *data);
 void	init_player(t_data *data, t_player *player);
+
+void	keybinds(void *tmp);
+
+void	render3D(t_data *data, int i);
 
 #endif

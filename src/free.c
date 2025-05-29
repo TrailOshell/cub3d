@@ -66,6 +66,8 @@ void	free_stuff(t_data *data)
 			free_node(&data->node);
 		if (data->tx)
 			free_tx(data->tx);
+		// if (data->ray)
+		// 	free_ray(data->ray);
 		free_if_alloc(data->line);
 		free_if_alloc(data->f);
 		free_if_alloc(data->c);

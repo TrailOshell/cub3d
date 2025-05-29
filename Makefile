@@ -24,6 +24,7 @@ SRC				=	error.c \
 					ray.c \
 					init_mlx.c\
 					init_player.c\
+					keybinds.c\
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -157,7 +158,7 @@ VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp
 
 define	test_cub
 	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"
-	@-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
+	-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
 	@- GREP_COLOR='01;32' grep --color=auto -E "no leaks" valgrind.out || @- GREP_COLOR='01;31' grep echo "leaks found"
 	@-grep --color=auto -E "definitely lost:|indirectly lost:|possibly lost:|still reachable:| suppressed:" valgrind.out || true
 	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true

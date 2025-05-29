@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:44:36 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/26 18:55:29 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:50:29 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_mlx(t_data *data)
 		error_and_exit(data, "Error: can't create new window image\n");
 	if (mlx_image_to_window(data->mlx, data->win, 0, 0) == -1)
 		error_and_exit(data, "Error: can't put image to window\n");
-	// if (ft_import_image_png(data->mlx, data->tx) == -1)
-	// 	error_and_exit(data, "Error: can't load textures\n");
+	if (ft_import_image_png(data->mlx, data->tx) == -1)
+		error_and_exit(data, "Error: can't load textures\n");
 	return ;
 }

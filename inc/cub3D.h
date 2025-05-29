@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/29 14:16:55 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:15:55 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,10 +230,12 @@ void	free_and_exit(void	*data);
 void	ft_ray(t_data *data);
 
 void	init_mlx(t_data *data);
-void	init_player(t_data *data, t_player *player);
+void	init_player(t_player *player);
 
 void	keybinds(void *tmp);
 
-void	render3D(t_data *data, int i);
+void	renderTD(t_data *data, int i);
+
+void	calculate_wall(t_data *data);
 
 #endif

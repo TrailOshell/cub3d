@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
+/*   Updated: 2025/05/29 15:15:47 by paradari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	set_ray_dir(t_ray *ray, t_player *player)
@@ -53,7 +65,8 @@ void	ft_dda(t_map *map, t_ray *ray)
 			ray->y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->y <= 0 || ray->y >= map->n_col || ray->x <= 0 || ray->x >= map->n_row)
+		if (ray->y <= 0 || ray->y >= map->n_col || ray->x <= 0
+			|| ray->x >= map->n_row)
 			return ;
 		if (map->grid[ray->y][ray->x] == '1')
 			ray->hit = 1;
@@ -69,8 +82,8 @@ void	ft_ray(t_data *data)
 	{
 		init_ray(data->player, data->ray, i);
 		ft_dda(data->map, data->ray);
-		// calculate_wall(data);
-		//draw 
+		calculate_wall(data);
+		renderTD(data, i);
 		i++;
 	}
 	return ;

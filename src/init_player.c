@@ -6,15 +6,14 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:44:51 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 14:17:25 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:52:16 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_player(t_data *data, t_player *player)
+void	init_player(t_player *player)
 {
-	(void)data;
 	if (player->direction == 'N')
 	{
 		player->radian = 90 * (PI / 180);

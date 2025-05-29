@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:57:43 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/26 17:42:57 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:43:21 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_data	*init_data(t_data *data)
 {
 	if (!data)
 		data = malloc(sizeof(t_data));
-	init_mlx(data);
 	data->map = init_map(data->map);
 	data->node = NULL;
 	data->tx = init_tx(data->tx);

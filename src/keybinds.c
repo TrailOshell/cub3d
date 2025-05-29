@@ -1,31 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keybinds.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
+/*   Updated: 2025/05/29 15:10:41 by paradari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	key_ws(t_data *data, const char key)
 {
-	double	new_x = 0;
-	double	new_y = 0;
+	double	new_x;
+	double	new_y;
 
+	new_x = 0;
+	new_y = 0;
 	if (key == 'W')
 	{
 		new_x = data->player->x + data->player->dir_x * STEP;
 		new_y = data->player->y + data->player->dir_y * STEP;
-		// if (wall_check(data->map, new_x, new_y) == '1')
-		// {
-		// 	data->player->x -= data->player->dir_x * STEP;
-		// 	data->player->y -= data->player->dir_y * STEP;
+		// if (can_walk(data, new_x, new_y) == -1)
 		// 	return ;
-		// }
 	}
 	else if (key == 'S')
 	{
 		new_x = data->player->x - data->player->dir_x * STEP;
 		new_y = data->player->y - data->player->dir_y * STEP;
-		// if (wall_check(data->map, new_x, new_y) == '1')
-		// {
-		// 	data->player->x += data->player->dir_x * STEP;
-		// 	data->player->y += data->player->dir_y * STEP;
+		// if (can_walk(data->map, new_x, new_y) == -1)
 		// 	return ;
-		// }
 	}
 	data->player->x = new_x;
 	data->player->y = new_y;
@@ -33,30 +39,22 @@ void	key_ws(t_data *data, const char key)
 
 void	key_ad(t_data *data, const char key)
 {
-	double	new_x = 0;
-	double	new_y = 0;
+	double	new_x;
+	double	new_y;
 
+	new_x = 0;
+	new_y = 0;
 	if (key == 'A')
 	{
 		new_x = data->player->x + data->player->dir_x * STEP;
 		new_y = data->player->y - data->player->dir_y * STEP;
-		// if (wall_check(data->map, new_x, new_y) == '1')
-		// {
-		// 	data->player->x -= data->player->dir_x * STEP;
-		// 	data->player->y += data->player->dir_y * STEP;
-		// 	return ;
-		// }
+		// can_walk(data->map, new_x, new_y);
 	}
 	else if (key == 'D')
 	{
 		new_x = data->player->x - data->player->dir_x * STEP;
 		new_y = data->player->y + data->player->dir_y * STEP;
-		// if (wall_check(data->map, new_x, new_y) == '1')
-		// {
-		// 	data->player->x += data->player->dir_x * STEP;
-		// 	data->player->y -= data->player->dir_y * STEP;
-		// 	return ;
-		// }
+		// can_walk(data->map, new_x, new_y);
 	}
 	data->player->x = new_x;
 	data->player->y = new_y;

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/28 12:35:16 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:33:41 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	find_wall_dist(t_map *map, t_ray *ray)
+void	find_wall_dist(t_player *player, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->wall_dist = (ray->x - data->player->x + (1 - ray->step_x) / 2) / ray->dir_x;
+		ray->wall_dist = (ray->x - player->x + (1 - ray->step_x) / 2) / ray->dir_x;
 	else
-		ray->wall_dist = (ray->y - data->player->y + (1 - ray->step_y) / 2) / ray->dir_y;
+		ray->wall_dist = (ray->y - player->y + (1 - ray->step_y) / 2) / ray->dir_y;
 }
 
 void	ft_line_height_wall(t_ray *ray, int *draw_start, int *draw_end)
@@ -65,7 +65,7 @@ void	ft_set_texture(t_ray *ray)
 
 void	calculate_wall(t_data *data)
 {
-	find_wall_dist(data->map, data->ray);
+	find_wall_dist(data->player, data->ray);
 	ft_line_height_wall(data->ray, &data->ray->draw_start, &data->ray->draw_end);
 	get_wall_size(data->ray, data->player);
 	ft_set_texture(data->ray);

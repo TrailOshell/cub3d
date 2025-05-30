@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/29 15:42:43 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:55:32 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ int	main(int argc, char **argv)
 		error_and_exit(data, "ERROR! Input arguments not equal 2\n");
 	read_map(argv, data);
 	init_mlx(data);
-	if (!data->mlx)
-		return (0);
 	init_player(data->player);
 	data->ray = malloc(sizeof(t_ray));
 	if (!data->ray)
-		return (0);
+		error_and_exit(data, "Error: can't initialize ray\n");
 	ft_bzero(data->ray, sizeof(t_ray));
+	write_color("Raycasting...\n", GRN);
 	ft_ray(data);
 	mlx_loop_hook(data->mlx, keybinds, data);
 	mlx_close_hook(data->mlx, free_and_exit, data);

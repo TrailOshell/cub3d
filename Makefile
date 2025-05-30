@@ -156,13 +156,16 @@ $(TEXTURES):
 	cp $(TEXTURES_PTH)path_to_the_south_texture.png .
 	cp $(TEXTURES_PTH)path_to_the_west_texture.png .
 
-VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp
+VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --show-reachable=no --suppressions=mlx.supp
 
 define	test_cub
 	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"
 	-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
 	@- GREP_COLOR='01;32' grep --color=auto -E "no leaks" valgrind.out || @- GREP_COLOR='01;31' grep echo "leaks found"
-	@-grep --color=auto -E "definitely lost:|indirectly lost:|possibly lost:|still reachable:| suppressed:" valgrind.out || true
+	@- GREP_COLOR='01;0' grep --color=auto -E "definitely lost: 0 bytes in 0 blocks" valgrind.out || grep --color=auto -E "definitely lost:" valgrind.out
+	@- GREP_COLOR='01;0' grep --color=auto -E "indirectly lost: 0 bytes in 0 blocks" valgrind.out || grep --color=auto -E "indirectly lost:" valgrind.out
+	@- GREP_COLOR='01;0' grep --color=auto -E "possibly lost: 0 bytes in 0 blocks" valgrind.out ||  grep --color=auto -E "possibly lost:" valgrind.out 
+	@- GREP_COLOR='01;34' grep --color=auto -E "still reachable:| suppressed:" valgrind.out || true
 	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true
 endef
 

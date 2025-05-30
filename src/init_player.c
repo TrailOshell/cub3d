@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:44:51 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 14:52:16 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:07:38 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_player(t_player *player)
 {
+	player->dir_x = 0;
+	player->dir_y = 0;
 	if (player->direction == 'N')
 	{
 		player->radian = 90 * (PI / 180);

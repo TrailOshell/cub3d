@@ -76,6 +76,7 @@ void	free_stuff(t_data *data)
 		free_if_alloc(data->line);
 		free_if_alloc(data->f);
 		free_if_alloc(data->c);
+		free_if_alloc(data->ray);
 		mlx_terminate(data->mlx);
 		free(data);
 	}

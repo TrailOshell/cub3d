@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/29 15:15:55 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:46:12 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ typedef struct s_node
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
-	char		direction;
+	int				x;
+	int				y;
+	char			direction;
 
-	double	radian;
-	int		dir_x;
-	int		dir_y;
-	double	plane_x;
-	double	plane_y;
+	double			radian;
+	int				dir_x;
+	int				dir_y;
+	double			plane_x;
+	double			plane_y;
 }	t_player;
 
 typedef struct s_map
@@ -113,10 +113,10 @@ typedef struct s_tx
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
+	int				r;
+	int				g;
+	int				b;
+	int				rgb;
 }	t_rgb;
 
 typedef struct s_ray
@@ -161,7 +161,7 @@ typedef struct s_data
 	char			*line;
 }	t_data;
 
-/*	||  DEBUG  ||	*/
+/*	  DEBUG  	*/
 // color_write.c
 void	write_color(char *msg, char *color);
 void	write_color_nl(char *msg, char *color);
@@ -174,12 +174,12 @@ void	color_from_char(char c);
 void	write_grid(char **grid);
 void	write_elements(t_data *data);
 
-/*	||  EVENT  ||	*/
+/*	  EVENT  	*/
 // mlx_events.c
 int		game_exit(t_data *data);
 int		on_keypress(int keysym, t_data *data);
 
-/*	||  INIT  ||	*/
+/*	  INIT  	*/
 // flood_fill.c
 int		flood_fill(t_data *data);
 // get_next_row.c
@@ -199,14 +199,14 @@ void	set_map(t_data *data, t_node *node);
 // set_texture.c
 int		set_elements(t_data *data);
 
-/*	||  RENDER  ||	*/
+/*	  RENDER  	*/
 // render.c
 void	render_tile(t_data *data, int x, int y);
 void	render_map(t_data *data);
 // sprites.c
 void	*load_a_sprite(t_data *data, char *filename);
 
-/*	||  UTIL  ||	*/
+/*	  UTIL  	*/
 // is_conditions.c
 int		isplayerchar(char c);
 int		isvalidchar(char c);
@@ -216,7 +216,7 @@ int		ft_strrncmp(char *s1, char *s2, size_t n);
 int		ft_isspace(char str);
 int		chk_all_spaces(char *str);
 
-/*	|| SRC ||	*/
+/*	 SRC 	*/
 // error.c
 void	error_and_exit(t_data *data, char *msg);
 // free.c

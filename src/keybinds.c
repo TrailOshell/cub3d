@@ -6,89 +6,49 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/30 15:02:30 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:53:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	key_ws(t_data *data, const char key)
+int	can_walk(t_data *data, double new_x, double new_y)
+{
+	if (new_x < 0 || new_x > data->map->n_col)
+		return (-1);
+	else if (new_y < 0 || new_y > data->map->n_row)
+		return (-1);
+	return (0);
+}
+
+void	key_wasd(t_data *data, int sign_x, int sign_y)
 {
 	double	new_x;
 	double	new_y;
 
-	new_x = 0;
-	new_y = 0;
-	if (key == 'W')
-	{
-		new_x = data->player->x + data->player->dir_x * STEP;
-		new_y = data->player->y + data->player->dir_y * STEP;
-		// if (can_walk(data, new_x, new_y) == -1)
-		// 	return ;
-	}
-	else if (key == 'S')
-	{
-		new_x = data->player->x - data->player->dir_x * STEP;
-		new_y = data->player->y - data->player->dir_y * STEP;
-		// if (can_walk(data->map, new_x, new_y) == -1)
-		// 	return ;
-	}
+	new_x = data->player->x + (sign_x * data->player->dir_x * STEP);
+	new_y = data->player->y + (sign_y * data->player->dir_y * STEP);
+	if (can_walk(data, new_x, new_y) == -1)
+		return ;
 	data->player->x = new_x;
 	data->player->y = new_y;
 }
 
-void	key_ad(t_data *data, const char key)
+void	key_rotate(t_data *data, double rot_spd)
 {
-	double	new_x;
-	double	new_y;
+	double		tmp_x;
+	double		tmp_y;
+	t_player	*player;
 
-	new_x = 0;
-	new_y = 0;
-	if (key == 'A')
-	{
-		new_x = data->player->x + data->player->dir_x * STEP;
-		new_y = data->player->y - data->player->dir_y * STEP;
-		// can_walk(data->map, new_x, new_y);
-	}
-	else if (key == 'D')
-	{
-		new_x = data->player->x - data->player->dir_x * STEP;
-		new_y = data->player->y + data->player->dir_y * STEP;
-		// can_walk(data->map, new_x, new_y);
-	}
-	data->player->x = new_x;
-	data->player->y = new_y;
-}
-
-void	rotateleft(t_data *data)
-{
-	double	tmp_x;
-	double	tmp_y;
-
-	tmp_x = data->player->dir_x;
-	tmp_y = data->player->dir_y;
-	data->player->dir_x = tmp_x * cos(-RSPEED) - tmp_y * sin(-RSPEED);
-	data->player->dir_y = tmp_x * sin(-RSPEED) + tmp_y * cos(-RSPEED);
-	tmp_x = data->player->plane_x;
-	tmp_y = data->player->plane_y;
-	data->player->plane_x = tmp_x * cos(-RSPEED) - tmp_y * sin(-RSPEED);
-	data->player->plane_y = tmp_x * sin(-RSPEED) + tmp_y * cos(-RSPEED);
-	ft_ray(data);
-}
-
-void	rotateright(t_data *data)
-{
-	double	tmp_x;
-	double	tmp_y;
-
-	tmp_x = data->player->dir_x;
-	tmp_y = data->player->dir_y;
-	data->player->dir_x = tmp_x * cos(RSPEED) - tmp_y * sin(RSPEED);
-	data->player->dir_y = tmp_x * sin(RSPEED) + tmp_y * cos(RSPEED);
-	tmp_x = data->player->plane_x;
-	tmp_y = data->player->plane_y;
-	data->player->plane_x = tmp_x * cos(RSPEED) - tmp_y * sin(RSPEED);
-	data->player->plane_y = tmp_x * sin(RSPEED) + tmp_y * cos(RSPEED);
+	player = data->player;
+	tmp_x = player->dir_x * cos(rot_spd) - player->dir_y * sin(rot_spd);
+	tmp_y = player->dir_x * sin(rot_spd) + player->dir_y * cos(rot_spd);
+	player->dir_x = tmp_x;
+	player->dir_y = tmp_y;
+	tmp_x = player->plane_x * cos(rot_spd) - player->plane_y * sin(rot_spd);
+	tmp_y = player->plane_x * sin(rot_spd) + player->plane_y * cos(rot_spd);
+	player->plane_x = tmp_x;
+	player->plane_y = tmp_y;
 	ft_ray(data);
 }
 
@@ -98,17 +58,17 @@ void	keybinds(void *tmp)
 
 	data = (t_data *)tmp;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		key_ws(data, 'W');
+		key_wasd(data, 1, 1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		key_ad(data, 'A');
+		key_wasd(data, 1, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		key_ws(data, 'S');
+		key_wasd(data, -1, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		key_ad(data, 'D');
+		key_wasd(data, -1, 1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-		rotateleft(data);
+		key_rotate(data, -RSPEED);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		rotateright(data);
+		key_rotate(data, RSPEED);
 	ft_ray(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE)
 		|| mlx_is_key_down(data->mlx, MLX_KEY_Q))

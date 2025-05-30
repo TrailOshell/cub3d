@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 15:10:41 by paradari         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:02:30 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	keybinds(void *tmp)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		rotateright(data);
 	ft_ray(data);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE)
+		|| mlx_is_key_down(data->mlx, MLX_KEY_Q))
 		free_and_exit(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render3D.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/02 11:15:48 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:28:06 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_floor(t_data *data, int i, int draw_end)
 
 	(void)draw_end;
 	color = 65303;
-	x = HEIGHT/2;
+	x = HEIGHT / 2;
 	while (x < HEIGHT)
 	{
 		if (i >= 0 && i < WIDTH && x >= 0 && x < HEIGHT)
@@ -52,5 +52,5 @@ void	renderTD(t_data *data, int i)
 {
 	draw_ceiling(data, i, data->ray->draw_start);
 	draw_floor(data, i, data->ray->draw_end);
-	// wall_render(data, i);
+	wall_render(data, i);
 }

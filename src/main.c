@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/30 14:55:32 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:40:50 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	main(int argc, char **argv)
 		error_and_exit(data, "Error: can't initialize ray\n");
 	ft_bzero(data->ray, sizeof(t_ray));
 	write_color("Raycasting...\n", GRN);
-	ft_ray(data);
+	minimap(data);
+	// ft_ray(data);
 	mlx_loop_hook(data->mlx, keybinds, data);
 	mlx_close_hook(data->mlx, free_and_exit, data);
 	mlx_loop(data->mlx);

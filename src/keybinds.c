@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/30 15:53:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:50:15 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	key_wasd(t_data *data, int sign_x, int sign_y)
 	new_y = data->player->y + (sign_y * data->player->dir_y * STEP);
 	if (can_walk(data, new_x, new_y) == -1)
 		return ;
+	clear_player(data, data->player->x * 64, data->player->y * 64);//for debug
 	data->player->x = new_x;
 	data->player->y = new_y;
+	draw_player(data, data->player->x * 64, data->player->y * 64);//for debug
 }
 
 void	key_rotate(t_data *data, double rot_spd)
@@ -62,7 +64,7 @@ void	keybinds(void *tmp)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		key_wasd(data, 1, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		key_wasd(data, -1, -1);
+		key_wasd(data, -1, 1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		key_wasd(data, -1, 1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))

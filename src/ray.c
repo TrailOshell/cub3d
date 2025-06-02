@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 15:15:47 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:42:27 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_ray(t_data *data)
 		init_ray(data->player, data->ray, i);
 		ft_dda(data->map, data->ray);
 		calculate_wall(data);
-		renderTD(data, i);
+		// renderTD(data, i);
 		i++;
 	}
 	return ;

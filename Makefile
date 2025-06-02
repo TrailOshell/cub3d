@@ -27,7 +27,8 @@ SRC				=	error.c \
 					keybinds.c\
 					calculate_wall.c\
 					render3D.c\
-					render_utils.c
+					render_utils.c\
+					minimap.c
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -152,10 +153,10 @@ TEXTURES		=	path_to_the_east_texture.png \
 					path_to_the_south_texture.png \
 					path_to_the_west_texture.png
 $(TEXTURES):
-	cp $(TEXTURES_PTH)path_to_the_east_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_north_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_south_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_west_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_east_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_north_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_south_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_west_texture.png .
 
 VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --show-reachable=no --suppressions=mlx.supp
 

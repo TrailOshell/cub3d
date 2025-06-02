@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/02 10:55:29 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:52:01 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	get_next_row(t_data *data, int fd);
 char	**new_grid(t_map *map);
 char	**dupe_grid(t_map *map);
 // init.c
-t_map	*init_map(t_map *map);
+t_map	*init_map(t_map *map);void	clear_player(t_data *data, int x, int y);
 t_data	*init_data(t_data *data);
 // line.c
 void	add_line(t_node **node, char *line);
@@ -248,5 +248,10 @@ void	renderTD(t_data *data, int i);
 void	calculate_wall(t_data *data);
 
 void	wall_render(t_data *data, int i);
+
+// for debug
+void	minimap(t_data *data);
+void	draw_player(t_data *data, int x, int y);
+void	clear_player(t_data *data, int x, int y);
 
 #endif

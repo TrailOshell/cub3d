@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/30 14:46:12 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/02 10:55:29 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@
 # define WIDTH	1920
 # define HEIGHT 1080
 # define PI 3.14159265
-# define STEP 0.1
-# define RSPEED 0.1
+# define STEP 0.01
+# define RSPEED 0.01
 
 typedef struct s_node
 {
@@ -111,6 +111,15 @@ typedef struct s_tx
 	mlx_texture_t	*we_tx;
 }	t_tx;
 
+typedef struct s_tx_scale
+{
+	mlx_texture_t	*tx;
+	int	height;
+	int	width;
+	double	range;
+	double	pos;
+}	t_tx_scale;
+
 typedef struct s_rgb
 {
 	int				r;
@@ -135,8 +144,8 @@ typedef struct s_ray
 	int				draw_end;
 	int				line_height;
 	double			wall_size;
-	int				tx_size;
-	char			tx;
+	int				tx_pos_x;
+	char			tx_hit;
 
 	int				step_x;
 	int				step_y;
@@ -237,5 +246,7 @@ void	keybinds(void *tmp);
 void	renderTD(t_data *data, int i);
 
 void	calculate_wall(t_data *data);
+
+void	wall_render(t_data *data, int i);
 
 #endif

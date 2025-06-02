@@ -26,7 +26,8 @@ SRC				=	error.c \
 					init_player.c\
 					keybinds.c\
 					calculate_wall.c\
-					render3D.c
+					render3D.c\
+					render_utils.c
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 14:33:41 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/02 10:33:59 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	get_wall_size(t_ray *ray, t_player *player)
 	else
 		ray->wall_size = player->x + ray->wall_dist * ray->dir_x;
 	ray->wall_size -= floor(ray->wall_size);
-	ray->tx_size = (int)(ray->wall_size * 64);
+	ray->tx_pos_x = (int)(ray->wall_size * 64);
 	if (ray->side == 0 && ray->dir_x > 0)
-		ray->tx_size = 64 - ray->tx_size - 1;
+		ray->tx_pos_x = 64 - ray->tx_pos_x - 1;
 	if (ray->side == 1 && ray->dir_y < 0)
-		ray->tx_size = 64 - ray->tx_size - 1;
+		ray->tx_pos_x = 64 - ray->tx_pos_x - 1;
 }
 
 void	ft_set_texture(t_ray *ray)
@@ -50,16 +50,16 @@ void	ft_set_texture(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			ray->tx = 'W';
+			ray->tx_hit = 'W';
 		else
-			ray->tx = 'E';
+			ray->tx_hit = 'E';
 	}
 	else
 	{
 		if (ray->dir_y > 0)
-			ray->tx = 'N';
+			ray->tx_hit = 'N';
 		else
-			ray->tx = 'S';
+			ray->tx_hit = 'S';
 	}
 }
 

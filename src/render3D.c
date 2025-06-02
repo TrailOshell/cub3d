@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render3D.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/29 15:49:14 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:15:48 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void	renderTD(t_data *data, int i)
 {
 	draw_ceiling(data, i, data->ray->draw_start);
 	draw_floor(data, i, data->ray->draw_end);
-	// render_wall()
+	// wall_render(data, i);
 }

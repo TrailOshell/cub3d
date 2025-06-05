@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:44:51 by paradari          #+#    #+#             */
-/*   Updated: 2025/05/30 16:07:38 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:21:18 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ void	init_player(t_player *player)
 	player->dir_y = 0;
 	if (player->direction == 'N')
 	{
-		player->radian = 90 * (PI / 180);
+		player->radian = PI / 2;
 		player->dir_y = -1;
 	}
 	else if (player->direction == 'S')
 	{
-		player->radian = 270 * (PI / 180);
+		player->radian = 3 * PI / 2;
 		player->dir_y = 1;
 	}
 	else if (player->direction == 'E')
 	{
-		player->radian = 0 * (PI / 180);
+		player->radian = 0;
 		player->dir_x = 1;
 	}
 	else if (player->direction == 'W')
 	{
-		player->radian = 180 * (PI / 180);
+		player->radian = PI;
 		player->dir_x = -1;
 	}
 	player->plane_x = player->dir_y * (-0.66);

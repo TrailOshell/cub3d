@@ -3,41 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/02 16:53:46 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:36:49 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_wall(int y, int x, t_data *data)
+void	draw_square(int y, int x, t_data *data, int color, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < 64)
+	x = x * size;
+	y = y * size;
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + i, y, 0x0000FF);
+		mlx_put_pixel(data->win, x + i, y, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x, y + i, 0x0000FF);
+		mlx_put_pixel(data->win, x, y + i, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + i, y + 64, 0x0000FF);
+		mlx_put_pixel(data->win, x + i, y + size, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + 64, y + i, 0x0000FF);
+		mlx_put_pixel(data->win, x + size, y + i, color);
 		i++;
 	}
 }
@@ -115,7 +117,7 @@ void	draw_map(t_map *map, t_data *data)
 		while (map->grid[y][x])
 		{
 			if (map->grid[y][x] == '1')
-				draw_wall(y * 64, x * 64, data);
+				draw_square(y, x, data, 0x0000FF, 64);
 			x++;
 		}
 		y++;
@@ -128,5 +130,6 @@ void	minimap(t_data *data)
 
 	map = data->map;
 	draw_map(map, data);
-	draw_player(data, data->player->x * 64, data->player->y * 64);
+	draw_square(data->player->y, data->player->x, data, 0x00FFFF, 64);
+	
 }

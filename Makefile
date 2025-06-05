@@ -25,6 +25,7 @@ SRC				=	error.c \
 					init_mlx.c\
 					init_player.c\
 					keybinds.c\
+					keybind_utils.c\
 					calculate_wall.c\
 					render3D.c\
 					render_utils.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/04 12:27:08 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:17:08 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_node
 typedef struct s_player
 {
 	double			x;
-	double				y;
+	double			y;
 	char			direction;
 
 	double			radian;
@@ -252,9 +252,10 @@ void	wall_render(t_data *data, int i);
 
 // for debug
 void	minimap(t_data *data);
-void	draw_player(t_data *data, int x, int y);
+void	draw_player(int y, int x, t_data *data, int color, int size);
 void	draw_map(t_map *map, t_data *data);
 void	clear_player(t_data *data, int x, int y);
 void	draw_square(int y, int x, t_data *data, int color, int size);
+void	relocate_player(t_data *data);
 
 #endif

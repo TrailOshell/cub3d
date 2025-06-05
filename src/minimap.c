@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/05 01:36:49 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:14:54 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_square(int y, int x, t_data *data, int color, int size)
+void	draw_square(int y, int x, t_data *data, int color, int size)//for debug
 {
 	int	i;
 
@@ -44,67 +44,38 @@ void	draw_square(int y, int x, t_data *data, int color, int size)
 	}
 }
 
-void	draw_player(t_data *data, int x, int y)
+
+void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
 {
 	int	i;
 
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + i, y, 0x00FFFF);
+		mlx_put_pixel(data->win, x + i, y, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x, y + i, 0x00FFFF);
+		mlx_put_pixel(data->win, x, y + i, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + i, y + 64, 0x00FFFF);
+		mlx_put_pixel(data->win, x + i, y + size, color);
 		i++;
 	}
 	i = 0;
-	while (i < 64)
+	while (i < size)
 	{
-		mlx_put_pixel(data->win, x + 64, y + i, 0x00FFFF);
+		mlx_put_pixel(data->win, x + size, y + i, color);
 		i++;
 	}
 }
 
-void	clear_player(t_data *data, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < 64)
-	{
-		mlx_put_pixel(data->win, x + i, y, 0x00);
-		i++;
-	}
-	i = 0;
-	while (i < 64)
-	{
-		mlx_put_pixel(data->win, x, y + i, 0x00);
-		i++;
-	}
-	i = 0;
-	while (i < 64)
-	{
-		mlx_put_pixel(data->win, x + i, y + 64, 0x00);
-		i++;
-	}
-	i = 0;
-	while (i < 64)
-	{
-		mlx_put_pixel(data->win, x + 64, y + i, 0x00);
-		i++;
-	}
-}
-
-void	draw_map(t_map *map, t_data *data)
+void	draw_map(t_map *map, t_data *data)//for debug
 {
 	int	x;
 	int	y;
@@ -124,12 +95,12 @@ void	draw_map(t_map *map, t_data *data)
 	}
 }
 
-void	minimap(t_data *data)
+void	minimap(t_data *data)//for debug
 {
 	t_map	*map;
 
 	map = data->map;
 	draw_map(map, data);
 	draw_square(data->player->y, data->player->x, data, 0x00FFFF, 64);
-	
+
 }

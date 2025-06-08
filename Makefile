@@ -90,7 +90,7 @@ MLX_FLAGS		=    -Iinclude -ldl -lglfw -pthread -lm
 MLX_INC        =    -I$(MLX_PTH)include/MLX42
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	=	-Wall -Wextra -Werror
 CFLAGS	+=	-g
 
 all: $(MLX) $(LIBFT) $(GNL) $(NAME)

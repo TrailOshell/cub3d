@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 15:15:30 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:12:52 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 
 	// ray_x = data->ray->x;
 	// ray_y = data->ray->y;
-	ray_x = (double)player->x * 64 + 32;
-	ray_y = (double)player->y * 64 + 32;
+	ray_x = (double)player->x * 64;
+	ray_y = (double)player->y * 64;
 	// ray_x = player->x;
 	// ray_y = player->y;
 	cos_rad = cos(start_x);
@@ -87,9 +87,8 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 		mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
 	}
 
-	// // float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
-	// float	distance = rescale(player->x, player->y, ray_x, ray_y, data);
-	// float	line_height = (64 * HEIGHT) / distance;
+	// float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
+	// int		line_height = (int)HEIGHT / distance;
 	// int	draw_start = (HEIGHT / 2) - (line_height / 2);
 	// int draw_end = draw_start + line_height;
 	// while(draw_start < draw_end)
@@ -103,7 +102,7 @@ void	relocate_player(t_data *data) //for debug
 {
 	clear_image(data);
 	draw_map(data->map, data);
-	draw_player(data->player->y *64 + 20, data->player->x * 64 + 20, data, 255, 12);
+	draw_player(data->player->y *64 - 6, data->player->x * 64 - 6, data, 0xFFFF64FF, 12);
 	float	fov = PI / 3 / WIDTH;
 	float	start_x = data->player->radian - PI / 6;
 	int	i = 0;

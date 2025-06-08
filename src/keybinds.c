@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/05 15:29:47 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:22:10 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int	can_walk(t_data *data, int new_x, int new_y)
 {
+	char	**map;
+
+	map = data->map->grid;
 	if (new_x < 0 || new_x > data->map->n_col)
 		return (-1);
 	if (new_y < 0 || new_y > data->map->n_row)
 		return (-1);
-	if (data->map->grid[new_y][new_x] == '1')
+	if (map[new_y][new_x] == '1' || map[new_y][new_x] == '2')
 		return (-1);
 	return (0);
 }

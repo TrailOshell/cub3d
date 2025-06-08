@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/02 14:28:06 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:04:15 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void	renderTD(t_data *data, int i)
 {
 	draw_ceiling(data, i, data->ray->draw_start);
 	draw_floor(data, i, data->ray->draw_end);
-	wall_render(data, i);
+	// wall_render(data, i);
 }

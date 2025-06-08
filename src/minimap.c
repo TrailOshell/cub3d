@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/05 14:14:54 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:18:15 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
 		i++;
 	}
 }
+
 
 void	draw_map(t_map *map, t_data *data)//for debug
 {

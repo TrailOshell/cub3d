@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:46:20 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:39:24 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	{
 		ray_x = (double)player->x * 64;
 		ray_y = (double)player->y * 64;
-		mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+		mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
 	}
 
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
@@ -88,7 +88,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 		ray_x += cos_rad;
 		ray_y += sin_rad;
 		if (DRAW_MODE == 2)
-			mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+			mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
 	}
 
 	if (DRAW_MODE == 3)
@@ -99,7 +99,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 		int draw_end = draw_start + line_height;
 		while(draw_start < draw_end)
 		{
-			mlx_put_pixel(data->win, i, draw_start, 0xFFFFFF);
+			mlx_put_pixel(data->win, i, draw_start, RAY_CLR);
 			draw_start++;
 		}
 	}
@@ -111,7 +111,7 @@ void	relocate_player(t_data *data) //for debug
 	if (DRAW_MODE == 2)
 	{
 		draw_map(data->map, data);
-		draw_player(data->player->y *64 - 6, data->player->x * 64 - 6, data, 0xFFFF64FF, 12);
+		draw_player(data->player->y *64 - 6, data->player->x * 64 - 6, data, PLAYER_CLR, 12);
 	}
 	float	fov = PI / 3 / WIDTH;
 	float	start_x = data->player->radian - PI / 6;

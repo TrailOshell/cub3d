@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 16:27:21 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:44:18 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # ifndef DRAW_MODE
 #  define DRAW_MODE			3
 # endif
+
+//	Debug Color
+# define RAY_CLR			0xFFFFFFFF
+# define PLAYER_CLR			0xFFFF64FF
+# define WALL_CLR			0x00FFFFFF
+# define MAP_WALL_CLR		0x0000FFFF
 
 //	X11 events 
 # define KEYPRESS			2
@@ -119,10 +125,10 @@ typedef struct s_tx
 typedef struct s_tx_scale
 {
 	mlx_texture_t	*tx;
-	int	height;
-	int	width;
-	double	range;
-	double	pos;
+	int				height;
+	int				width;
+	double			range;
+	double			pos;
 }	t_tx_scale;
 
 typedef struct s_rgb
@@ -131,6 +137,7 @@ typedef struct s_rgb
 	int				g;
 	int				b;
 	int				rgb;
+	uint32_t		rgba;
 }	t_rgb;
 
 typedef struct s_ray
@@ -202,7 +209,8 @@ void	get_next_row(t_data *data, int fd);
 char	**new_grid(t_map *map);
 char	**dupe_grid(t_map *map);
 // init.c
-t_map	*init_map(t_map *map);void	clear_player(t_data *data, int x, int y);
+t_map	*init_map(t_map *map);
+void	clear_player(t_data *data, int x, int y);
 t_data	*init_data(t_data *data);
 // line.c
 void	add_line(t_node **node, char *line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render3D.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:04:15 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:31:28 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw_ceiling(t_data *data, int i, int draw_start)
 	int			x;
 
 	(void)draw_start;
-	floor_color = data->c->rgb;
-	ceiling_color = data->f->rgb;
+	floor_color = data->c->rgba;
+	ceiling_color = data->f->rgba;
 	x = 0;
 	while (x < HEIGHT)
 	{
@@ -38,7 +38,7 @@ void	draw_floor(t_data *data, int i, int draw_end)
 	int			x;
 
 	(void)draw_end;
-	color = 65303;
+	color = data->f->rgba;
 	x = HEIGHT / 2;
 	while (x < HEIGHT)
 	{

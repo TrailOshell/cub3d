@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:18:15 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:42:41 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	draw_square(int y, int x, t_data *data, int color, int size)//for debug
 	}
 }
 
-
 void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
 {
 	int	i;
@@ -75,7 +74,6 @@ void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
 	}
 }
 
-
 void	draw_map(t_map *map, t_data *data)//for debug
 {
 	int	x;
@@ -89,7 +87,7 @@ void	draw_map(t_map *map, t_data *data)//for debug
 		while (map->grid[y][x])
 		{
 			if (map->grid[y][x] == '1')
-				draw_square(y, x, data, 0x0000FF, 64);
+				draw_square(y, x, data, MAP_WALL_CLR, 64);
 			x++;
 		}
 		y++;
@@ -102,6 +100,5 @@ void	minimap(t_data *data)//for debug
 
 	map = data->map;
 	draw_map(map, data);
-	draw_square(data->player->y, data->player->x, data, 0x00FFFF, 64);
-
+	draw_square(data->player->y, data->player->x, data, WALL_CLR, 64);
 }

@@ -62,6 +62,8 @@ int	set_rgb(t_data *data, t_rgb *rgb)
 	rgb->rgb = rgb->r;
 	rgb->rgb = (rgb->rgb << 8) + rgb->g;
 	rgb->rgb = (rgb->rgb << 8) + rgb->b;
+	rgb->rgba = rgb->rgb;
+	rgb->rgba = (rgb->rgba << 8) + 255;
 	return (1);
 }
 	// write_double_color("color: ", YLW, str, CYN);

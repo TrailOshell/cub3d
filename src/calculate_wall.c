@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/02 10:33:59 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:24:52 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	find_wall_dist(t_player *player, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->wall_dist = (ray->x - player->x + (1 - ray->step_x) / 2) / ray->dir_x;
+		ray->wall_dist = player->y;
 	else
-		ray->wall_dist = (ray->y - player->y + (1 - ray->step_y) / 2) / ray->dir_y;
+		ray->wall_dist = player->x;
 }
 
 void	ft_line_height_wall(t_ray *ray, int *draw_start, int *draw_end)

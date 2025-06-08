@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybind_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 11:51:33 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:15:30 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,20 @@
 
 void	clear_image(t_data *data)//for debug
 {
-	for(int y = 0; y < HEIGHT; y++)
-		for(int x = 0; x < WIDTH; x++)
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
 			mlx_put_pixel(data->win, x, y, 0);
+			x++;
+		}
+		y++;
+	}
 
 }
 
@@ -67,25 +78,25 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	// ray_y = player->y;
 	cos_rad = cos(start_x);
 	sin_rad = sin(start_x);
-	// mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+	mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
 
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
 	{
 		ray_x += cos_rad;
 		ray_y += sin_rad;
-		// mlx_put_pixel(data->win, *ray_x, *ray_y, 0xFFFFFF);//for debug
+		mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
 	}
 
-	// float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
-	float	distance = rescale(player->x, player->y, ray_x, ray_y, data);
-	float	line_height = (64 * HEIGHT) / distance;
-	int	draw_start = (HEIGHT / 2) - (line_height / 2);
-	int draw_end = draw_start + line_height;
-	while(draw_start < draw_end)
-	{
-		mlx_put_pixel(data->win, i, draw_start, 0xFFFFFF);
-		draw_start++;
-	}
+	// // float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
+	// float	distance = rescale(player->x, player->y, ray_x, ray_y, data);
+	// float	line_height = (64 * HEIGHT) / distance;
+	// int	draw_start = (HEIGHT / 2) - (line_height / 2);
+	// int draw_end = draw_start + line_height;
+	// while(draw_start < draw_end)
+	// {
+	// 	mlx_put_pixel(data->win, i, draw_start, 0xFFFFFF);
+	// 	draw_start++;
+	// }
 }
 
 void	relocate_player(t_data *data) //for debug

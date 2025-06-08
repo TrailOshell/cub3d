@@ -64,7 +64,9 @@ void	flood_outer_wall(t_data *data, t_map	*flood)
 	{
 		while (x < map->n_col)
 		{
-			if (flood->grid[y][x] == '0' || ft_isspace(flood->grid[y][x]))
+
+			if (flood->grid[y][x] == '0' || ft_isspace(flood->grid[y][x]) 
+				|| flood->grid[y][x] == 0)
 			{
 				flood->grid[y][x] = '2';
 				map->grid[y][x] = flood->grid[y][x];

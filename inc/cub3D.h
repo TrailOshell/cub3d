@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/05 15:17:08 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:27:21 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 
 # ifndef SIZE
 #  define SIZE				32
+# endif
+
+# ifndef DRAW_MODE
+#  define DRAW_MODE			3
 # endif
 
 //	X11 events 

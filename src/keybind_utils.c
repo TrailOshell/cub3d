@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:12:52 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:29:46 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,26 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	float	sin_rad;
 
 	(void)i;
-
-	// ray_x = data->ray->x;
-	// ray_y = data->ray->y;
-	ray_x = (double)player->x * 64;
-	ray_y = (double)player->y * 64;
-	// ray_x = player->x;
-	// ray_y = player->y;
 	cos_rad = cos(start_x);
 	sin_rad = sin(start_x);
-	mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+	if (DRAW_MODE == 3)
+	{
+		ray_x = player->x;
+		ray_y = player->y;
+	}
+	else if (DRAW_MODE == 2)
+	{
+		ray_x = (double)player->x * 64;
+		ray_y = (double)player->y * 64;
+		mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+	}
 
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
 	{
 		ray_x += cos_rad;
 		ray_y += sin_rad;
-		mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
+		if (DRAW_MODE == 2)
+			mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
 	}
 
 	// float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);

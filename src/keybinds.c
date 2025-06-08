@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 17:35:41 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:14:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ void	keybinds(void *tmp)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE)
 		|| mlx_is_key_down(data->mlx, MLX_KEY_Q))
 		free_and_exit(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_2))
+		data->draw_mode = 2;
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_3))
+		data->draw_mode = 3;
 	relocate_player(data);//for debug
 }

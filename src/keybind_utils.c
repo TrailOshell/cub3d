@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 18:39:24 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:16:32 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,29 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	(void)i;
 	cos_rad = cos(start_x);
 	sin_rad = sin(start_x);
-	if (DRAW_MODE == 3)
+	if (data->draw_mode == 3)
 	{
 		ray_x = player->x;
 		ray_y = player->y;
 	}
-	else if (DRAW_MODE == 2)
+	else if (data->draw_mode == 2)
 	{
 		ray_x = (double)player->x * 64;
 		ray_y = (double)player->y * 64;
 		mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
 	}
+	else
+		return ;
 
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
 	{
 		ray_x += cos_rad;
 		ray_y += sin_rad;
-		if (DRAW_MODE == 2)
+		if (data->draw_mode == 2)
 			mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
 	}
 
-	if (DRAW_MODE == 3)
+	if (data->draw_mode == 3)
 	{
 		float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
 		int		line_height = (int)HEIGHT / distance;
@@ -108,7 +110,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 void	relocate_player(t_data *data) //for debug
 {
 	clear_image(data);
-	if (DRAW_MODE == 2)
+	if (data->draw_mode == 2)
 	{
 		draw_map(data->map, data);
 		draw_player(data->player->y *64 - 6, data->player->x * 64 - 6, data, PLAYER_CLR, 12);

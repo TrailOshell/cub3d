@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 18:44:18 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:10:26 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # endif
 
 # ifndef DRAW_MODE
-#  define DRAW_MODE			3
+#  define DRAW_MODE			2
 # endif
 
 //	Debug Color
@@ -173,6 +173,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*win;
 	t_map			*map;
+	int				draw_mode;
 	t_node			*node;
 	t_player		*player;
 	t_tx			*tx;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 10:58:05 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:10:48 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	ft_bzero(data->ray, sizeof(t_ray));
 	write_color("Raycasting...\n", GRN);
 	minimap(data);
-	// ft_ray(data);
+	ft_ray(data);
 	mlx_loop_hook(data->mlx, keybinds, data);
 	mlx_close_hook(data->mlx, free_and_exit, data);
 	mlx_loop(data->mlx);

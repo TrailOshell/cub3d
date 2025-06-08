@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:22:10 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:35:41 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	can_walk(t_data *data, int new_x, int new_y)
+void	walking(t_data *data, double new_x, double new_y)
 {
-	char	**map;
+	char	**grid;
 
-	map = data->map->grid;
-	if (new_x < 0 || new_x > data->map->n_col)
-		return (-1);
-	if (new_y < 0 || new_y > data->map->n_row)
-		return (-1);
-	if (map[new_y][new_x] == '1' || map[new_y][new_x] == '2')
-		return (-1);
-	return (0);
+	grid = data->map->grid;
+	if (new_x >= 0 && new_x <= data->map->n_col
+		&& iswalkable(grid[(int)data->player->y][(int)new_x]))
+		data->player->x = new_x;
+	if (new_y >= 0 && new_y <= data->map->n_row
+		&& iswalkable(grid[(int)new_y][(int)data->player->x]))
+		data->player->y = new_y;
 }
 
 void	key_ws(t_data *data, double cos_r, double sin_r)
@@ -33,10 +32,7 @@ void	key_ws(t_data *data, double cos_r, double sin_r)
 
 	new_x = data->player->x + cos_r * STEP;
 	new_y = data->player->y + sin_r * STEP;
-	if (can_walk(data, (int)new_x, (int)new_y) == -1)
-		return ;
-	data->player->x = new_x;
-	data->player->y = new_y;
+	walking(data, new_x, new_y);
 }
 
 void	key_ad(t_data *data, double cos_r, double sin_r)
@@ -46,10 +42,7 @@ void	key_ad(t_data *data, double cos_r, double sin_r)
 
 	new_x = data->player->x + sin_r * STEP;
 	new_y = data->player->y + cos_r * STEP;
-	if (can_walk(data, (int)new_x, (int)new_y) == -1)
-		return ;
-	data->player->x = new_x;
-	data->player->y = new_y;
+	walking(data, new_x, new_y);
 }
 
 void	key_leftright(t_player *player, double spd)

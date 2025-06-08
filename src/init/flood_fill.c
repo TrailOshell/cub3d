@@ -50,6 +50,32 @@ void	paintnear(int y, int x, t_data *data, t_map *flood)
 		paintnear(y, x - 1, data, flood);
 }
 
+void	flood_outer_wall(t_data *data, t_map	*flood)
+{
+	int		x;
+	int		y;
+	t_map	*map;
+
+	map = data->map;
+
+	x = 0;
+	y = 0;
+	while (y < map->n_row)
+	{
+		while (x < map->n_col)
+		{
+			if (flood->grid[y][x] == '0' || ft_isspace(flood->grid[y][x]))
+			{
+				flood->grid[y][x] = '2';
+				map->grid[y][x] = flood->grid[y][x];
+			}
+			x++;
+		}
+		y++;
+		x = 0;
+	}
+}
+
 int	flood_fill(t_data *data)
 {
 	t_map	*flood;
@@ -67,6 +93,7 @@ int	flood_fill(t_data *data)
 		return (0);
 	}
 	paintnear(data->player->y, data->player->x, data, flood);
+	flood_outer_wall(data, flood);
 	write_color("Map is valid (flood_filled)\n", PUR);
 	write_grid(flood->grid);
 	free_map(flood);

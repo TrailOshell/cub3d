@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/02 16:40:50 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:58:05 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ void	free_and_exit(void	*data)
 	exit (0);
 }
 
+void printmap(char **grid)
+{
+	int	i;
+
+	i = 0;
+	while (grid[i])
+	{
+		printf("%s\n", grid[i]);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -52,6 +64,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_and_exit(data, "ERROR! Input arguments not equal 2\n");
 	read_map(argv, data);
+	printmap(data->map->grid);
 	init_mlx(data);
 	init_player(data->player);
 	data->ray = malloc(sizeof(t_ray));

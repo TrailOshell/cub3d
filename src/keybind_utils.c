@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybind_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:33:46 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:46:20 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,17 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 			mlx_put_pixel(data->win, ray_x, ray_y, 0xFFFFFF);//for debug
 	}
 
-	float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
-	int		line_height = (int)HEIGHT / distance;
-	int	draw_start = (HEIGHT / 2) - (line_height / 2);
-	int draw_end = draw_start + line_height;
-	while(draw_start < draw_end)
+	if (DRAW_MODE == 3)
 	{
-		mlx_put_pixel(data->win, i, draw_start, 0xFFFFFF);
-		draw_start++;
+		float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
+		int		line_height = (int)HEIGHT / distance;
+		int	draw_start = (HEIGHT / 2) - (line_height / 2);
+		int draw_end = draw_start + line_height;
+		while(draw_start < draw_end)
+		{
+			mlx_put_pixel(data->win, i, draw_start, 0xFFFFFF);
+			draw_start++;
+		}
 	}
 }
 

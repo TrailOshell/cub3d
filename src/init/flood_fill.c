@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/16 19:15:28y tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:03:16 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@ void	err_map(t_data *data, t_map *map, char *msg)
 {
 	free_map(map);
 	error_and_exit(data, msg);
-}
-
-int	check_unenclosed_wall(t_data *data, int x, int y, t_map *flood)
-{
-	if (y == 0 && flood->grid[y][x] != '1')
-		err_map(data, flood, "ERROR! Unenclosed wall (top must be wall)\n");
-	else if (y == data->map->n_row - 1 && flood->grid[y][x] != '1')
-		err_map(data, flood, "ERROR! Unenclosed wall (bottom must be wall)\n");
-	return (0);
 }
 
 int	painting(char *c, t_data *data, t_map *flood)
@@ -39,7 +30,12 @@ int	painting(char *c, t_data *data, t_map *flood)
 
 void	paintnear(int y, int x, t_data *data, t_map *flood)
 {
-	check_unenclosed_wall(data, x, y, flood);
+	if (y == 0 && flood->grid[y][x] != '1')
+		return (err_map(data, flood,
+				"ERROR! Unenclosed wall (top must be wall)\n"));
+	else if (y == data->map->n_row - 1 && flood->grid[y][x] != '1')
+		return (err_map(data, flood,
+				"ERROR! Unenclosed wall (bottom must be wall)\n"));
 	if (painting(&flood->grid[y + 1][x], data, flood) == 1)
 		paintnear(y + 1, x, data, flood);
 	if (painting(&flood->grid[y - 1][x], data, flood) == 1)
@@ -64,8 +60,7 @@ void	flood_outer_wall(t_data *data, t_map	*flood)
 	{
 		while (x < map->n_col)
 		{
-
-			if (flood->grid[y][x] == '0' || ft_isspace(flood->grid[y][x]) 
+			if (flood->grid[y][x] == '0' || ft_isspace(flood->grid[y][x])
 				|| flood->grid[y][x] == 0)
 			{
 				flood->grid[y][x] = '2';

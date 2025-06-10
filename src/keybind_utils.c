@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybind_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 19:16:32 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:18:40 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,18 @@ int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 	int	x;
 	int	y;
 
-	x = (int)(ray_x / 64);
-	y = (int)(ray_y / 64);
+	if (data->draw_mode == 2)
+	{
+		x = (int)(ray_x / 64);
+		y = (int)(ray_y / 64);
+	}
+	else if(data->draw_mode == 3)
+	{
+		x = (int)ray_x;
+		y = (int)ray_y;
+	}
+	else
+		return (0);
 	if (x < 0 || x >= data->map->n_col || y < 0 || y >= data->map->n_row)
 		return (1);
 	if (data->map->grid[y][x] == '1' || data->map->grid[y][x] == '2')
@@ -96,9 +106,14 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	if (data->draw_mode == 3)
 	{
 		float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
-		int		line_height = (int)HEIGHT / distance;
-		int	draw_start = (HEIGHT / 2) - (line_height / 2);
-		int draw_end = draw_start + line_height;
+		if (distance <= 0)
+			distance = 0.0001;
+		float	line_height = (int)HEIGHT / distance;
+		float	draw_start = HEIGHT / 2 - line_height;
+		if (draw_start <= 0)
+			draw_start = 0;
+		float	draw_end = draw_start + line_height;
+		printf("lineh = %f\tdraw_start = %f\tdraw_end = %f\n", line_height, draw_start, draw_end);
 		while(draw_start < draw_end)
 		{
 			mlx_put_pixel(data->win, i, draw_start, RAY_CLR);

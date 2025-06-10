@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 19:10:26 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:05:55 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # endif
 
 # ifndef DRAW_MODE
-#  define DRAW_MODE			2
+#  define DRAW_MODE			3
 # endif
 
 //	Debug Color

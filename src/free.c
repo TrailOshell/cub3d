@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:38:27 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 00:17:49 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:58:11 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +56,14 @@ void	free_tx(t_tx *tx, mlx_t *mlx)
 	mlx_delete_image(mlx, tx->so_img);
 	mlx_delete_image(mlx, tx->we_img);
 	mlx_delete_image(mlx, tx->ea_img);
-	mlx_delete_texture(tx->no_tx);
-	mlx_delete_texture(tx->so_tx);
-	mlx_delete_texture(tx->we_tx);
-	mlx_delete_texture(tx->ea_tx);
+	if (tx->no_tx)
+		mlx_delete_texture(tx->no_tx);
+	if (tx->so_tx)
+		mlx_delete_texture(tx->so_tx);
+	if (tx->we_tx)
+		mlx_delete_texture(tx->we_tx);
+	if (tx->ea_tx)
+		mlx_delete_texture(tx->ea_tx);
 	free(tx);
 }
 

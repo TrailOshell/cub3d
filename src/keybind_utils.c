@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybind_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/10 16:18:40 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:26:04 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 		x = (int)(ray_x / 64);
 		y = (int)(ray_y / 64);
 	}
-	else if(data->draw_mode == 3)
+	else if (data->draw_mode == 3)
 	{
 		x = (int)ray_x;
 		y = (int)ray_y;
@@ -57,18 +57,26 @@ int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 
 double	ft_getdistance(double x, double y)
 {
-	return (sqrt(x * x + y * y));
+	double	x2;
+	double	y2;
+
+	x2 = x * x;
+	y2 = y * y;
+	printf(GRN"sqrt  = "NCL"%f"YLW" x * x + y * y "NCL"%f\t", sqrt(x2 + y2), x2 + y2);
+	printf(CYN"x * x = "NCL"%f"CYN" y * y "NCL"%f\n", x2, y2);
+	//return ((double)sqrt(x * x + y * y));
+	return (sqrt((x * x) + (y * y)));
 }
 
 double rescale(double x1, double y1, double x2, double y2, t_data *data)
 {
 	double	distance;
+	float	dx = x2 - x1;
+	float	dy = y2 - y1;
+	float	angle = atan2(dy, dx) - data->player->radian;
 
-	float dx = x2 - x1;
-	float dy = y2 - y1;
-	float angle = atan2(dy, dx) - data->player->radian;
 	distance = ft_getdistance(dx, dy) * cos(angle);
-	return distance;
+	return (distance);
 }
 
 void	draw_ray(t_player *player, t_data *data, float start_x, int i)
@@ -106,18 +114,19 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	if (data->draw_mode == 3)
 	{
 		float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
+		//printf(GRN"distance = %f" NCL ""CYN "\tx = " NCL "%f" CYN "\ty = " NCL "%f\n", distance, ray_x - player->x, ray_y - player->y);
 		if (distance <= 0)
 			distance = 0.0001;
-		float	line_height = (int)HEIGHT / distance;
-		float	draw_start = HEIGHT / 2 - line_height;
+		float	line_height = (float)HEIGHT / (float)distance;
+		float	draw_start = (float)HEIGHT / (float)2 - (float)line_height;
 		if (draw_start <= 0)
 			draw_start = 0;
-		float	draw_end = draw_start + line_height;
-		printf("lineh = %f\tdraw_start = %f\tdraw_end = %f\n", line_height, draw_start, draw_end);
-		while(draw_start < draw_end)
+		float	draw_end = (float)draw_start + (float)line_height;
+		//printf(GRN "line_h = " NCL "%f" CYN "\tdraw_start = " NCL "%f" CYN "\tdraw_end = " NCL "%f\n", line_height, draw_start, draw_end);
+		while (draw_start < draw_end)
 		{
 			mlx_put_pixel(data->win, i, draw_start, RAY_CLR);
-			draw_start++;
+			draw_start += (float)1;
 		}
 	}
 }

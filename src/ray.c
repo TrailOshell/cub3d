@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:04:02 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:09:39 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_ray(t_data *data)
 		// init_ray(data->player, data->ray, i);
 		// ft_dda(data->map, data->ray);
 		calculate_wall(data);
-		// renderTD(data, i);
+		// render_three_dimension(data, i);
 		i++;
 	}
 	return ;

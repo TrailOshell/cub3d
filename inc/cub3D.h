@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/10 16:05:55 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:09:39 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void	init_player(t_player *player);
 
 void	keybinds(void *tmp);
 
-void	renderTD(t_data *data, int i);
+void	render_three_dimension(t_data *data, int i);
 
 void	calculate_wall(t_data *data);
 

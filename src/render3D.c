@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 18:31:28 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:09:41 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_floor(t_data *data, int i, int draw_end)
 	}
 }
 
-void	renderTD(t_data *data, int i)
+void	render_three_dimension(t_data *data, int i)
 {
 	draw_ceiling(data, i, data->ray->draw_start);
 	draw_floor(data, i, data->ray->draw_end);

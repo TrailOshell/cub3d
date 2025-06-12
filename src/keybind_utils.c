@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/10 18:26:04 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:48:41 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	clear_image(t_data *data)//for debug
 		}
 		y++;
 	}
-
 }
 
 int	is_ray_hit(float ray_x, float ray_y, t_data *data)
@@ -59,24 +58,48 @@ double	ft_getdistance(double x, double y)
 {
 	double	x2;
 	double	y2;
+	double	xy2;
 
 	x2 = x * x;
 	y2 = y * y;
-	printf(GRN"sqrt  = "NCL"%f"YLW" x * x + y * y "NCL"%f\t", sqrt(x2 + y2), x2 + y2);
-	printf(CYN"x * x = "NCL"%f"CYN" y * y "NCL"%f\n", x2, y2);
-	//return ((double)sqrt(x * x + y * y));
+	xy2 = x2 + y2;
+	printf(GRN"sqrt = "NCL"%.2f"YLW" x*x + y*y "NCL"\t%.2f\t",
+		sqrt(x2 + y2), x2 + y2);
+	printf(PUR"xy2 = "NCL"%.2f\t", xy2);
+	printf(CYN"x*x = "NCL"%.2f"CYN" y*y "NCL"%.2f\n", x2, y2);
 	return (sqrt((x * x) + (y * y)));
 }
 
-double rescale(double x1, double y1, double x2, double y2, t_data *data)
+//	use like this --> rescale(x2 - x1, y2 - y1, data);
+double	rescale(double dx, double dy, t_data *data)
 {
 	double	distance;
-	float	dx = x2 - x1;
-	float	dy = y2 - y1;
-	float	angle = atan2(dy, dx) - data->player->radian;
+	float	angle;
 
+	angle = atan2(dy, dx) - data->player->radian;
 	distance = ft_getdistance(dx, dy) * cos(angle);
 	return (distance);
+}
+
+//	use like this...
+//	draw_three_dimension(data, ray_x - player->x, ray_y - player->y, i)
+void	draw_three_dimension(t_data *data, double dx, double dy, int i)
+{
+	float	distance;
+	float	line_height;
+	float	draw_start;
+	float	draw_end;
+
+	distance = ft_getdistance(dx, dy);
+	if (distance <= 0)
+		distance = 0.0001;
+	line_height = (float)HEIGHT / (float)distance;
+	draw_start = (float)HEIGHT / (float)2 - (float)line_height;
+	if (draw_start <= 0)
+		draw_start = 0;
+	draw_end = (float)draw_start + (float)line_height;
+	while (draw_start < draw_end)
+		mlx_put_pixel(data->win, i, draw_start++, RAY_CLR);
 }
 
 void	draw_ray(t_player *player, t_data *data, float start_x, int i)
@@ -86,7 +109,6 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	float	cos_rad;
 	float	sin_rad;
 
-	(void)i;
 	cos_rad = cos(start_x);
 	sin_rad = sin(start_x);
 	if (data->draw_mode == 3)
@@ -98,50 +120,38 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	{
 		ray_x = (double)player->x * 64;
 		ray_y = (double)player->y * 64;
-		mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
+		mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);
 	}
 	else
 		return ;
-
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
 	{
 		ray_x += cos_rad;
 		ray_y += sin_rad;
 		if (data->draw_mode == 2)
-			mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);//for debug
+			mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);
 	}
-
 	if (data->draw_mode == 3)
-	{
-		float	distance = ft_getdistance(ray_x - player->x, ray_y - player->y);
-		//printf(GRN"distance = %f" NCL ""CYN "\tx = " NCL "%f" CYN "\ty = " NCL "%f\n", distance, ray_x - player->x, ray_y - player->y);
-		if (distance <= 0)
-			distance = 0.0001;
-		float	line_height = (float)HEIGHT / (float)distance;
-		float	draw_start = (float)HEIGHT / (float)2 - (float)line_height;
-		if (draw_start <= 0)
-			draw_start = 0;
-		float	draw_end = (float)draw_start + (float)line_height;
-		//printf(GRN "line_h = " NCL "%f" CYN "\tdraw_start = " NCL "%f" CYN "\tdraw_end = " NCL "%f\n", line_height, draw_start, draw_end);
-		while (draw_start < draw_end)
-		{
-			mlx_put_pixel(data->win, i, draw_start, RAY_CLR);
-			draw_start += (float)1;
-		}
-	}
+		draw_three_dimension(data, ray_x - player->x, ray_y - player->y, i);
 }
 
-void	relocate_player(t_data *data) //for debug
+//for debug
+void	relocate_player(t_data *data)
 {
+	float	fov;
+	float	start_x;
+	int		i;
+
 	clear_image(data);
 	if (data->draw_mode == 2)
 	{
 		draw_map(data->map, data);
-		draw_player(data->player->y *64 - 6, data->player->x * 64 - 6, data, PLAYER_CLR, 12);
+		draw_player(data->player->y * 64 - 6, data->player->x * 64 - 6,
+			data, PLAYER_CLR, 12);
 	}
-	float	fov = PI / 3 / WIDTH;
-	float	start_x = data->player->radian - PI / 6;
-	int	i = 0;
+	fov = PI / 3 / WIDTH;
+	start_x = data->player->radian - PI / 6;
+	i = 0;
 	while (i < WIDTH)
 	{
 		draw_ray(data->player, data, start_x, i);

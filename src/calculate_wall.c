@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 16:05:08 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:40:40 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	calculate_wall(t_data *data)
 {
 	(void)data;
 // 	find_wall_dist(data->player, data->ray);
-// 	ft_line_height_wall(data->ray, &data->ray->draw_start, &data->ray->draw_end);
+// 	ft_line_height_wall(data->ray,
+//	&data->ray->draw_start, &data->ray->draw_end);
 // 	get_wall_size(data->ray, data->player);
 // 	ft_set_texture(data->ray);
 }

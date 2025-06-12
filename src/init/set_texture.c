@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:07:07 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 19:57:44y tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:35:20 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

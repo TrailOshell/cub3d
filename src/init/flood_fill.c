@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 18:03:16 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:38:35 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	flood_outer_wall(t_data *data, t_map	*flood)
 	t_map	*map;
 
 	map = data->map;
-
 	x = 0;
 	y = 0;
 	while (y < map->n_row)

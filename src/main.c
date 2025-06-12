@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/08 19:10:48 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:07:53 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,13 @@ void	free_and_exit(void	*data)
 	exit (0);
 }
 
-void printmap(char **grid)
+void	printmap(char **grid)
 {
 	int	i;
 
 	i = 0;
 	while (grid[i])
-	{
-		printf("%s\n", grid[i]);
-		i++;
-	}
+		printf("%s\n", grid[i++]);
 }
 
 int	main(int argc, char **argv)

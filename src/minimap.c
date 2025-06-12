@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 18:42:41 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:37:10 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,16 @@ void	draw_square(int y, int x, t_data *data, int color, int size)//for debug
 	x = x * size;
 	y = y * size;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + i, y, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + i++, y, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x, y + i, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x, y + i++, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + i, y + size, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + i++, y + size, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + size, y + i, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + size, y + i++, color);
 }
 
 void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
@@ -50,28 +38,16 @@ void	draw_player(int y, int x, t_data *data, int color, int size)//for debug
 
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + i, y, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + i++, y, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x, y + i, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x, y + i++, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + i, y + size, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + i++, y + size, color);
 	i = 0;
 	while (i < size)
-	{
-		mlx_put_pixel(data->win, x + size, y + i, color);
-		i++;
-	}
+		mlx_put_pixel(data->win, x + size, y + i++, color);
 }
 
 void	draw_map(t_map *map, t_data *data)//for debug

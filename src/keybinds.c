@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/08 19:14:31 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:46:21 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	key_leftright(t_player *player, double spd)
 		player->radian = 2 * PI;
 }
 
-void	keybinds(void *tmp)
+void	check_key_movement(t_data *data)
 {
-	t_data	*data;
 	double	cos_rad;
 	double	sin_rad;
 
-	data = (t_data *)tmp;
 	cos_rad = cos(data->player->radian);
 	sin_rad = sin(data->player->radian);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
@@ -75,6 +73,14 @@ void	keybinds(void *tmp)
 		key_ad(data, cos_rad, (sin_rad * (-1.0)));
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		key_ad(data, (cos_rad * -1.0), sin_rad);
+}
+
+void	keybinds(void *tmp)
+{
+	t_data	*data;
+
+	data = (t_data *)tmp;
+	check_key_movement(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE)
 		|| mlx_is_key_down(data->mlx, MLX_KEY_Q))
 		free_and_exit(data);
@@ -82,5 +88,5 @@ void	keybinds(void *tmp)
 		data->draw_mode = 2;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_3))
 		data->draw_mode = 3;
-	relocate_player(data);//for debug
+	relocate_player(data);
 }

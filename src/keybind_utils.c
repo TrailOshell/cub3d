@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 15:48:41 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:27:47 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ double	ft_getdistance(double x, double y)
 	x2 = x * x;
 	y2 = y * y;
 	xy2 = x2 + y2;
-	printf(GRN"sqrt = "NCL"%.2f"YLW" x*x + y*y "NCL"\t%.2f\t",
-		sqrt(x2 + y2), x2 + y2);
+	printf(GRN"sqrt = "NCL"%.2f\t", sqrt(x2 + y2));
+	printf(YLW"x*x + y*y = "NCL"\t%.2f\t", x2 + y2);
 	printf(PUR"xy2 = "NCL"%.2f\t", xy2);
-	printf(CYN"x*x = "NCL"%.2f"CYN" y*y "NCL"%.2f\n", x2, y2);
+	printf(CYN"x*x = "NCL"%.2f\t", x2);
+	printf(CYN"y*y = "NCL"%.2f\n", y2);
 	return (sqrt((x * x) + (y * y)));
 }
 
@@ -93,13 +94,19 @@ void	draw_three_dimension(t_data *data, double dx, double dy, int i)
 	distance = ft_getdistance(dx, dy);
 	if (distance <= 0)
 		distance = 0.0001;
-	line_height = (float)HEIGHT / (float)distance;
-	draw_start = (float)HEIGHT / (float)2 - (float)line_height;
+	line_height = HEIGHT / distance;
+	draw_start = HEIGHT / 2 - line_height;
 	if (draw_start <= 0)
 		draw_start = 0;
-	draw_end = (float)draw_start + (float)line_height;
+	draw_end = draw_start + line_height;
 	while (draw_start < draw_end)
 		mlx_put_pixel(data->win, i, draw_start++, RAY_CLR);
+}
+
+void	set_ray_pos(double *ray_x, double *ray_y, double x, double y)
+{
+	*ray_x = x;
+	*ray_y = y;
 }
 
 void	draw_ray(t_player *player, t_data *data, float start_x, int i)
@@ -109,21 +116,16 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	float	cos_rad;
 	float	sin_rad;
 
-	cos_rad = cos(start_x);
-	sin_rad = sin(start_x);
 	if (data->draw_mode == 3)
-	{
-		ray_x = player->x;
-		ray_y = player->y;
-	}
+		set_ray_pos(&ray_x, &ray_y, player->x, player->y);
 	else if (data->draw_mode == 2)
-	{
-		ray_x = (double)player->x * 64;
-		ray_y = (double)player->y * 64;
-		mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);
-	}
+		set_ray_pos(&ray_x, &ray_y, player->x * 64, player->y * 64);
 	else
 		return ;
+	cos_rad = cos(start_x);
+	sin_rad = sin(start_x);
+	if (data->draw_mode == 2)
+		mlx_put_pixel(data->win, ray_x, ray_y, PLAYER_CLR);
 	while (is_ray_hit(ray_x, ray_y, data) != 1)
 	{
 		ray_x += cos_rad;

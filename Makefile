@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/08 18:56:20 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/25 10:59:42 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,15 +25,9 @@ SRC_PTH			=	src/
 SRC				=	error.c \
 					free.c \
 					main.c \
-					ray.c \
 					init_mlx.c\
 					init_player.c\
-					keybinds.c\
-					keybind_utils.c\
-					calculate_wall.c\
-					render3D.c\
-					render_utils.c\
-					minimap.c
+					keybinds.c
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -58,6 +52,16 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					set_texture.c \
 		)
 
+SRC_RAYCAST_PTH	=	raycast/
+SRC	+=	$(addprefix $(SRC_RAYCAST_PTH), \
+					calculate_wall.c \
+					keybind_utils.c \
+					minimap.c \
+					ray.c \
+					render_utils.c \
+					render3D.c \
+		)
+
 SRC_RENDER_PTH	=	render/
 SRC	+=	$(addprefix $(SRC_RENDER_PTH), \
 					render.c \
@@ -76,6 +80,7 @@ OBJ_SUB_PTHS	=	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 					$(SRC_DEBUG_PTH) \
 					$(SRC_EVENT_PTH) \
 					$(SRC_INIT_PTH) \
+					$(SRC_RAYCAST_PTH) \
 					$(SRC_RENDER_PTH) \
 					$(SRC_UTIL_PTH) \
 				)
@@ -88,7 +93,7 @@ GNL_PTH	=	gnl/
 GNL		=	$(GNL_PTH)get_next_line.a
 GNL_INC	=	-I$(GNL_PTH)
 
-MLX            =    $(MLX_PTH)/build/libmlx42.a
+MLX            =    $(MLX_PTH)build/libmlx42.a
 MLX_PTH        =    MLX42/
 MLX_FLAGS	=    -Iinclude -ldl -lglfw -pthread -lm
 MLX_INC        =    -I$(MLX_PTH)include/MLX42

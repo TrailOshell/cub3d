@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybind_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 17:27:47 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:21:56 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/12 16:09:39 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/26 10:48:41 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,27 +144,24 @@ typedef struct s_ray
 {
 	int				x;
 	int				y;
-	double			pov;
+	double			fov;
 	double			dir_x;
 	double			dir_y;
-	double			dx;
-	double			dy;
-	int				hit;
-
-	double			wall_dist;
-	int				draw_start;
-	int				draw_end;
-	int				line_height;
-	double			wall_size;
-	int				tx_pos_x;
-	char			tx_hit;
-
+	double			ddist_x;
+	double			ddist_y;
+	bool			hit;
+	
 	int				step_x;
 	int				step_y;
-
 	double			side_dx;
 	double			side_dy;
 	int				side;
+
+	float			prep_wall_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			wallX;
 
 }	t_ray;
 

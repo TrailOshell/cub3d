@@ -3,88 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 16:09:39 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/26 10:52:56 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// void	set_ray_dir(t_ray *ray, t_player *player)
-// {
-// 	if (ray->dir_x < 0)
-// 	{
-// 		ray->step_x = -1;
-// 		ray->side_dx = (player->x - ray->x) * ray->dx;
-// 	}
-// 	else
-// 	{
-// 		ray->step_x = 1;
-// 		ray->side_dx = (1 + ray->x - player->x) * ray->dx;
-// 	}
-// 	if (ray->dir_y < 0)
-// 	{
-// 		ray->step_y = -1;
-// 		ray->side_dy = (player->y - ray->y) * ray->dy;
-// 	}
-// 	else
-// 	{
-// 		ray->step_y = 1;
-// 		ray->side_dy = (1 + ray->y - player->y) * ray->dy;
-// 	}
-// }
-
-// void	init_ray(t_player *player, t_ray *ray, int i)
-// {
-// 	ray->x = (int)player->x;
-// 	ray->y = (int)player->y;
-// 	ray->pov = 2 * i / (double)WIDTH - 1;
-// 	ray->dir_x = player->dir_x + (player->plane_x * ray->pov);
-// 	ray->dir_y = player->dir_y + (player->plane_y * ray->pov);
-// 	ray->dx = fabs(1 / ray->dir_x);
-// 	ray->dy = fabs(1 / ray->dir_y);
-// 	ray->hit = 0;
-// 	set_ray_dir(ray, player);
-// }
-
-// void	ft_dda(t_map *map, t_ray *ray)
-// {
-// 	while (ray->hit == 0)
-// 	{
-// 		if (ray->side_dx < ray->side_dy)
-// 		{
-// 			ray->side_dx += ray->dx;
-// 			ray->x += ray->step_x;
-// 			ray->side = 0;
-// 		}
-// 		else
-// 		{
-// 			ray->side_dy += ray->dy;
-// 			ray->y += ray->step_y;
-// 			ray->side = 1;
-// 		}
-// 		if (ray->y <= 0 || ray->y >= map->n_col || ray->x <= 0
-// 			|| ray->x >= map->n_row)
-// 			return ;
-// 		if (map->grid[ray->y][ray->x] == '1')
-// 			ray->hit = 1;
-// 	}
-// }
-
-void	ft_ray(t_data *data)
+void	ft_init_sideDist(t_ray *ray, t_player *player)
 {
-	int	i;
-
-	i = 0;
-	while (i < WIDTH)
+	if (ray->dir_x < 0)
 	{
-		// init_ray(data->player, data->ray, i);
-		// ft_dda(data->map, data->ray);
-		calculate_wall(data);
-		// render_three_dimension(data, i);
-		i++;
+		ray->step_x = -1;
+		ray->side_dx = (player->x - ray->x) * ray->ddist_x;
 	}
-	return ;
+	else
+	{
+		ray->step_x = 1;
+		ray->side_dx = (ray->x + 1.0 - player->x) * ray->ddist_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->side_dy = (player->y - ray->y) * ray->ddist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->side_dy = (ray->y + 1.0 - player->y) * ray->ddist_y;
+	}
+}
+
+void	ft_set_ray(t_ray *ray, t_player *player, int x)
+{
+	ray->x = (int)player->x;
+	ray->y = (int)player->y;
+	ray->fov = 2 * x / (float)WIDTH - 1;
+	ray->dir_x = player->dir_x + (player->plane_x * ray->fov);
+	ray->dir_y = player->dir_y + (player->plane_y * ray->fov);
+	ray->ddist_x = abs(1 / ray->dir_x);
+	ray->ddist_y = abs(1 / ray->dir_y);
+	ray->hit = false;
+	ft_init_sideDist(ray, player);
+}
+
+void	ft_dda(t_data *data)
+{
+	t_ray	*ray;
+
+	ray = data->ray;
+	while (ray->hit == false)
+	{
+		if (ray->side_dx < ray->side_dy)
+		{
+			ray->side_dx += ray->ddist_x;
+			ray->x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dy += ray->ddist_y;
+			ray->y += ray->step_y;
+			ray->side = 1;
+		}
+		if (is_ray_hit(ray->x, ray->y, data) == 1)
+			ray->hit = true;
+	}
+}
+
+void	ft_prepWallDist(t_ray *ray)
+{
+	if (ray->side == 0)
+		ray->prep_wall_dist = ray->side_dx - ray->ddist_x;
+	else
+		ray->prep_wall_dist = ray->side_dy - ray->ddist_y;
+}
+
+void	ft_prepDraw(t_ray *ray)
+{
+	ray->line_height = (int)(HEIGHT / prep_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = line_height / 2 + HEIGHT / 2;
+	if (ray->draw_end >= HEIGHT)
+		ray->draw_end = HEIGHT - 1;
+}
+
+void	ft_cal_value_wallx(t_ray *ray, t_player *player)
+{
+	if (ray->side == 0)
+		ray->wallX = player->y + ray->prep_wall_dist * ray->dir_y;
+}
+
+void	ft_ray_render(t_data *data)
+{
+	int x;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		ft_set_ray(data->ray, data->player, x);
+		ft_dda(data->ray, data->map);
+		ft_prepWallDist(data->ray);
+		ft_prepDraw(data->ray);
+		ft_cal_value_wallx(data->ray, data->player);
+		x++;
+	}
 }

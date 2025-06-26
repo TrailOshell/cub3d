@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keybind_utils.c                                    :+:      :+:    :+:   */
+/*   relocate_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/25 12:21:56 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/26 10:52:57 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 //for debug
 void	relocate_player(t_data *data)
 {
-	float	fov;
-	float	start_x;
-	int		i;
+	// float	fov;
+	// float	start_x;
+	// int		i;
 
 	clear_image(data);
 	if (data->draw_mode == 2)
@@ -151,13 +151,13 @@ void	relocate_player(t_data *data)
 		draw_player(data->player->y * 64 - 6, data->player->x * 64 - 6,
 			data, PLAYER_CLR, 12);
 	}
-	fov = PI / 3 / WIDTH;
-	start_x = data->player->radian - PI / 6;
-	i = 0;
-	while (i < WIDTH)
-	{
-		draw_ray(data->player, data, start_x, i);
-		start_x += fov;
-		i++;
-	}
+	// fov = PI / 3 / WIDTH;
+	// start_x = data->player->radian - PI / 6;
+	// i = 0;
+	// while (i < WIDTH)
+	// {
+	// 	draw_ray(data->player, data, start_x, i);
+	// 	start_x += fov;
+	// 	i++;
+	// }
 }

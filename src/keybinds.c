@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 09:27:20 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:01:02 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,34 @@ void	key_leftright(t_player *player, double spd)
 		player->radian = 2 * PI;
 }
 
-void	set_direction_left(t_player *player)
+void	set_direction_right(t_player *player, t_data *data)
 {
-	double	tmpX;
-	double	tmpY;
+	double	tmp_x;
 
-	tmpX = player->dir_x;
-	tmpY = player->dir_y;
-	player->dir_x = tmpX * cos(-RSPEED) - tmpY * sin(-RSPEED);
-	player->dir_x = tmpX * sin(-RSPEED) + tmpY * cos(-RSPEED);
-	tmpX = player->plane_x;
-	tmpY = player->plane_y;
-	player->plane_x = tmpX * cos(-RSPEED) - tmpY * sin(-RSPEED);
-	player->plane_y = tmpX * sin(-RSPEED) + tmpY * cos(-RSPEED);
+	printf("player->dir_x = %f\nplayer->dir_y = %f\n player->planex = %lf\n player->planey = %lf\n", player->dir_x, player->dir_y, player->plane_x, player->plane_y);
+	tmp_x = player->dir_x;
+	player->dir_x = player->dir_x * cos(-RSPEED) - player->dir_y * sin(-RSPEED);
+	player->dir_y = tmp_x * sin(-RSPEED) +  player->dir_y * cos(-RSPEED);
+	tmp_x = player->plane_x;
+	player->plane_x = player->plane_x * cos(-RSPEED) - player->plane_y * sin(-RSPEED);
+	player->plane_y = tmp_x * sin(-RSPEED) + player->plane_y * cos(-RSPEED);
+	ft_ray_render(data);
 }
 
-void	set_direction_right(t_player *player)
+void	set_direction_left(t_player *player, t_data *data)
 {
-	double	tmpX;
-	double	tmpY;
+	double	tmp_x;
 
-	tmpX = player->dir_x;
-	tmpY = player->dir_y;
-	player->dir_x = tmpX * cos(RSPEED) - tmpY * sin(RSPEED);
-	player->dir_y = tmpX * sin(RSPEED) + tmpY * cos(RSPEED);
-	tmpX = player->plane_x;
-	tmpY = player->plane_y;
-	player->plane_x = tmpX * cos(RSPEED) - tmpY * sin(RSPEED);
-	player->plane_y = tmpX * sin(RSPEED) + tmpY * cos(RSPEED);
+	printf("[1]player->dir_x = %f\nplayer->dir_y = %f\n player->planex = %lf\n player->planey = %lf\n", player->dir_x, player->dir_y, player->plane_x, player->plane_y);
+	tmp_x = player->dir_x;
+	player->dir_x = player->dir_x * cos(RSPEED) - player->dir_y * sin(RSPEED);
+	player->dir_y = tmp_x * sin(RSPEED) +  player->dir_y * cos(RSPEED);
+	tmp_x = player->plane_x;
+	player->plane_x = player->plane_x * cos(RSPEED) - player->plane_y * sin(RSPEED);
+	player->plane_y = tmp_x * sin(RSPEED) + player->plane_y * cos(RSPEED);
+	printf("[2]player->dir_x = %f\nplayer->dir_y = %f\n player->planex = %lf\n player->planey = %lf\n", player->dir_x, player->dir_y, player->plane_x, player->plane_y);
+
+	ft_ray_render(data);
 }
 
 void	check_key_movement(t_data *data)
@@ -89,17 +89,18 @@ void	check_key_movement(t_data *data)
 	double	cos_rad;
 	double	sin_rad;
 
+	// t_player *player = data->player;
 	cos_rad = cos(data->player->radian);
 	sin_rad = sin(data->player->radian);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
 		key_leftright(data->player, RSPEED * (-1.0));
-		set_direction_left(data->player);
+		set_direction_left(data->player, data);
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
 		key_leftright(data->player, RSPEED);
-		set_direction_right(data->player);
+		set_direction_right(data->player, data);
 	}	
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		key_ws(data, cos_rad, sin_rad);
@@ -109,6 +110,7 @@ void	check_key_movement(t_data *data)
 		key_ad(data, cos_rad, (sin_rad * (-1.0)));
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		key_ad(data, (cos_rad * -1.0), sin_rad);
+	ft_ray_render(data);
 }
 
 void	keybinds(void *tmp)

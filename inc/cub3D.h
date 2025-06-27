@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 08:53:48 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:59:40 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ typedef struct s_player
 	char			direction;
 
 	double			radian;
-	int				dir_x;
-	int				dir_y;
+	double			dir_x;
+	double			dir_y;
 	double			plane_x;
 	double			plane_y;
 }	t_player;
@@ -164,6 +164,9 @@ typedef struct s_ray
 	double			wallX;
 	int				tx_X;
 	char			tx_hit;
+	
+	int				tx_pos_x;
+	int				tx_pos_y;
 
 }	t_ray;
 
@@ -249,7 +252,7 @@ void	free_stuff(t_data *data);
 void	free_and_exit(void	*data);
 
 // ray.c
-void	ft_ray(t_data *data);
+void	ft_ray_render(t_data *data);
 
 void	init_mlx(t_data *data);
 void	init_player(t_player *player);

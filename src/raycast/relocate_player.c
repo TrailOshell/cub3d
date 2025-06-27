@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   relocate_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/26 10:52:57 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:03:05 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	clear_image(t_data *data)//for debug
 	}
 }
 
-int	is_ray_hit(float ray_x, float ray_y, t_data *data)
+static int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 {
 	int	x;
 	int	y;
@@ -133,31 +133,33 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 		if (data->draw_mode == 2)
 			mlx_put_pixel(data->win, ray_x, ray_y, RAY_CLR);
 	}
+	(void)i;
 	if (data->draw_mode == 3)
-		draw_three_dimension(data, ray_x - player->x, ray_y - player->y, i);
+	ft_ray_render(data);
+	// 	draw_three_dimension(data, ray_x - player->x, ray_y - player->y, i);
 }
 
 //for debug
 void	relocate_player(t_data *data)
 {
-	// float	fov;
-	// float	start_x;
-	// int		i;
+	float	fov;
+	float	start_x;
+	int		i;
 
 	clear_image(data);
 	if (data->draw_mode == 2)
 	{
 		draw_map(data->map, data);
 		draw_player(data->player->y * 64 - 6, data->player->x * 64 - 6,
-			data, PLAYER_CLR, 12);
+		data, PLAYER_CLR, 12);
+		fov = PI / 3 / WIDTH;
+		start_x = data->player->radian - PI / 6;
+		i = 0;
+		while (i < WIDTH)
+		{
+			draw_ray(data->player, data, start_x, i);
+			start_x += fov;
+			i++;
+		}
 	}
-	// fov = PI / 3 / WIDTH;
-	// start_x = data->player->radian - PI / 6;
-	// i = 0;
-	// while (i < WIDTH)
-	// {
-	// 	draw_ray(data->player, data, start_x, i);
-	// 	start_x += fov;
-	// 	i++;
-	// }
 }

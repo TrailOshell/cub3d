@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 08:58:22 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:03:54 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ void	ft_init_sideDist(t_ray *ray, t_player *player)
 	}
 }
 
+static int	is_ray_hit(float ray_x, float ray_y, t_data *data)
+{
+	int	x;
+	int	y;
+
+	if (data->draw_mode == 2)
+	{
+		x = (int)(ray_x / 64);
+		y = (int)(ray_y / 64);
+	}
+	else if (data->draw_mode == 3)
+	{
+		x = (int)ray_x;
+		y = (int)ray_y;
+	}
+	else
+		return (0);
+	if (x < 0 || x >= data->map->n_col || y < 0 || y >= data->map->n_row)
+		return (1);
+	if (data->map->grid[y][x] == '1' || data->map->grid[y][x] == '2')
+		return (1);
+	return (0);
+}
+
 void	ft_set_ray(t_ray *ray, t_player *player, int x)
 {
 	ray->x = (int)player->x;
@@ -43,8 +67,8 @@ void	ft_set_ray(t_ray *ray, t_player *player, int x)
 	ray->fov = 2 * x / (float)WIDTH - 1;
 	ray->dir_x = player->dir_x + (player->plane_x * ray->fov);
 	ray->dir_y = player->dir_y + (player->plane_y * ray->fov);
-	ray->ddist_x = abs(1 / ray->dir_x);
-	ray->ddist_y = abs(1 / ray->dir_y);
+	ray->ddist_x = fabs(1 / ray->dir_x);
+	ray->ddist_y = fabs(1 / ray->dir_y);
 	ray->hit = false;
 	ft_init_sideDist(ray, player);
 }
@@ -83,11 +107,11 @@ void	ft_prepWallDist(t_ray *ray)
 
 void	ft_prepDraw(t_ray *ray)
 {
-	ray->line_height = (int)(HEIGHT / prep_wall_dist);
+	ray->line_height = (int)(HEIGHT / ray->prep_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = line_height / 2 + HEIGHT / 2;
+	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
 }
@@ -132,7 +156,7 @@ void	ft_ray_render(t_data *data)
 	while (x < WIDTH)
 	{
 		ft_set_ray(data->ray, data->player, x);
-		ft_dda(data->ray, data->map);
+		ft_dda(data);
 		ft_prepWallDist(data->ray);
 		ft_prepDraw(data->ray);
 		ft_cal_value_wallx(data->ray, data->player);

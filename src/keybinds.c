@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 15:46:21 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/27 09:27:20 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,36 @@ void	key_leftright(t_player *player, double spd)
 		player->radian = 2 * PI;
 }
 
+void	set_direction_left(t_player *player)
+{
+	double	tmpX;
+	double	tmpY;
+
+	tmpX = player->dir_x;
+	tmpY = player->dir_y;
+	player->dir_x = tmpX * cos(-RSPEED) - tmpY * sin(-RSPEED);
+	player->dir_x = tmpX * sin(-RSPEED) + tmpY * cos(-RSPEED);
+	tmpX = player->plane_x;
+	tmpY = player->plane_y;
+	player->plane_x = tmpX * cos(-RSPEED) - tmpY * sin(-RSPEED);
+	player->plane_y = tmpX * sin(-RSPEED) + tmpY * cos(-RSPEED);
+}
+
+void	set_direction_right(t_player *player)
+{
+	double	tmpX;
+	double	tmpY;
+
+	tmpX = player->dir_x;
+	tmpY = player->dir_y;
+	player->dir_x = tmpX * cos(RSPEED) - tmpY * sin(RSPEED);
+	player->dir_y = tmpX * sin(RSPEED) + tmpY * cos(RSPEED);
+	tmpX = player->plane_x;
+	tmpY = player->plane_y;
+	player->plane_x = tmpX * cos(RSPEED) - tmpY * sin(RSPEED);
+	player->plane_y = tmpX * sin(RSPEED) + tmpY * cos(RSPEED);
+}
+
 void	check_key_movement(t_data *data)
 {
 	double	cos_rad;
@@ -62,9 +92,15 @@ void	check_key_movement(t_data *data)
 	cos_rad = cos(data->player->radian);
 	sin_rad = sin(data->player->radian);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+	{
 		key_leftright(data->player, RSPEED * (-1.0));
+		set_direction_left(data->player);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+	{
 		key_leftright(data->player, RSPEED);
+		set_direction_right(data->player);
+	}	
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		key_ws(data, cos_rad, sin_rad);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))

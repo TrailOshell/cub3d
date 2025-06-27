@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   render3D.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 16:09:41 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/27 09:01:09 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_ceiling(t_data *data, int i, int draw_start)
+void	draw_ceiling(t_data *data, int i)
 {
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
 	int			x;
 
-	(void)draw_start;
 	floor_color = data->c->rgba;
 	ceiling_color = data->f->rgba;
 	x = 0;
@@ -32,12 +31,11 @@ void	draw_ceiling(t_data *data, int i, int draw_start)
 	}
 }
 
-void	draw_floor(t_data *data, int i, int draw_end)
+void	draw_floor(t_data *data, int i)
 {
 	uint32_t	color;
 	int			x;
 
-	(void)draw_end;
 	color = data->f->rgba;
 	x = HEIGHT / 2;
 	while (x < HEIGHT)
@@ -50,7 +48,7 @@ void	draw_floor(t_data *data, int i, int draw_end)
 
 void	render_three_dimension(t_data *data, int i)
 {
-	draw_ceiling(data, i, data->ray->draw_start);
-	draw_floor(data, i, data->ray->draw_end);
-	// wall_render(data, i);
+	draw_ceiling(data, i);
+	draw_floor(data, i);
+	wall_render(data, i);
 }

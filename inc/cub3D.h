@@ -6,7 +6,7 @@
 /*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/26 10:48:41 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 08:53:48 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define CYN "\033[0;96m"
 
 # ifndef SIZE
-#  define SIZE				32
+#  define SIZE				64
 # endif
 
 # ifndef DRAW_MODE
@@ -162,6 +162,8 @@ typedef struct s_ray
 	int				draw_start;
 	int				draw_end;
 	double			wallX;
+	int				tx_X;
+	char			tx_hit;
 
 }	t_ray;
 

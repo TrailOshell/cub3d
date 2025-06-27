@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:17:26 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 16:05:00 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/27 09:28:48 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ft_tx_scaling(t_tx_scale *tx_new_scale, mlx_texture_t *tx, t_ray *ray)
 {
 	tx_new_scale->tx = tx;
-	tx_new_scale->height = 64;
-	tx_new_scale->width = 64;
+	tx_new_scale->height = SIZE;
+	tx_new_scale->width = SIZE;
 	if (ray->line_height > 0)
 		tx_new_scale->range = 1.0 * tx_new_scale->height / ray->line_height;
 	else

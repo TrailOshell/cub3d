@@ -6,7 +6,7 @@
 /*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/26 10:52:56 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 08:58:22 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,32 @@ void	ft_cal_value_wallx(t_ray *ray, t_player *player)
 {
 	if (ray->side == 0)
 		ray->wallX = player->y + ray->prep_wall_dist * ray->dir_y;
+	else
+		ray->wallX = player->x + ray->prep_wall_dist * ray->dir_x;
+	ray->wallX -= floor(ray->wallX);
+	ray->tx_X = (int)(ray->wallX * (double)SIZE);
+	if (ray->side == 0 && ray->dir_x > 0)
+		ray->tx_X = SIZE - ray->tx_X - 1;
+	if (ray->side == 1 && ray->dir_y < 0)
+		ray->tx_X = SIZE - ray->tx_X - 1;
+}
+
+void	ft_set_texture(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->dir_x > 0)
+			ray->tx_hit = 'W';
+		else
+			ray->tx_hit = 'E';
+	}
+	else
+	{
+		if (ray->dir_y >= 0)
+			ray->tx_hit = 'N';
+		else
+			ray->tx_hit = 'S';
+	}
 }
 
 void	ft_ray_render(t_data *data)
@@ -110,6 +136,8 @@ void	ft_ray_render(t_data *data)
 		ft_prepWallDist(data->ray);
 		ft_prepDraw(data->ray);
 		ft_cal_value_wallx(data->ray, data->player);
+		ft_set_texture(data->ray);
+		render_three_dimension(data, x);
 		x++;
 	}
 }

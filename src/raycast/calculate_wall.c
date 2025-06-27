@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_wall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <paradari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:04 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 15:40:40 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/27 08:52:34 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,6 @@
 // 	if (ray->side == 1 && ray->dir_y < 0)
 // 		ray->tx_pos_x = 64 - ray->tx_pos_x - 1;
 // }
-
-void	ft_set_texture(t_ray *ray)
-{
-	if (ray->side == 0)
-	{
-		if (ray->dir_x > 0)
-			ray->tx_hit = 'W';
-		else
-			ray->tx_hit = 'E';
-	}
-	else
-	{
-		if (ray->dir_y > 0)
-			ray->tx_hit = 'N';
-		else
-			ray->tx_hit = 'S';
-	}
-}
 
 void	calculate_wall(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 17:28:58 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:59:33 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,4 +279,7 @@ void	clear_player(t_data *data, int x, int y);
 void	draw_square(int y, int x, t_data *data, int color, int size);
 void	relocate_player(t_data *data);
 
+void	clear_image(t_data *data);
+void	draw_floor(t_data *data);
+void	draw_ceiling(t_data *data);
 #endif

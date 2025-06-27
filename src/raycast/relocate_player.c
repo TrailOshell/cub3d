@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 17:25:43 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:25:11 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,26 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	}
 	(void)i;
 	if (data->draw_mode == 3)
-	ft_ray_render(data);
+		ft_ray_render(data);
 	// 	draw_three_dimension(data, ray_x - player->x, ray_y - player->y, i);
+}
+
+void	clear_minimap(t_data *data)//for debug
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < MAP_SIZE * data->map->n_row)
+	{
+		x = 0;
+		while (x < MAP_SIZE * data->map->n_col)
+		{
+			mlx_put_pixel(data->win, x, y, 0xFF000000);
+			x++;
+		}
+		y++;
+	}
 }
 
 //for debug
@@ -146,9 +164,9 @@ void	relocate_player(t_data *data)
 	float	start_x;
 	int		i;
 
-	clear_image(data);
 	if (data->draw_mode == 2)
 	{
+		clear_minimap(data);
 		draw_map(data->map, data);
 		draw_player(data->player->y * MAP_SIZE - 6, data->player->x * MAP_SIZE - 6,
 		data, PLAYER_CLR, 12);

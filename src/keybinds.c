@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:47 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 17:01:02 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:00:31 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	key_leftright(t_player *player, double spd)
 		player->radian = 2 * PI;
 }
 
-void	set_direction_right(t_player *player, t_data *data)
+void	set_direction_left(t_player *player, t_data *data)
 {
 	double	tmp_x;
 
@@ -68,7 +68,7 @@ void	set_direction_right(t_player *player, t_data *data)
 	ft_ray_render(data);
 }
 
-void	set_direction_left(t_player *player, t_data *data)
+void	set_direction_right(t_player *player, t_data *data)
 {
 	double	tmp_x;
 

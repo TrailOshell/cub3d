@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 16:03:54 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:59:09 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,9 @@ void	ft_ray_render(t_data *data)
 	int x;
 
 	x = 0;
+	clear_image(data);
+	draw_ceiling(data);
+	draw_floor(data);
 	while (x < WIDTH)
 	{
 		ft_set_ray(data->ray, data->player, x);

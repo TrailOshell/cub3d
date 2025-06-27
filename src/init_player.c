@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:44:51 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 16:24:17 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:15:10 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	init_player(t_player *player)
 {
 	player->dir_x = 0;
 	player->dir_y = 0;
-	if (player->direction == 'N')
+	if (player->direction == 'S')
 	{
 		player->radian = PI / 2;
-		player->dir_y = -1;
+		player->dir_y = 1;
 	}
-	else if (player->direction == 'S')
+	else if (player->direction == 'N')
 	{
 		player->radian = 3 * PI / 2;
-		player->dir_y = 1;
+		player->dir_y = -1;
 	}
 	else if (player->direction == 'E')
 	{

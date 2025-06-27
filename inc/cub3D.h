@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 17:24:12 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:28:58 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 
 # ifndef DRAW_MODE
 #  define DRAW_MODE			3
+# endif
+
+# ifndef MINIMAP_MODE
+#  define MINIMAP_MODE		1
 # endif
 
 //	Debug Color
@@ -151,7 +155,7 @@ typedef struct s_ray
 	double			ddist_x;
 	double			ddist_y;
 	bool			hit;
-	
+
 	int				step_x;
 	int				step_y;
 	double			side_dx;
@@ -165,7 +169,7 @@ typedef struct s_ray
 	double			wallX;
 	int				tx_X;
 	char			tx_hit;
-	
+
 	int				tx_pos_x;
 	int				tx_pos_y;
 
@@ -177,6 +181,7 @@ typedef struct s_data
 	mlx_image_t		*win;
 	t_map			*map;
 	int				draw_mode;
+	int				minimap_mode;
 	t_node			*node;
 	t_player		*player;
 	t_tx			*tx;

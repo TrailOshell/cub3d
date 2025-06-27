@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 16:59:40 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:24:12 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@
 # define KEY_Q				113
 # define KEY_ESC			65307
 
-# define WIDTH	1920
-# define HEIGHT 1080
-# define PI 3.14159265
-# define STEP 0.05
-# define RSPEED 0.05
+# define WIDTH				1920
+# define HEIGHT 			1080
+# define MAP_SIZE			16
+# define PI 				3.14159265
+# define STEP 				0.05
+# define RSPEED 			0.05
 
 typedef struct s_node
 {

@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/27 17:03:05 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:25:43 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 
 	if (data->draw_mode == 2)
 	{
-		x = (int)(ray_x / 64);
-		y = (int)(ray_y / 64);
+		x = (int)(ray_x / 16);
+		y = (int)(ray_y / 16);
 	}
 	else if (data->draw_mode == 3)
 	{
@@ -119,7 +119,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x, int i)
 	if (data->draw_mode == 3)
 		set_ray_pos(&ray_x, &ray_y, player->x, player->y);
 	else if (data->draw_mode == 2)
-		set_ray_pos(&ray_x, &ray_y, player->x * 64, player->y * 64);
+		set_ray_pos(&ray_x, &ray_y, player->x * MAP_SIZE, player->y * MAP_SIZE);
 	else
 		return ;
 	cos_rad = cos(start_x);
@@ -150,7 +150,7 @@ void	relocate_player(t_data *data)
 	if (data->draw_mode == 2)
 	{
 		draw_map(data->map, data);
-		draw_player(data->player->y * 64 - 6, data->player->x * 64 - 6,
+		draw_player(data->player->y * MAP_SIZE - 6, data->player->x * MAP_SIZE - 6,
 		data, PLAYER_CLR, 12);
 		fov = PI / 3 / WIDTH;
 		start_x = data->player->radian - PI / 6;

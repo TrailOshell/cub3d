@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:16:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/12 15:37:10 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:25:18 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	draw_map(t_map *map, t_data *data)//for debug
 		while (map->grid[y][x])
 		{
 			if (map->grid[y][x] == '1')
-				draw_square(y, x, data, MAP_WALL_CLR, 64);
+				draw_square(y, x, data, MAP_WALL_CLR, MAP_SIZE);
 			x++;
 		}
 		y++;
@@ -76,5 +76,5 @@ void	minimap(t_data *data)//for debug
 
 	map = data->map;
 	draw_map(map, data);
-	draw_square(data->player->y, data->player->x, data, WALL_CLR, 64);
+	draw_square(data->player->y, data->player->x, data, WALL_CLR, MAP_SIZE);
 }

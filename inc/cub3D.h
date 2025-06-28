@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/28 01:15:58 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:05:48 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,6 @@
 # define KEYPRESS			2
 # define DESTROYNOTIFY		17
 # define EXPOSE				12
-
-//# define KEYPRESSMASK	(1L<<0)
-
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100 
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364 
-# define KEY_SPACE 			32
-# define KEY_H				104
-# define KEY_Q				113
-# define KEY_ESC			65307
 
 # define WIDTH				1920
 # define HEIGHT 			1080

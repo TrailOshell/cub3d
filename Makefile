@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/28 01:21:32 by paradari         ###   ########.fr        #
+#    Updated: 2025/06/28 10:50:27 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -214,7 +214,7 @@ define	val_cub
 	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true
 endef
 
-val : &(NAME) $(TEXTURES)
+val : $(NAME) $(TEXTURES)
 	-$(call val_cub, cub/test.cub)
 
 .PHONY	+=	t test s subject v valid i invalid im invalid_map if invalid_file

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render3D.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 10:23:13 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:01:43 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,18 @@ static void	ft_tx_scaling(t_tx_scale *tx_new, mlx_texture_t *tx, t_ray *ray)
 
 static uint32_t	set_tx_color(mlx_texture_t *tx, int pos_x, int pos_y)
 {
-	uint8_t		*tx_color;
 	int			i;
+	int			r;
+	int			g;
+	int			b;
+	int			a;
 
-	i = ((pos_y * SIZE) - pos_x + SIZE + 1) * 4;
-	tx_color = &tx->pixels[i];
-	return ((tx_color[0] << 24) | (tx_color[1] << 16)
-		| (tx_color[2] << 8) | tx_color[3]);
+	i = ((pos_y * SIZE) + pos_x) * 4;
+	r = tx->pixels[i];
+	g = tx->pixels[i + 1];
+	b = tx->pixels[i + 2];
+	a = tx->pixels[i + 3];
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 static void	ft_put_wall_to_win(t_tx_scale *tx_new_scale, t_data *data, int x)

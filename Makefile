@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/25 15:43:45 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/28 01:21:32 by paradari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,6 @@ SRC_PTH			=	src/
 SRC				=	error.c \
 					free.c \
 					main.c \
-					init_mlx.c\
-					init_player.c\
-					keybinds.c
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -36,10 +33,6 @@ SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
 					debug.c \
 		)
 
-SRC_EVENT_PTH	=	event/
-SRC	+=	$(addprefix $(SRC_EVENT_PTH), \
-					mlx_events.c \
-		)
 
 SRC_INIT_PTH	=	init/
 SRC	+=	$(addprefix $(SRC_INIT_PTH), \
@@ -50,22 +43,24 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					line.c \
 					set_map.c \
 					set_texture.c \
+					init_mlx.c\
+					init_player.c\
 		)
 
 SRC_RAYCAST_PTH	=	raycast/
 SRC	+=	$(addprefix $(SRC_RAYCAST_PTH), \
-					calculate_wall.c \
 					relocate_player.c \
 					minimap.c \
 					ray.c \
+					ray_utils.c\
 					render_utils.c \
 					render3D.c \
 		)
 
-SRC_RENDER_PTH	=	render/
-SRC	+=	$(addprefix $(SRC_RENDER_PTH), \
-					render.c \
-					sprites.c \
+SRC_CONTROL_PTH	=	control/
+SRC	+=	$(addprefix $(SRC_CONTROL_PTH), \
+					keybinds.c\
+					movement.c\
 		)
 
 SRC_UTIL_PTH	=	util/
@@ -78,10 +73,9 @@ OBJ_PTH			=	obj/
 OBJ				=	$(SRC:%.c=$(OBJ_PTH)%.o)
 OBJ_SUB_PTHS	=	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 					$(SRC_DEBUG_PTH) \
-					$(SRC_EVENT_PTH) \
 					$(SRC_INIT_PTH) \
 					$(SRC_RAYCAST_PTH) \
-					$(SRC_RENDER_PTH) \
+					$(SRC_CONTROL_PTH) \
 					$(SRC_UTIL_PTH) \
 				)
 

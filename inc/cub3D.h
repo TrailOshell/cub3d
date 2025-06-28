@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 21:59:33 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:15:58 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ typedef struct s_ray
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
-	double			wallX;
-	int				tx_X;
+	double			wallx;
+	int				tx_x;
 	char			tx_hit;
 
 	int				tx_pos_x;
@@ -282,4 +282,18 @@ void	relocate_player(t_data *data);
 void	clear_image(t_data *data);
 void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
+
+// void	walking(t_data *data, double new_x, double new_y);
+void	key_ws(t_data *data, double cos_r, double sin_r);
+void	key_ad(t_data *data, double cos_r, double sin_r);
+void	key_leftright(t_player *player, double spd);
+
+int		is_ray_hit(float ray_x, float ray_y, t_data *data);
+
+//ray_utils
+void	ft_set_texture(t_ray *ray);
+void	ft_cal_value_wallx(t_ray *ray, t_player *player);
+void	ft_prep_draw(t_ray *ray);
+void	ft_prep_wall_dist(t_ray *ray);
+void	ft_init_side_dist(t_ray *ray, t_player *player);
 #endif

@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/27 22:11:05 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 10:29:09 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,42 +52,6 @@ void	printmap(char **grid)
 		printf("%s\n", grid[i++]);
 }
 
-void	draw_ceiling(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT / 2)
-		{
-			mlx_put_pixel(data->win, x, y, data->c->rgba);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	draw_floor(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = HEIGHT / 2;
-		while (y < HEIGHT)
-		{
-			mlx_put_pixel(data->win, x, y, data->f->rgba);
-			y++;
-		}
-		x++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -113,6 +77,24 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+//Valgrind cub3D
+
+// HEAP SUMMARY:
+// ==2645196==     in use at exit: 317,955 bytes in 3,107 blocks
+// ==2645196==   total heap usage: 87,973 allocs, 84,866 frees, 35,288,496 bytes allocated
+// ==2645196== 
+// ==2645196== LEAK SUMMARY:
+// ==2645196==    definitely lost: 0 bytes in 1 blocks
+// ==2645196==    indirectly lost: 0 bytes in 0 blocks
+// ==2645196==      possibly lost: 0 bytes in 0 blocks
+// ==2645196==    still reachable: 317,899 bytes in 3,104 blocks
+// ==2645196==         suppressed: 56 bytes in 2 blocks
+// ==2645196== Rerun with --leak-check=full to see details of leaked memory
+// ==2645196== 
+// ==2645196== Use --track-origins=yes to see where uninitialised values come from
+// ==2645196== For lists of detected and suppressed errors, rerun with: -s
+// ==2645196== ERROR SUMMARY: 409354 errors from 14 contexts (suppressed: 0 from 0)
+
 // int	main()
 // {
 // 	mlx_t *mlx;
@@ -121,6 +103,8 @@ int	main(int argc, char **argv)
 // 	mlx_terminate(mlx);
 // 	return (0);
 // }
+
+//Valgrind MLX
 // ==2532420== HEAP SUMMARY:
 // ==2532420==     in use at exit: 317,955 bytes in 3,107 blocks
 // ==2532420==   total heap usage: 73,445 allocs, 70,338 frees, 20,358,366 bytes allocated

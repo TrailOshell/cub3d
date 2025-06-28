@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/28 10:50:27 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/28 10:59:19 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,19 @@ SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
 
 SRC_INIT_PTH	=	init/
 SRC	+=	$(addprefix $(SRC_INIT_PTH), \
-					flood_fill.c \
 					get_next_row.c \
-					grid.c \
 					init.c \
-					line.c \
 					set_map.c \
 					set_texture.c \
 					init_mlx.c\
 					init_player.c\
+		)
+
+SRC_MAP_PTH	=	map/
+SRC	+=	$(addprefix $(SRC_MAP_PTH), \
+					flood_fill.c \
+					grid.c \
+					line.c \
 		)
 
 SRC_RAYCAST_PTH	=	raycast/
@@ -74,6 +78,7 @@ OBJ				=	$(SRC:%.c=$(OBJ_PTH)%.o)
 OBJ_SUB_PTHS	=	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 					$(SRC_DEBUG_PTH) \
 					$(SRC_INIT_PTH) \
+					$(SRC_MAP_PTH) \
 					$(SRC_RAYCAST_PTH) \
 					$(SRC_CONTROL_PTH) \
 					$(SRC_UTIL_PTH) \

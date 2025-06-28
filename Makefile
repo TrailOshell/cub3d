@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/25 15:43:45 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/28 09:05:13 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,6 @@ SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 
 SRC_RAYCAST_PTH	=	raycast/
 SRC	+=	$(addprefix $(SRC_RAYCAST_PTH), \
-					calculate_wall.c \
 					relocate_player.c \
 					minimap.c \
 					ray.c \

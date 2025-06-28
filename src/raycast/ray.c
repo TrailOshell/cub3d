@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:30:35 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 17:01:52 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:37:44 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,8 @@ int	is_ray_hit(float ray_x, float ray_y, t_data *data)
 	int	x;
 	int	y;
 
-	if (data->draw_mode == 2)
-	{
-		x = (int)(ray_x / MAP_SIZE);
-		y = (int)(ray_y / MAP_SIZE);
-	}
-	else if (data->draw_mode == 3)
-	{
-		x = (int)ray_x;
-		y = (int)ray_y;
-	}
-	else
-		return (0);
+	x = (int)ray_x;
+	y = (int)ray_y;
 	if (x < 0 || x >= data->map->n_col || y < 0 || y >= data->map->n_row)
 		return (1);
 	if (data->map->grid[y][x] == '1' || data->map->grid[y][x] == '2')

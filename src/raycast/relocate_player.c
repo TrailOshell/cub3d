@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   relocate_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 17:53:58 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:35:51 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	draw_ray(t_player *player, t_data *data, float start_x)
 	sin_rad = sin(start_x);
 	if (data->draw_mode == 2)
 		mlx_put_pixel(data->win, ray_x, ray_y, PLAYER_CLR);
-	while (is_ray_hit(ray_x, ray_y, data) != 1)
+	while (is_ray_hit(ray_x / MAP_SIZE, ray_y / MAP_SIZE, data) != 1)
 	{
 		ray_x += cos_rad;
 		ray_y += sin_rad;

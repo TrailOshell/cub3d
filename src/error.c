@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:52:24 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/10 15:58:55 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:39:25 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	error_and_exit(t_data *data, char *msg)
 	if (msg && *msg)
 		write(1, msg, ft_strlen(msg));
 	set_color(NCL);
-	free_stuff(data);
+	if (data)
+		free_stuff(data);
 	exit(0);
 }

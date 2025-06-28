@@ -6,7 +6,7 @@
 /*   By: paradari <bellixz610@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:38:27 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/28 01:13:11 by paradari         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:47:10 by paradari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ void	free_tx(t_tx *tx, mlx_t *mlx)
 	free_if_alloc(tx->so);
 	free_if_alloc(tx->ea);
 	free_if_alloc(tx->we);
-	mlx_delete_image(mlx, tx->no_img);
-	mlx_delete_image(mlx, tx->so_img);
-	mlx_delete_image(mlx, tx->we_img);
-	mlx_delete_image(mlx, tx->ea_img);
+	if (tx->no_img)
+		mlx_delete_image(mlx, tx->no_img);
+	if (tx->so_img)
+		mlx_delete_image(mlx, tx->so_img);
+	if (tx->we_img)
+		mlx_delete_image(mlx, tx->we_img);
+	if (tx->ea_img)
+		mlx_delete_image(mlx, tx->ea_img);
 	if (tx->no_tx)
 		mlx_delete_texture(tx->no_tx);
 	if (tx->so_tx)
@@ -82,7 +86,8 @@ void	free_stuff(t_data *data)
 		free_if_alloc(data->f);
 		free_if_alloc(data->c);
 		free_if_alloc(data->ray);
-		mlx_terminate(data->mlx);
+		if (data->mlx)
+			mlx_terminate(data->mlx);
 		free(data);
 	}
 }

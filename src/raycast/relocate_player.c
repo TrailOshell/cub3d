@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:05:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 17:48:57 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:53:58 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	relocate_player(t_data *data)
 		clear_minimap(data);
 		draw_map(data->map, data);
 		draw_player(data->player->y * MAP_SIZE - 6,
-			data->player->x * MAP_SIZE - 6, data, PLAYER_CLR, 12);
+			data->player->x * MAP_SIZE - 6, data, PLAYER_CLR);
 		fov = PI / 3 / WIDTH;
 		start_x = data->player->radian - PI / 6;
 		i = 0;

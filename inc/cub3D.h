@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/28 17:05:48 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:53:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,10 +258,10 @@ void	wall_render(t_data *data, int i);
 
 // for debug
 void	minimap(t_data *data);
-void	draw_player(int y, int x, t_data *data, int color, int size);
+void	draw_player(int y, int x, t_data *data, int color);
 void	draw_map(t_map *map, t_data *data);
 void	clear_player(t_data *data, int x, int y);
-void	draw_square(int y, int x, t_data *data, int color, int size);
+void	draw_square(int y, int x, t_data *data, int color);
 void	relocate_player(t_data *data);
 
 void	clear_image(t_data *data);

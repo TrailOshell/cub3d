@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:07:07 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 19:57:44y tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:30:40 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	get_int_color(t_data *data, char *str, int *i)
 	color = 0;
 	while (ft_isspace(str[*i]))
 		*i += 1;
+	if (!ft_isdigit(str[*i]))
+		return (err_elem(data, "ERROR! wrong color input\n"));
 	while (str[*i] && ft_isdigit(str[*i]))
 	{
 		color += (str[*i] - '0');
@@ -55,13 +57,21 @@ int	set_rgb(t_data *data, t_rgb *rgb)
 		return (err_elem(data, "ERROR! duplicate color input\n"));
 	i = 2;
 	rgb->r = get_int_color(data, str, &i);
+	if (rgb->r == -1)
+		free_and_exit(data);
 	rgb->g = get_int_color(data, str, &i);
+	if (rgb->g == -1)
+		free_and_exit(data);
 	rgb->b = get_int_color(data, str, &i);
+	if (rgb->b == -1)
+		free_and_exit(data);
 	if (!ft_isspace(str[i]) && str[i] != '\0')
 		return (err_elem(data, "ERROR! wrong color input\n"));
 	rgb->rgb = rgb->r;
 	rgb->rgb = (rgb->rgb << 8) + rgb->g;
 	rgb->rgb = (rgb->rgb << 8) + rgb->b;
+	rgb->rgba = rgb->rgb;
+	rgb->rgba = (rgb->rgba << 8) + 255;
 	return (1);
 }
 	// write_double_color("color: ", YLW, str, CYN);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kwangtip <kwangtip@student.42.fr>          +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 13:51:44 by kwangtip          #+#    #+#              #
-#    Updated: 2024/03/26 22:14:41 by kwangtip         ###   ########.fr        #
+#    Updated: 2025/06/29 10:28:28 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

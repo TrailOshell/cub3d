@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:06:46 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/13 21:08:50y tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:29:51 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	write_color_input(t_rgb *rgb)
 	write_color(",", NULL);
 	write_color_nb(rgb->b, CYN);
 	write(1, "\t", 1);
-	//if (rgb->rgb == -1 || rgb->rgb == 0)
-	//	write(1, "\t", 1);
 	write_color_nb(rgb->rgb, CYN);
 	write_color("\n", NULL);
 }

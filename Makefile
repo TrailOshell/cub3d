@@ -6,11 +6,15 @@
 #    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/05/16 19:53:44by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/29 10:26:32 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	cub3D
+
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			+=	-g
 
 INC_PTH			=	inc/
 INC				=	-I$(INC_PTH)
@@ -20,7 +24,7 @@ INC_CUB3D		=	$(INC_PTH)cub3D.h
 SRC_PTH			=	src/
 SRC				=	error.c \
 					free.c \
-					main.c
+					main.c \
 
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
@@ -29,26 +33,38 @@ SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
 					debug.c \
 		)
 
-SRC_EVENT_PTH	=	event/
-SRC	+=	$(addprefix $(SRC_EVENT_PTH), \
-					mlx_events.c \
-		)
 
 SRC_INIT_PTH	=	init/
 SRC	+=	$(addprefix $(SRC_INIT_PTH), \
-					flood_fill.c \
 					get_next_row.c \
-					grid.c \
 					init.c \
-					line.c \
 					set_map.c \
 					set_texture.c \
+					init_mlx.c\
+					init_player.c\
 		)
 
-SRC_RENDER_PTH	=	render/
-SRC	+=	$(addprefix $(SRC_RENDER_PTH), \
-					render.c \
-					sprites.c \
+SRC_MAP_PTH	=	map/
+SRC	+=	$(addprefix $(SRC_MAP_PTH), \
+					flood_fill.c \
+					grid.c \
+					line.c \
+		)
+
+SRC_RAYCAST_PTH	=	raycast/
+SRC	+=	$(addprefix $(SRC_RAYCAST_PTH), \
+					relocate_player.c \
+					minimap.c \
+					ray.c \
+					ray_utils.c\
+					render_utils.c \
+					render3D.c \
+		)
+
+SRC_CONTROL_PTH	=	control/
+SRC	+=	$(addprefix $(SRC_CONTROL_PTH), \
+					keybinds.c\
+					movement.c\
 		)
 
 SRC_UTIL_PTH	=	util/
@@ -57,13 +73,14 @@ SRC	+=	$(addprefix $(SRC_UTIL_PTH), \
 					util.c \
 		)
 
-OBJ_PTH	=	obj/
-OBJ		=	$(SRC:%.c=$(OBJ_PTH)%.o)
-OBJ_SUB_PTHS =	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
+OBJ_PTH			=	obj/
+OBJ				=	$(SRC:%.c=$(OBJ_PTH)%.o)
+OBJ_SUB_PTHS	=	$(OBJ_PTH) $(addprefix $(OBJ_PTH), \
 					$(SRC_DEBUG_PTH) \
-					$(SRC_EVENT_PTH) \
 					$(SRC_INIT_PTH) \
-					$(SRC_RENDER_PTH) \
+					$(SRC_MAP_PTH) \
+					$(SRC_RAYCAST_PTH) \
+					$(SRC_CONTROL_PTH) \
 					$(SRC_UTIL_PTH) \
 				)
 
@@ -75,14 +92,10 @@ GNL_PTH	=	gnl/
 GNL		=	$(GNL_PTH)get_next_line.a
 GNL_INC	=	-I$(GNL_PTH)
 
-MLX			=	$(MLX_PTH)/libmlx.a
-MLX_PTH		=	mlx
-MLX_FLAGS	=	-L$(MLX_PTH) -l$(MLX_PTH) -L/usr/lib -I$(MLX_PTH) -lXext -lX11 -lm -lz
-MLX_INC		=	-I$(MLX_PTH)
-
-CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	+=	-g
+MLX            =    $(MLX_PTH)build/libmlx42.a
+MLX_PTH        =    MLX42/
+MLX_FLAGS	=    -Iinclude -ldl -lglfw -pthread -lm
+MLX_INC        =    -I$(MLX_PTH)include/MLX42
 
 all: $(MLX) $(LIBFT) $(GNL) $(NAME)
 
@@ -91,7 +104,7 @@ $(OBJ_PTH)%.o: $(SRC_PTH)%.c Makefile $(INC_CUB3D) | $(OBJ_SUB_PTHS)
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(GNL) $(LIBFT) -o $@ $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) $(GNL) $(LIBFT) $(MLX) -o $@ $(MLX_FLAGS)
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(OBJ_SUB_PTHS):
@@ -107,18 +120,21 @@ $(GNL):
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 $(MLX):
-	@make -C ${MLX_PTH}
+	@echo "$(YLW)===================> start make MLX42$(NCL)"
+	cmake $(MLX_PTH) -B $(MLX_PTH)/build && make -C $(MLX_PTH)/build -j4
+	@echo "$(YLW)===================> Finish mlx\n$(NCL)"
 	@echo "$(GRN)compiled $(CYN)$@$(NCL)"
 
 clean:
 	rm -f $(OBJ)
 	rm -rf $(OBJ_PTH)
+	rm -rf $(MLX_PTH)/build
 	rm -rf $(TEXTURES)
 	@echo "$(YLW)removed object files$(NCL)"
 
 fclean: clean
-	make clean -C $(MLX_PTH)
 	rm -f $(NAME)
+	rm -f $(MLX)
 	@echo "$(YLW)removed $(NAME) and object files$(NCL)"
 
 re: fclean all
@@ -142,19 +158,14 @@ TEXTURES		=	path_to_the_east_texture.png \
 					path_to_the_south_texture.png \
 					path_to_the_west_texture.png
 $(TEXTURES):
-	cp $(TEXTURES_PTH)path_to_the_east_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_north_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_south_texture.png .
-	cp $(TEXTURES_PTH)path_to_the_west_texture.png .
-
-VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp
+	# cp $(TEXTURES_PTH)path_to_the_east_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_north_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_south_texture.png .
+	# cp $(TEXTURES_PTH)path_to_the_west_texture.png .
 
 define	test_cub
 	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"
-	@-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
-	@- GREP_COLOR='01;32' grep --color=auto -E "no leaks" valgrind.out || @- GREP_COLOR='01;31' grep echo "leaks found"
-	@-grep --color=auto -E "definitely lost:|indirectly lost:|possibly lost:|still reachable:| suppressed:" valgrind.out || true
-	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true
+	./$(NAME) $1
 endef
 
 t : test
@@ -194,5 +205,21 @@ invalid_file : $(NAME) $(TEXTURES)
 	-$(call test_cub, cub/invalid/file_name_error_pn.cub)
 	-$(call test_cub, cub/invalid/file_name_error_text.cub)
 	-$(call test_cub, cub/invalid/file_name.cu)
+
+VAL_FLAGS	=	 --leak-check=full --show-leak-kinds=all --show-reachable=no --suppressions=mlx.supp
+
+define	val_cub
+	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"
+	-valgrind $(VAL_FLAGS) --log-file="valgrind.out" ./$(NAME) $1
+	@- GREP_COLOR='01;32' grep --color=auto -E "no leaks" valgrind.out || @- GREP_COLOR='01;31' grep echo "leaks found"
+	@- GREP_COLOR='01;0' grep --color=auto -E "definitely lost: 0 bytes in 0 blocks" valgrind.out || grep --color=auto -E "definitely lost:" valgrind.out
+	@- GREP_COLOR='01;0' grep --color=auto -E "indirectly lost: 0 bytes in 0 blocks" valgrind.out || grep --color=auto -E "indirectly lost:" valgrind.out
+	@- GREP_COLOR='01;0' grep --color=auto -E "possibly lost: 0 bytes in 0 blocks" valgrind.out ||  grep --color=auto -E "possibly lost:" valgrind.out 
+	@- GREP_COLOR='01;34' grep --color=auto -E "still reachable:| suppressed:" valgrind.out || true
+	@- GREP_COLOR='01;35' grep --color=auto "ERROR SUMMARY" valgrind.out || true
+endef
+
+val : $(NAME) $(TEXTURES)
+	-$(call val_cub, cub/test.cub)
 
 .PHONY	+=	t test s subject v valid i invalid im invalid_map if invalid_file

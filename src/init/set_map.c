@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:42:30 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/16 18:48:26 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:30:15 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	check_player_pos(t_data *data, char *line, int y)
 				error_and_exit(data, "ERROR! duplicated player\n");
 			data->player->x = x;
 			data->player->y = y;
+			data->player->direction = line[x];
 			return (1);
 		}
 		x++;

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/16 19:09:03 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 10:28:10 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <string.h>
+# include <math.h>
 
-# include "mlx.h"
+# include <stdio.h>
+
+# include "MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"
 # include "../libft/sources/libft.h"
 
@@ -32,28 +36,34 @@
 # define CYN "\033[0;96m"
 
 # ifndef SIZE
-#  define SIZE				32
+#  define SIZE				64
 # endif
+
+# ifndef DRAW_MODE
+#  define DRAW_MODE			3
+# endif
+
+# ifndef MINIMAP_MODE
+#  define MINIMAP_MODE		1
+# endif
+
+//	Debug Color
+# define RAY_CLR			0xFFFFFFFF
+# define PLAYER_CLR			0xFFFF64FF
+# define WALL_CLR			0x00FFFFFF
+# define MAP_WALL_CLR		0x0000FFFF
 
 //	X11 events 
 # define KEYPRESS			2
 # define DESTROYNOTIFY		17
 # define EXPOSE				12
 
-//# define KEYPRESSMASK	(1L<<0)
-
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100 
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364 
-# define KEY_SPACE 			32
-# define KEY_H				104
-# define KEY_Q				113
-# define KEY_ESC			65307
+# define WIDTH				1920
+# define HEIGHT 			1080
+# define MAP_SIZE			16
+# define PI 				3.14159265
+# define STEP 				0.05
+# define RSPEED 			0.05
 
 typedef struct s_node
 {
@@ -63,10 +73,18 @@ typedef struct s_node
 	int				y;
 }	t_node;
 
+
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
+	char			direction;
+
+	double			radian;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 }	t_player;
 
 typedef struct s_map
@@ -78,34 +96,87 @@ typedef struct s_map
 
 typedef struct s_tx
 {
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
+
+	mlx_image_t		*no_img;
+	mlx_image_t		*so_img;
+	mlx_image_t		*ea_img;
+	mlx_image_t		*we_img;
+
+	mlx_texture_t	*no_tx;
+	mlx_texture_t	*so_tx;
+	mlx_texture_t	*ea_tx;
+	mlx_texture_t	*we_tx;
 }	t_tx;
+
+typedef struct s_tx_scale
+{
+	mlx_texture_t	*tx;
+	int				height;
+	int				width;
+	double			range;
+	double			pos;
+}	t_tx_scale;
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
+	int				r;
+	int				g;
+	int				b;
+	int				rgb;
+	uint32_t		rgba;
 }	t_rgb;
+
+typedef struct s_ray
+{
+	int				x;
+	int				y;
+	double			fov;
+	double			dir_x;
+	double			dir_y;
+	double			ddist_x;
+	double			ddist_y;
+	bool			hit;
+
+	int				step_x;
+	int				step_y;
+	double			side_dx;
+	double			side_dy;
+	int				side;
+
+	float			prep_wall_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			wallx;
+	int				tx_x;
+	char			tx_hit;
+
+	int				tx_pos_x;
+	int				tx_pos_y;
+
+}	t_ray;
 
 typedef struct s_data
 {
-	void			*mlx;
-	void			*win;
+	mlx_t			*mlx;
+	mlx_image_t		*win;
 	t_map			*map;
+	int				draw_mode;
+	int				minimap_mode;
 	t_node			*node;
 	t_player		*player;
 	t_tx			*tx;
 	t_rgb			*f;
 	t_rgb			*c;
+	t_ray			*ray;
 	char			*line;
 }	t_data;
 
-/*	||  DEBUG  ||	*/
+/*	  DEBUG  	*/
 // color_write.c
 void	write_color(char *msg, char *color);
 void	write_color_nl(char *msg, char *color);
@@ -118,12 +189,12 @@ void	color_from_char(char c);
 void	write_grid(char **grid);
 void	write_elements(t_data *data);
 
-/*	||  EVENT  ||	*/
+/*	  EVENT  	*/
 // mlx_events.c
 int		game_exit(t_data *data);
 int		on_keypress(int keysym, t_data *data);
 
-/*	||  INIT  ||	*/
+/*	  INIT  	*/
 // flood_fill.c
 int		flood_fill(t_data *data);
 // get_next_row.c
@@ -132,6 +203,8 @@ void	get_next_row(t_data *data, int fd);
 char	**new_grid(t_map *map);
 char	**dupe_grid(t_map *map);
 // init.c
+t_map	*init_map(t_map *map);
+void	clear_player(t_data *data, int x, int y);
 t_data	*init_data(t_data *data);
 // line.c
 void	add_line(t_node **node, char *line);
@@ -142,14 +215,14 @@ void	set_map(t_data *data, t_node *node);
 // set_texture.c
 int		set_elements(t_data *data);
 
-/*	||  RENDER  ||	*/
+/*	  RENDER  	*/
 // render.c
 void	render_tile(t_data *data, int x, int y);
 void	render_map(t_data *data);
 // sprites.c
 void	*load_a_sprite(t_data *data, char *filename);
 
-/*	||  UTIL  ||	*/
+/*	  UTIL  	*/
 // is_conditions.c
 int		isplayerchar(char c);
 int		isvalidchar(char c);
@@ -159,7 +232,7 @@ int		ft_strrncmp(char *s1, char *s2, size_t n);
 int		ft_isspace(char str);
 int		chk_all_spaces(char *str);
 
-/*	|| SRC ||	*/
+/*	 SRC 	*/
 // error.c
 void	error_and_exit(t_data *data, char *msg);
 // free.c
@@ -167,6 +240,45 @@ void	free_map(t_map *map);
 void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c
-t_map	*init_map(t_map *map);
+void	free_and_exit(void	*data);
 
+// ray.c
+void	ft_ray_render(t_data *data);
+
+void	init_mlx(t_data *data);
+void	init_player(t_player *player);
+
+void	keybinds(void *tmp);
+
+void	render_three_dimension(t_data *data, int i);
+
+void	calculate_wall(t_data *data);
+
+void	wall_render(t_data *data, int i);
+
+// for debug
+void	minimap(t_data *data);
+void	draw_player(int y, int x, t_data *data, int color);
+void	draw_map(t_map *map, t_data *data);
+void	clear_player(t_data *data, int x, int y);
+void	draw_square(int y, int x, t_data *data, int color);
+void	relocate_player(t_data *data);
+
+void	clear_image(t_data *data);
+void	draw_floor(t_data *data);
+void	draw_ceiling(t_data *data);
+
+// void	walking(t_data *data, double new_x, double new_y);
+void	key_ws(t_data *data, double cos_r, double sin_r);
+void	key_ad(t_data *data, double cos_r, double sin_r);
+void	key_leftright(t_player *player, double spd);
+
+int		is_ray_hit(float ray_x, float ray_y, t_data *data);
+
+//ray_utils
+void	ft_set_texture(t_ray *ray);
+void	ft_cal_value_wallx(t_ray *ray, t_player *player);
+void	ft_prep_draw(t_ray *ray);
+void	ft_prep_wall_dist(t_ray *ray);
+void	ft_init_side_dist(t_ray *ray, t_player *player);
 #endif

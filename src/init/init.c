@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:57:43 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 10:30:04 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:55:42 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_data	*init_data(t_data *data)
 		data = malloc(sizeof(t_data));
 	data->map = init_map(data->map);
 	data->draw_mode = DRAW_MODE;
-	data->minimap_mode = MINIMAP_MODE;
+	data->debug_mode = DEBUG_MODE;
 	data->node = NULL;
 	data->tx = init_tx(data->tx);
 	data->f = init_rgb(data->f);

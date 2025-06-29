@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_row.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 16:43:01 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/05/16 18:42:16 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:57:31 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,3 @@ void	get_next_row(t_data *data, int fd)
 	if (result == -1)
 		error_and_exit(data, NULL);
 }
-/*
-	write_color("Max rows is :", BLU);
-	write_color_nb(data->map->n_row, CYN);
-	write_color("\nMax cols is :", BLU);
-	write_color_nb(data->map->n_col, CYN);
-	write_color("\n", NULL);
-*/

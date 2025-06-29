@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:21:10 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 17:48:42 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:23:34 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,20 @@ void	key_ad(t_data *data, double cos_r, double sin_r)
 	walking(data, new_x, new_y);
 }
 
-void	key_leftright(t_player *player, double spd)
+void	set_direction_leftright(t_player *player, t_data *data, double rspeed)
 {
-	player->radian = player->radian + spd;
+	double	tmp_x;
+
+	player->radian = player->radian + rspeed;
 	if (player->radian > 2 * PI)
 		player->radian = 0;
-	if (player->radian < 0)
+	else if (player->radian < 0)
 		player->radian = 2 * PI;
+	tmp_x = player->dir_x;
+	player->dir_x = player->dir_x * cos(rspeed) - player->dir_y * sin(rspeed);
+	player->dir_y = tmp_x * sin(rspeed) + player->dir_y * cos(rspeed);
+	tmp_x = player->plane_x;
+	player->plane_x = tmp_x * cos(rspeed) - player->plane_y * sin(rspeed);
+	player->plane_y = tmp_x * sin(rspeed) + player->plane_y * cos(rspeed);
+	ft_ray_render(data);
 }

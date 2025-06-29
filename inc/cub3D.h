@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 16:06:37 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:23:49 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,14 @@ typedef struct s_data
 	char			*line;
 }	t_data;
 
+/*	  CONTROL  	*/
+// keybinds.c
+void	keybinds(void *tmp);
+// movement.c
+void	key_ws(t_data *data, double cos_r, double sin_r);
+void	key_ad(t_data *data, double cos_r, double sin_r);
+void	set_direction_leftright(t_player *player, t_data *data, double rspeed);
+
 /*	  DEBUG  	*/
 // color_write.c
 void	write_color(char *msg, char *color);
@@ -190,25 +198,47 @@ void	write_grid(char **grid);
 void	write_elements(t_data *data);
 
 /*	  INIT  	*/
-// flood_fill.c
-int		flood_fill(t_data *data);
 // get_next_row.c
 void	get_next_row(t_data *data, int fd);
-// grid.c
-char	**new_grid(t_map *map);
-char	**dupe_grid(t_map *map);
+// init_mlx.c
+void	init_mlx(t_data *data);
+// init_player.c
+void	init_player(t_player *player);
 // init.c
 t_map	*init_map(t_map *map);
 void	clear_player(t_data *data, int x, int y);
 t_data	*init_data(t_data *data);
-// line.c
-void	add_line(t_node **node, char *line);
-char	*line_dupe(char *line);
-char	*line_copy(char *copy, char *line);
 // set_map.c
 void	set_map(t_data *data, t_node *node);
 // set_texture.c
 int		set_elements(t_data *data);
+
+/*	  MAP  	*/
+// flood_fill.c
+int		flood_fill(t_data *data);
+// grid.c
+char	**new_grid(t_map *map);
+char	**dupe_grid(t_map *map);
+// line.c
+void	add_line(t_node **node, char *line);
+char	*line_dupe(char *line);
+char	*line_copy(char *copy, char *line);
+
+/*	 RAYCAST 	*/
+// ray_utils.c
+void	ft_set_texture(t_ray *ray);
+void	ft_cal_value_wallx(t_ray *ray, t_player *player);
+void	ft_prep_draw(t_ray *ray);
+void	ft_prep_wall_dist(t_ray *ray);
+void	ft_init_side_dist(t_ray *ray, t_player *player);
+// ray.c
+void	ft_ray_render(t_data *data);
+
+void	render_three_dimension(t_data *data, int i);
+
+void	calculate_wall(t_data *data);
+
+void	wall_render(t_data *data, int i);
 
 /*	  UTIL  	*/
 // is_conditions.c
@@ -230,20 +260,6 @@ void	free_stuff(t_data *data);
 // main.c
 void	free_and_exit(void	*data);
 
-// ray.c
-void	ft_ray_render(t_data *data);
-
-void	init_mlx(t_data *data);
-void	init_player(t_player *player);
-
-void	keybinds(void *tmp);
-
-void	render_three_dimension(t_data *data, int i);
-
-void	calculate_wall(t_data *data);
-
-void	wall_render(t_data *data, int i);
-
 // for debug
 void	minimap(t_data *data);
 void	draw_player(int y, int x, t_data *data, int color);
@@ -256,17 +272,6 @@ void	clear_image(t_data *data);
 void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
 
-// void	walking(t_data *data, double new_x, double new_y);
-void	key_ws(t_data *data, double cos_r, double sin_r);
-void	key_ad(t_data *data, double cos_r, double sin_r);
-void	key_leftright(t_player *player, double spd);
-
 int		is_ray_hit(float ray_x, float ray_y, t_data *data);
 
-//ray_utils
-void	ft_set_texture(t_ray *ray);
-void	ft_cal_value_wallx(t_ray *ray, t_player *player);
-void	ft_prep_draw(t_ray *ray);
-void	ft_prep_wall_dist(t_ray *ray);
-void	ft_init_side_dist(t_ray *ray, t_player *player);
 #endif

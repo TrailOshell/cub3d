@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 16:46:50 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:52:00 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,11 +225,11 @@ void	draw_player(int y, int x, t_data *data, int color);
 void	draw_map(t_map *map, t_data *data);
 void	minimap(t_data *data);
 // ray_utils.c
-void	ft_set_texture(t_ray *ray);
-void	ft_cal_value_wallx(t_ray *ray, t_player *player);
-void	ft_prep_draw(t_ray *ray);
-void	ft_prep_wall_dist(t_ray *ray);
 void	ft_init_side_dist(t_ray *ray, t_player *player);
+void	ft_prep_wall_dist(t_ray *ray);
+void	ft_prep_draw(t_ray *ray);
+void	ft_cal_value_wallx(t_ray *ray, t_player *player);
+void	ft_set_texture(t_ray *ray);
 // ray.c
 int		is_ray_hit(float ray_x, float ray_y, t_data *data);
 void	clear_image(t_data *data);
@@ -237,8 +237,8 @@ void	ft_ray_render(t_data *data);
 // relocate_player.c
 void	relocate_player(t_data *data);
 // render_utils.c
-void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
+void	draw_floor(t_data *data);
 // render3D.c
 void	wall_render(t_data *data, int i);
 

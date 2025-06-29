@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:30:18 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/12 15:38:35 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:37:48 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	painting(char *c, t_data *data, t_map *flood)
 {
 	if (!*c)
 		err_map(data, flood, "ERROR! Unenclosed wall\n");
-	if (iswalkable(*c) == 0)
+	if (iswalkable(*c) == 0 && ft_isspace(*c) == 0)
 		return (0);
 	*c = 'P';
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 10:28:10 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:19:53 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,6 @@ void	color_from_char(char c);
 // debug.c
 void	write_grid(char **grid);
 void	write_elements(t_data *data);
-
-/*	  EVENT  	*/
-// mlx_events.c
-int		game_exit(t_data *data);
-int		on_keypress(int keysym, t_data *data);
 
 /*	  INIT  	*/
 // flood_fill.c

@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 15:19:53 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:46:08 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,13 +209,6 @@ char	*line_copy(char *copy, char *line);
 void	set_map(t_data *data, t_node *node);
 // set_texture.c
 int		set_elements(t_data *data);
-
-/*	  RENDER  	*/
-// render.c
-void	render_tile(t_data *data, int x, int y);
-void	render_map(t_data *data);
-// sprites.c
-void	*load_a_sprite(t_data *data, char *filename);
 
 /*	  UTIL  	*/
 // is_conditions.c

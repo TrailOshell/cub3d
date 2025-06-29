@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/29 15:12:55 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/29 15:45:17 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,12 @@ SRC				=	error.c \
 					free.c \
 					main.c \
 
+SRC_CONTROL_PTH	=	control/
+SRC	+=	$(addprefix $(SRC_CONTROL_PTH), \
+					keybinds.c\
+					movement.c\
+		)
+
 SRC_DEBUG_PTH	=	debug/
 SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
 					color_write.c \
@@ -37,11 +43,11 @@ SRC	+=	$(addprefix $(SRC_DEBUG_PTH), \
 SRC_INIT_PTH	=	init/
 SRC	+=	$(addprefix $(SRC_INIT_PTH), \
 					get_next_row.c \
+					init_mlx.c\
+					init_player.c\
 					init.c \
 					set_map.c \
 					set_texture.c \
-					init_mlx.c\
-					init_player.c\
 		)
 
 SRC_MAP_PTH	=	map/
@@ -53,18 +59,12 @@ SRC	+=	$(addprefix $(SRC_MAP_PTH), \
 
 SRC_RAYCAST_PTH	=	raycast/
 SRC	+=	$(addprefix $(SRC_RAYCAST_PTH), \
-					relocate_player.c \
 					minimap.c \
-					ray.c \
 					ray_utils.c\
+					ray.c \
+					relocate_player.c \
 					render_utils.c \
 					render3D.c \
-		)
-
-SRC_CONTROL_PTH	=	control/
-SRC	+=	$(addprefix $(SRC_CONTROL_PTH), \
-					keybinds.c\
-					movement.c\
 		)
 
 SRC_UTIL_PTH	=	util/

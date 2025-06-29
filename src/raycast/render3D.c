@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:46:44 by paradari          #+#    #+#             */
-/*   Updated: 2025/06/28 17:01:43 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:51:44 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ static void	draw_scaled_wall(t_data *data, mlx_texture_t *tx, int i)
 void	wall_render(t_data *data, int i)
 {
 	if (data->ray->tx_hit == 'N')
-		draw_scaled_wall(data, data->tx->no_tx, i);
-	else if (data->ray->tx_hit == 'S')
 		draw_scaled_wall(data, data->tx->so_tx, i);
+	else if (data->ray->tx_hit == 'S')
+		draw_scaled_wall(data, data->tx->no_tx, i);
 	else if (data->ray->tx_hit == 'E')
-		draw_scaled_wall(data, data->tx->ea_tx, i);
-	else if (data->ray->tx_hit == 'W')
 		draw_scaled_wall(data, data->tx->we_tx, i);
+	else if (data->ray->tx_hit == 'W')
+		draw_scaled_wall(data, data->tx->ea_tx, i);
 }

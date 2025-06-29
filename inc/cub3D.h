@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 16:26:33 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:34:21 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,6 @@ void	init_mlx(t_data *data);
 void	init_player(t_player *player);
 // init.c
 t_map	*init_map(t_map *map);
-void	clear_player(t_data *data, int x, int y);
 t_data	*init_data(t_data *data);
 // set_map.c
 void	set_map(t_data *data, t_node *node);
@@ -225,6 +224,11 @@ char	*line_dupe(char *line);
 char	*line_copy(char *copy, char *line);
 
 /*	 RAYCAST 	*/
+// minimap.c
+void	draw_square(int y, int x, t_data *data, int color);
+void	draw_player(int y, int x, t_data *data, int color);
+void	draw_map(t_map *map, t_data *data);
+void	minimap(t_data *data);
 // ray_utils.c
 void	ft_set_texture(t_ray *ray);
 void	ft_cal_value_wallx(t_ray *ray, t_player *player);
@@ -232,12 +236,15 @@ void	ft_prep_draw(t_ray *ray);
 void	ft_prep_wall_dist(t_ray *ray);
 void	ft_init_side_dist(t_ray *ray, t_player *player);
 // ray.c
+int		is_ray_hit(float ray_x, float ray_y, t_data *data);
+void	clear_image(t_data *data);
 void	ft_ray_render(t_data *data);
-
-void	render_three_dimension(t_data *data, int i);
-
-void	calculate_wall(t_data *data);
-
+// relocate_player.c
+void	relocate_player(t_data *data);
+// render_utils.c
+void	draw_floor(t_data *data);
+void	draw_ceiling(t_data *data);
+// render3D.c
 void	wall_render(t_data *data, int i);
 
 /*	  UTIL  	*/
@@ -259,19 +266,5 @@ void	free_node(t_node **node);
 void	free_stuff(t_data *data);
 // main.c
 void	free_and_exit(void	*data);
-
-// for debug
-void	minimap(t_data *data);
-void	draw_player(int y, int x, t_data *data, int color);
-void	draw_map(t_map *map, t_data *data);
-void	clear_player(t_data *data, int x, int y);
-void	draw_square(int y, int x, t_data *data, int color);
-void	relocate_player(t_data *data);
-
-void	clear_image(t_data *data);
-void	draw_floor(t_data *data);
-void	draw_ceiling(t_data *data);
-
-int		is_ray_hit(float ray_x, float ray_y, t_data *data);
 
 #endif

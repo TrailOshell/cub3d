@@ -44,7 +44,7 @@
 # endif
 
 # ifndef DEBUG_MODE
-#  define DEBUG_MODE		0
+#  define DEBUG_MODE		1
 # endif
 
 //	Debug Color
@@ -67,7 +67,6 @@ typedef struct s_node
 	int				x;
 	int				y;
 }	t_node;
-
 
 typedef struct s_player
 {

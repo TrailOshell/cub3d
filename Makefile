@@ -6,7 +6,7 @@
 #    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/29 15:45:17 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/29 16:53:49 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC				=	-I$(INC_PTH)
 INC_CUB3D		=	$(INC_PTH)cub3D.h
 
 SRC_PTH			=	src/
-SRC				=	error.c \
+SRC				=	exit.c \
 					free.c \
 					main.c \
 

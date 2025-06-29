@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:13:10 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 10:29:34 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:52:49 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ int	read_map(char **argv, t_data *data)
 	write_color("Initial map\n", GRN);
 	write_grid(data->map->grid);
 	return (1);
-}
-
-void	free_and_exit(void	*data)
-{
-	free_stuff(data);
-	exit (0);
 }
 
 int	main(int argc, char **argv)

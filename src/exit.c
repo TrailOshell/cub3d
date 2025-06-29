@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:52:24 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 10:29:08 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:52:54 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void	error_and_exit(t_data *data, char *msg)
 	if (data)
 		free_stuff(data);
 	exit(0);
+}
+
+void	free_and_exit(void	*data)
+{
+	free_stuff(data);
+	exit (0);
 }

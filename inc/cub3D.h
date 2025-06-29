@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 16:34:21 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:46:50 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@
 # define PLAYER_CLR			0xFFFF64FF
 # define WALL_CLR			0x00FFFFFF
 # define MAP_WALL_CLR		0x0000FFFF
-
-//	X11 events 
-# define KEYPRESS			2
-# define DESTROYNOTIFY		17
-# define EXPOSE				12
 
 # define WIDTH				1920
 # define HEIGHT 			1080

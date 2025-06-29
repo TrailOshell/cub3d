@@ -53,3 +53,7 @@ dkms.conf
 
 # cub3D project
 cub3D
+path_to_the_east_texture.png
+path_to_the_north_texture.png
+path_to_the_south_texture.png
+path_to_the_west_texture.png

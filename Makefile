@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsomchan <tsomchan@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 20:46:08 by tsomchan          #+#    #+#              #
-#    Updated: 2025/06/29 10:26:32 by tsomchan         ###   ########.fr        #
+#    Updated: 2025/06/29 15:12:55 by tsomchan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -153,15 +153,15 @@ CYN		=	\033[0;36m
 #	Tests
 
 TEXTURES_PTH	=	textures/
-TEXTURES		=	path_to_the_east_texture.png \
-					path_to_the_north_texture.png \
-					path_to_the_south_texture.png \
-					path_to_the_west_texture.png
+TEXTURE_NO		=	subject_example/path_to_the_north_texture.png
+TEXTURE_SO		=	subject_example/path_to_the_south_texture.png
+TEXTURE_EA		=	subject_example/path_to_the_east_texture.png
+TEXTURE_WE		=	subject_example/path_to_the_west_texture.png
+TEXTURES		=	$(TEXTURE_NO) $(TEXTURE_SO) $(TEXTURE_EA) $(TEXTURE_WE)
+
 $(TEXTURES):
-	# cp $(TEXTURES_PTH)path_to_the_east_texture.png .
-	# cp $(TEXTURES_PTH)path_to_the_north_texture.png .
-	# cp $(TEXTURES_PTH)path_to_the_south_texture.png .
-	# cp $(TEXTURES_PTH)path_to_the_west_texture.png .
+	@cp $(TEXTURES_PTH)$@ .
+	@echo "$(GRN)copied	$(CYN)$@$(NCL)"
 
 define	test_cub
 	@echo "$(YLW)Map:$(CYN) $1 \________ ____ __ _$(NCL)"

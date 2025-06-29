@@ -6,7 +6,7 @@
 /*   By: tsomchan <tsomchan@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:07:26 by tsomchan          #+#    #+#             */
-/*   Updated: 2025/06/29 16:23:49 by tsomchan         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:26:33 by tsomchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # endif
 
 # ifndef DRAW_MODE
-#  define DRAW_MODE			3
+#  define DRAW_MODE			2
 # endif
 
 # ifndef DEBUG_MODE
